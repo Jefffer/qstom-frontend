@@ -29,7 +29,7 @@ const Navbar = () => {
           <Link to="/" className="flex items-center space-x-2 group">
             <FaGamepad className="text-3xl text-cyan-400 group-hover:text-pink-500 transition-colors duration-300" />
             <span className="text-2xl font-bold text-white glow-text font-['Orbitron']">
-              QSTOM
+              Qstom
             </span>
           </Link>
 

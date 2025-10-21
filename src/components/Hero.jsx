@@ -48,7 +48,7 @@ const Hero = () => {
           transition={{ duration: 0.8 }}
         >
           <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 font-['Orbitron']">
-            <span className="glow-text">QSTOM</span>
+            <span className="glow-text">Qstom</span>
             <br />
             <span className="text-3xl md:text-5xl glow-pink">
               Personalización Extrema
