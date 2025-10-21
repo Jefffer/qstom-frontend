@@ -64,7 +64,7 @@ const Hero = () => {
         >
           Transforma tus accesorios gamer en obras de arte únicas. 
           Aerografía y serigrafía de alto nivel para consolas, controles, 
-          teclados y más.
+          teclados y más. Estamos ubicados en Bogotá, próximamente en tu ciudad.
         </motion.p>
 
         <motion.div
