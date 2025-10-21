@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const Hero = () => {
   return (
-    <div className="relative min-h-screen flex items-center justify-center overflow-hidden bg-linear-to-br from-black via-purple-900/20 to-black">
+    <div className="relative h-screen flex items-center justify-center overflow-hidden bg-linear-to-br from-black via-purple-900/20 to-black pt-16">
       {/* Animated Background Grid */}
       <div className="absolute inset-0 opacity-20">
         <div className="absolute inset-0" style={{
@@ -50,7 +50,7 @@ const Hero = () => {
           <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 font-['Orbitron']">
             <span className="glow-text">Qstom</span>
             <br />
-            <span className="text-3xl md:text-5xl glow-pink">
+            <span className="text-2xl md:text-4xl glow-pink">
               Personalización Extrema
             </span>
           </h1>
