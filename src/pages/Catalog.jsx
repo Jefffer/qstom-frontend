@@ -105,7 +105,7 @@ const Catalog = () => {
     : catalogItems.filter(item => item.category === selectedCategory);
 
   return (
-    <div className="min-h-screen pt-24 pb-20 px-4 bg-linear-to-b from-black via-gray-900 to-black">
+    <div className="min-h-screen pt-34 pb-20 px-4 bg-linear-to-b from-black via-gray-900 to-black">
       {/* Header */}
       <div className="max-w-7xl mx-auto mb-12">
         <motion.div

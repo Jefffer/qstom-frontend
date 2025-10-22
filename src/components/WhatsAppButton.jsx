@@ -7,7 +7,7 @@ const WhatsAppButton = () => {
   
   // Mensaje predefinido
   const message = encodeURIComponent(
-    '¡Hola QSTOM! 🎮 Me interesa personalizar mis accesorios gaming. ¿Me pueden ayudar?'
+    '¡Hola Qstom! 🎮 Me interesa personalizar mis accesorios gaming. ¿Me pueden ayudar?'
   );
   
   // URL de WhatsApp
@@ -26,7 +26,7 @@ const WhatsAppButton = () => {
         stiffness: 260,
         damping: 20 
       }}
-      whileHover={{ scale: 1.1 }}
+    //   whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.9 }}
       className="fixed bottom-6 right-6 z-50 bg-green-500 hover:bg-green-600 text-white rounded-full p-4 shadow-lg hover:shadow-2xl transition-all duration-300 group"
       aria-label="Contactar por WhatsApp"
@@ -46,7 +46,7 @@ const WhatsAppButton = () => {
       />
       
       {/* WhatsApp Icon */}
-      <FaWhatsapp className="relative text-4xl" />
+      <FaWhatsapp className="relative text-2xl" />
       
       {/* Tooltip */}
       <span className="absolute right-full mr-3 top-1/2 -translate-y-1/2 bg-gray-900 text-white text-sm font-medium px-3 py-2 rounded-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">

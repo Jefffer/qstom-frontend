@@ -75,7 +75,7 @@ const About = () => {
             transition={{ duration: 0.6 }}
             className="text-5xl md:text-6xl font-bold text-white mb-6 font-['Orbitron']"
           >
-            Sobre <span className="glow-text">QSTOM</span>
+            Sobre <span className="glow-text">Qstom</span>
           </motion.h1>
           
           <motion.p

@@ -61,7 +61,7 @@ const Contact = () => {
   ];
 
   return (
-    <div className="min-h-screen pt-24 pb-20 px-4 bg-black relative overflow-hidden">
+    <div className="min-h-screen pt-34 pb-20 px-4 bg-black relative overflow-hidden">
       {/* Background Effects */}
       <motion.div
         animate={{
