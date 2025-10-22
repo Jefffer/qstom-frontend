@@ -51,7 +51,7 @@ const Hero = () => {
             <span className="glow-text">Qstom</span>
             <br />
             <span className="text-2xl md:text-4xl glow-pink">
-              Personalización Extrema
+              PERSONALIZACIÓN DE ACCESORIOS
             </span>
           </h1>
         </motion.div>
@@ -62,9 +62,8 @@ const Hero = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto"
         >
-          Transforma tus accesorios gamer en obras de arte únicas. 
-          Aerografía y serigrafía de alto nivel para consolas, controles, 
-          teclados y más. Estamos ubicados en Bogotá, próximamente en tu ciudad.
+          Transforma tus accesorios gamer en obras de arte únicas.
+           Estamos ubicados en Bogotá, próximamente en tu ciudad.
         </motion.p>
 
         <motion.div
@@ -75,19 +74,19 @@ const Hero = () => {
         >
           <Link
             to="/catalog"
-            className="group relative px-8 py-4 bg-linear-to-r from-cyan-500 to-blue-600 text-white font-bold rounded-lg overflow-hidden transition-all duration-300 hover:scale-105 glow-border"
+            className="group relative px-8 py-4 bg-linear-to-r from-cyan-500 to-blue-600 text-white font-bold overflow-hidden transition-all duration-300 hover:scale-105 glow-border btn-tech"
           >
             <span className="relative z-10 flex items-center gap-2">
               <FaRocket className="group-hover:rotate-12 transition-transform" />
-              Explora el Catálogo
+              EXPLORA EL CATÁLOGO
             </span>
           </Link>
 
           <Link
             to="/contact"
-            className="px-8 py-4 border-2 border-pink-500 text-pink-400 font-bold rounded-lg hover:bg-pink-500/20 transition-all duration-300 hover:scale-105"
+            className="px-8 py-4 border border-pink-500 text-pink-400 font-bold hover:bg-pink-500/10 transition-all duration-300 hover:scale-105 btn-tech-alt"
           >
-            Cotiza Tu Diseño
+            COTIZA TU DISEÑO
           </Link>
         </motion.div>
 
@@ -99,9 +98,9 @@ const Hero = () => {
           className="grid grid-cols-3 gap-8 mt-20 max-w-2xl mx-auto"
         >
           {[
-            { number: '500+', label: 'Proyectos' },
-            { number: '100%', label: 'Personalizado' },
-            { number: '24/7', label: 'Soporte' },
+            { number: '50+', label: 'PROYECTOS' },
+            { number: '100%', label: 'PERSONALIZADO' },
+            { number: '24/7', label: 'SOPORTE' },
           ].map((stat, index) => (
             <div key={index} className="text-center">
               <div className="text-3xl md:text-4xl font-bold text-cyan-400 glow-text font-['Orbitron']">

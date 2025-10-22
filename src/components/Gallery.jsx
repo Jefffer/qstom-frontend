@@ -172,7 +172,7 @@ const Gallery = () => {
             </div>
             <button
               onClick={() => setSelectedImage(null)}
-              className="absolute top-4 right-4 text-white bg-red-500/80 hover:bg-red-500 w-10 h-10 rounded-full flex items-center justify-center transition-colors duration-300"
+              className="absolute top-4 right-4 text-white bg-red-500/80 hover:bg-red-500 w-10 h-10 flex items-center justify-center transition-colors duration-300 btn-corner-cut"
             >
               ✕
             </button>

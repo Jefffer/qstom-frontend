@@ -56,9 +56,9 @@ const Home = () => {
           >
             <Link
               to="/contact"
-              className="inline-flex items-center gap-3 px-8 py-4 bg-linear-to-r from-cyan-500 to-pink-500 text-white font-bold rounded-lg hover:scale-105 transition-all duration-300 glow-border"
+              className="inline-flex items-center gap-3 px-8 py-4 bg-linear-to-r from-cyan-500 to-pink-500 text-white font-bold hover:scale-105 transition-all duration-300 glow-border btn-tech-chip"
             >
-              Cotiza Ahora
+              COTIZA AHORA
               <FaArrowRight className="group-hover:translate-x-2 transition-transform" />
             </Link>
           </motion.div>

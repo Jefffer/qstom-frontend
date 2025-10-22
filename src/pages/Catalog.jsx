@@ -134,7 +134,7 @@ const Catalog = () => {
             <button
               key={category}
               onClick={() => setSelectedCategory(category)}
-              className={`px-6 py-2 rounded-lg font-medium transition-all duration-300 ${
+              className={`px-6 py-2 font-medium transition-all duration-300 btn-filter ${
                 selectedCategory === category
                   ? 'bg-cyan-500 text-black glow-border'
                   : 'bg-gray-800 text-gray-300 hover:bg-gray-700 border border-cyan-500/30'
@@ -208,8 +208,10 @@ const Catalog = () => {
                 </div>
 
                 {/* CTA Button */}
-                <button className="w-full py-3 bg-linear-to-r from-cyan-500 to-pink-500 text-white font-bold rounded-lg hover:shadow-lg hover:shadow-cyan-500/50 transition-all duration-300">
-                  Solicitar Cotización
+                <button className="w-full py-3 border border-pink-500 text-pink-400 font-bold hover:bg-pink-500/10 transition-all duration-300 btn-tech-alt">
+                {/* className="w-full py-3 bg-linear-to-r from-cyan-500 to-pink-500 text-white font-bold hover:shadow-lg hover:shadow-cyan-500/50 transition-all duration-300 btn-tech-alt"> */}
+                   {/* className="px-8 py-4 border-2 border-pink-500 text-pink-400 font-bold hover:bg-pink-500/20 transition-all duration-300 hover:scale-105 btn-tech-alt" */}
+                  SOLICITAR COTIZACIÓN
                 </button>
               </div>
 

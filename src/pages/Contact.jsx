@@ -128,7 +128,7 @@ const Contact = () => {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 bg-black/50 border border-cyan-500/30 rounded-lg text-white focus:border-cyan-500 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 transition-all duration-300"
+                    className="w-full px-4 py-3 bg-black/50 border border-cyan-500/30 text-white focus:border-cyan-500 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 transition-all duration-300 input-tech"
                     placeholder="Tu nombre"
                   />
                 </div>
@@ -144,7 +144,7 @@ const Contact = () => {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 bg-black/50 border border-cyan-500/30 rounded-lg text-white focus:border-cyan-500 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 transition-all duration-300"
+                    className="w-full px-4 py-3 bg-black/50 border border-cyan-500/30 text-white focus:border-cyan-500 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 transition-all duration-300 input-tech"
                     placeholder="tu@email.com"
                   />
                 </div>
@@ -159,7 +159,7 @@ const Contact = () => {
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 bg-black/50 border border-cyan-500/30 rounded-lg text-white focus:border-cyan-500 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 transition-all duration-300"
+                    className="w-full px-4 py-3 bg-black/50 border border-cyan-500/30 text-white focus:border-cyan-500 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 transition-all duration-300 input-tech"
                     placeholder="+1 (555) 123-4567"
                   />
                 </div>
@@ -174,7 +174,7 @@ const Contact = () => {
                     value={formData.category}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 bg-black/50 border border-cyan-500/30 rounded-lg text-white focus:border-cyan-500 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 transition-all duration-300"
+                    className="w-full px-4 py-3 bg-black/50 border border-cyan-500/30 text-white focus:border-cyan-500 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 transition-all duration-300 select-tech"
                   >
                     <option value="">Selecciona una categoría</option>
                     <option value="consolas">Consolas</option>
@@ -197,7 +197,7 @@ const Contact = () => {
                     onChange={handleChange}
                     required
                     rows="5"
-                    className="w-full px-4 py-3 bg-black/50 border border-cyan-500/30 rounded-lg text-white focus:border-cyan-500 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 transition-all duration-300 resize-none"
+                    className="w-full px-4 py-3 bg-black/50 border border-cyan-500/30 text-white focus:border-cyan-500 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 transition-all duration-300 resize-none input-tech"
                     placeholder="Cuéntanos qué diseño tienes en mente..."
                   />
                 </div>
@@ -205,7 +205,7 @@ const Contact = () => {
                 {/* Submit Button */}
                 <button
                   type="submit"
-                  className="w-full py-4 bg-linear-to-r from-cyan-500 to-pink-500 text-white font-bold rounded-lg hover:scale-105 transition-all duration-300 flex items-center justify-center gap-3 glow-border"
+                  className="w-full py-4 border border-pink-500 text-pink-400 font-bold hover:bg-pink-500/10 transition-all duration-300 flex items-center justify-center gap-3 glow-border btn-tech-alt"
                 >
                   {submitted ? (
                     <>
@@ -213,8 +213,8 @@ const Contact = () => {
                     </>
                   ) : (
                     <>
-                      <FaPaperPlane />
-                      <span>Enviar Cotización</span>
+                      {/* <FaPaperPlane /> */}
+                      <span>ENVIAR</span>
                     </>
                   )}
                 </button>
