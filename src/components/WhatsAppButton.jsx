@@ -2,8 +2,7 @@ import { motion } from 'framer-motion';
 import { FaWhatsapp } from 'react-icons/fa';
 
 const WhatsAppButton = () => {
-  // Número de WhatsApp (formato internacional sin +, espacios ni guiones)
-  const phoneNumber = '573001234567'; // Ejemplo: 57 para Colombia + número
+  const phoneNumber = '573001234567';
   
   // Mensaje predefinido
   const message = encodeURIComponent(
@@ -28,7 +27,7 @@ const WhatsAppButton = () => {
       }}
     //   whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.9 }}
-      className="fixed bottom-6 right-6 z-50 bg-green-500 hover:bg-green-600 text-white rounded-full p-4 shadow-lg hover:shadow-2xl transition-all duration-300 group"
+      className="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-50 bg-green-500 hover:bg-green-600 text-white rounded-full p-3 md:p-4 shadow-lg hover:shadow-2xl transition-all duration-300 group"
       aria-label="Contactar por WhatsApp"
     >
       {/* Pulse Animation Ring */}
@@ -46,10 +45,10 @@ const WhatsAppButton = () => {
       />
       
       {/* WhatsApp Icon */}
-      <FaWhatsapp className="relative text-2xl" />
+      <FaWhatsapp className="relative text-xl md:text-2xl" />
       
-      {/* Tooltip */}
-      <span className="absolute right-full mr-3 top-1/2 -translate-y-1/2 bg-gray-900 text-white text-sm font-medium px-3 py-2 rounded-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+      {/* Tooltip - Hidden on mobile */}
+      <span className="hidden md:block absolute right-full mr-3 top-1/2 -translate-y-1/2 bg-gray-900 text-white text-sm font-medium px-3 py-2 rounded-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
         ¿Necesitas ayuda? ¡Escríbenos!
       </span>
     </motion.a>
