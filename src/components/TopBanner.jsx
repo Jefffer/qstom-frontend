@@ -15,9 +15,9 @@ const TopBanner = () => {
   // =====================================================
   const messages = [
     '> NUEVO: Personalización de controles PS5 con efectos holográficos disponible',
-    '> PROMO: 15% de descuento en teclados RGB custom este mes',
-    '> INFO: Envíos gratis en pedidos superiores a $100',
-    '> ALERT: Últimas unidades de diseños exclusivos para Xbox Series X',
+    '> PROMO: 15% de descuento en personalización de teclados este mes',
+    '> INFO: Envíos gratis en pedidos superiores a $100.000',
+    '> ALERT: Diseños exclusivos para Xbox Series X',
     '> UPDATE: Nueva técnica de aerografía 3D implementada',
   ];
 
@@ -71,9 +71,9 @@ const TopBanner = () => {
         {/* Terminal Prompt Indicator */}
         <div className="hidden sm:flex items-center gap-2 text-green-400 text-xs font-mono">
           <div className="flex gap-1">
-            <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse" style={{ animationDuration: '2s' }} />
-            <div className="w-2 h-2 rounded-full bg-yellow-500 animate-pulse" style={{ animationDuration: '2.5s' }} />
-            <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" style={{ animationDuration: '3s' }} />
+            <div className="w-2 h-2 rounded-full bg-red-500" />
+            <div className="w-2 h-2 rounded-full bg-yellow-500"/>
+            <div className="w-2 h-2 rounded-full bg-green-500"/>
           </div>
           <span className="text-green-500/70">qstom@terminal:~$</span>
         </div>
@@ -129,14 +129,14 @@ const TopBanner = () => {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={social.label}
-              whileHover={{ scale: 1.2, rotate: 5 }}
+              whileHover={{ scale: 1.1, rotate: 5 }}
               whileTap={{ scale: 0.9 }}
-              className={`relative text-gray-400 ${social.color} transition-all duration-300 group`}
+              className={`relative text-gray-400 ${social.color} transition-all group`}
             >
               {/* Hexagon Background */}
               <div className="relative">
                 <div 
-                  className="absolute inset-0 bg-green-500/0 group-hover:bg-green-500/20 transition-all duration-300 -z-10"
+                  className="absolute inset-0 bg-green-500/0 group-hover:bg-green-500/20 transition-all -z-10"
                   style={{
                     clipPath: 'polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%)',
                     transform: 'scale(1.8)',
