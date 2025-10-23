@@ -83,16 +83,39 @@ const Gallery = () => {
         clipPath: 'polygon(0 0, 100% 0, 100% 10%, 0 100%)'
       }} />
 
-      {/* Grid Background Pattern - Cyberpunk Pink */}
-      <div className="absolute inset-0 opacity-50">
+      {/* Grid Background Pattern - Dense Irregular Cyberpunk with Contrast */}
+      <div className="absolute inset-0">
+        {/* Primary tight grid - subtle */}
         <div 
-          className="w-full h-full"
+          className="absolute inset-0 opacity-20"
           style={{
             backgroundImage: `
-              linear-gradient(rgba(255, 0, 255, 0.3) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(255, 0, 255, 0.3) 1px, transparent 1px)
+              linear-gradient(rgba(255, 0, 255, 0.4) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(255, 0, 255, 0.4) 1px, transparent 1px)
             `,
-            backgroundSize: '40px 40px',
+            backgroundSize: '15px 10px',
+          }}
+        />
+        {/* Secondary grid - medium intensity */}
+        <div 
+          className="absolute inset-0 opacity-10"
+          style={{
+            backgroundImage: `
+              linear-gradient(rgba(255, 0, 255, 0.6) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(255, 0, 255, 0.6) 1px, transparent 1px)
+            `,
+            backgroundSize: '45px 30px',
+          }}
+        />
+        {/* Accent lines - high intensity */}
+        <div 
+          className="absolute inset-0 opacity-10"
+          style={{
+            backgroundImage: `
+              linear-gradient(rgba(255, 0, 255, 0.5) 2px, transparent 2px),
+              linear-gradient(90deg, rgba(255, 0, 255, 0.5) 2px, transparent 2px)
+            `,
+            backgroundSize: '90px 60px',
           }}
         />
       </div>
@@ -389,7 +412,7 @@ const Gallery = () => {
       </div>
 
       {/* Bottom Slanted Edge */}
-      <div className="absolute bottom-0 left-0 right-0 h-20 bg-pink-600/80" style={{
+      <div className="absolute bottom-0 left-0 right-0 h-15 bg-pink-600/80" style={{
         clipPath: 'polygon(0 50%, 100% 0, 100% 100%, 0 100%)'
       }} />
 
