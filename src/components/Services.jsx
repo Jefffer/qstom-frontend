@@ -61,20 +61,23 @@ const Services = () => {
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 font-['Orbitron']">
-            <span className="glow-text">NUESTROS SERVICIOS</span>
-          </h2>
-          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-            Personalizamos cualquier accesorio gamer con técnicas profesionales
-          </p>
-        </motion.div>
+        <div className="max-w-7xl mx-auto px-4 mb-16">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center"
+          >
+            <h2 className="text-2xl md:text-4xl font-bold text-white mb-4 font-['Orbitron']">
+              <span className="glow-text">NUESTROS SERVICIOS</span>
+            </h2>
+            <div className="w-32 h-1 bg-linear-to-r from-transparent via-cyan-500 to-transparent mx-auto mb-4" />
+            <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto">
+              Personalizamos cualquier accesorio gamer con técnicas profesionales
+            </p>
+          </motion.div>
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, index) => (

@@ -17,10 +17,10 @@ const TopBanner = () => {
   const messages = [
     '> NUEVO: Personalización de controles PS5 con efectos holográficos disponible',
     '> PROMO: 15% de descuento en personalización de teclados este mes',
+    '> UPDATE: Amaya es gay',
     '> INFO: Envíos gratis en pedidos superiores a $100.000',
     '> ALERT: Diseños exclusivos para Xbox Series X',
     '> UPDATE: Nueva técnica de aerografía 3D implementada',
-    '> UPDATE: Amaya es gay',
   ];
 
   // =====================================================
@@ -30,7 +30,7 @@ const TopBanner = () => {
     { icon: FaInstagram, url: 'https://instagram.com', label: 'Instagram', color: 'hover:text-pink-500' },
     { icon: FaFacebookF, url: 'https://facebook.com', label: 'Facebook', color: 'hover:text-blue-500' },
     { icon: FaTiktok, url: 'https://tiktok.com', label: 'TikTok', color: 'hover:text-cyan-400' },
-    { icon: FaTwitter, url: 'https://twitter.com', label: 'Twitter', color: 'hover:text-cyan-300' },
+    // { icon: FaTwitter, url: 'https://twitter.com', label: 'Twitter', color: 'hover:text-cyan-300' },
   ];
 
   // Cambiar mensaje cada 12 segundos
@@ -61,8 +61,6 @@ const TopBanner = () => {
           }}
         />
       </div>
-
-      
 
       <div className="relative z-10 flex items-center justify-between h-10 px-4">
         {/* Terminal Prompt Indicator - Solo Desktop */}

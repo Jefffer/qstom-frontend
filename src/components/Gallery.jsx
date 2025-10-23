@@ -77,48 +77,11 @@ const Gallery = () => {
   };
 
   return (
-    <div className="relative overflow-hidden bg-linear-to-b from-black via-purple-950/30 to-black">
+    <div className="relative overflow-hidden bg-black">
       {/* Top Slanted Edge */}
       <div className="absolute top-0 left-0 right-0 h-20 bg-black" style={{
         clipPath: 'polygon(0 0, 100% 0, 100% 50%, 0 100%)'
       }} />
-
-      {/* Animated Grid Background */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `
-            linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255, 0, 255, 0.1) 1px, transparent 1px)
-          `,
-          backgroundSize: '80px 80px',
-        }} />
-      </div>
-
-      {/* Glowing Orbs */}
-      <motion.div
-        animate={{
-          scale: [1, 1.3, 1],
-          opacity: [0.15, 0.25, 0.15],
-        }}
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-        className="absolute top-1/4 -left-32 w-64 h-64 bg-cyan-500 rounded-full blur-3xl"
-      />
-      <motion.div
-        animate={{
-          scale: [1, 1.2, 1],
-          opacity: [0.15, 0.25, 0.15],
-        }}
-        transition={{
-          duration: 6,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-        className="absolute bottom-1/4 -right-32 w-96 h-96 bg-pink-500 rounded-full blur-3xl"
-      />
 
       <div className="relative z-10 py-20">
         {/* Header */}

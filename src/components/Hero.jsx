@@ -48,7 +48,7 @@ const Hero = () => {
           transition={{ duration: 0.8 }}
         >
           <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 font-['Orbitron']">
-            <span className="glow-text">Qstom</span>
+            <span className="glow-text">.::: Qstom :::.</span>
             <br />
             <span className="text-2xl md:text-4xl glow-pink">
               PERSONALIZACIÓN DE ACCESORIOS
@@ -60,7 +60,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto"
+          className="text-lg md:text-xl text-gray-300 mb-8 max-w-3xl mx-auto"
         >
           Transforma tus accesorios gamer en obras de arte únicas.
            Estamos ubicados en Bogotá, próximamente en tu ciudad.
