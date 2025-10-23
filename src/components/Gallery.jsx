@@ -210,22 +210,6 @@ const Gallery = () => {
                   </div>
                 </motion.div>
               </AnimatePresence>
-
-              {/* Navigation Arrows */}
-              {/* <button
-                onClick={prevSlide}
-                className="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-black/50 hover:bg-cyan-500/50 text-white p-4 backdrop-blur-sm transition-all duration-300 btn-tech group"
-                aria-label="Previous"
-              >
-                <FaChevronLeft className="text-2xl group-hover:scale-110 transition-transform" />
-              </button>
-              <button
-                onClick={nextSlide}
-                className="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-black/50 hover:bg-pink-500/50 text-white p-4 backdrop-blur-sm transition-all duration-300 btn-tech group"
-                aria-label="Next"
-              >
-                <FaChevronRight className="text-2xl group-hover:scale-110 transition-transform" />
-              </button> */}
             </div>
           </div>
 
