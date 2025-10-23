@@ -79,9 +79,23 @@ const Gallery = () => {
   return (
     <div className="relative overflow-hidden bg-black">
       {/* Top Slanted Edge */}
-      <div className="absolute top-0 left-0 right-0 h-20 bg-black" style={{
-        clipPath: 'polygon(0 0, 100% 0, 100% 50%, 0 100%)'
+      <div className="absolute top-0 left-0 right-0 h-10 bg-pink-600/80" style={{
+        clipPath: 'polygon(0 0, 100% 0, 100% 10%, 0 100%)'
       }} />
+
+      {/* Grid Background Pattern - Cyberpunk Pink */}
+      <div className="absolute inset-0 opacity-50">
+        <div 
+          className="w-full h-full"
+          style={{
+            backgroundImage: `
+              linear-gradient(rgba(255, 0, 255, 0.3) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(255, 0, 255, 0.3) 1px, transparent 1px)
+            `,
+            backgroundSize: '40px 40px',
+          }}
+        />
+      </div>
 
       <div className="relative z-10 py-20">
         {/* Header */}
@@ -375,7 +389,7 @@ const Gallery = () => {
       </div>
 
       {/* Bottom Slanted Edge */}
-      <div className="absolute bottom-0 left-0 right-0 h-20 bg-black" style={{
+      <div className="absolute bottom-0 left-0 right-0 h-20 bg-pink-600/80" style={{
         clipPath: 'polygon(0 50%, 100% 0, 100% 100%, 0 100%)'
       }} />
 
