@@ -79,7 +79,7 @@ const Gallery = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 font-['Orbitron']">
-            <span className="glow-pink">Galería de Proyectos</span>
+            <span className="glow-pink">GALERÍA DE PROYECTOS</span>
           </h2>
           <p className="text-xl text-gray-400 max-w-2xl mx-auto">
             Explora algunos de nuestros trabajos más destacados
@@ -94,7 +94,6 @@ const Gallery = () => {
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
-              whileHover={{ scale: 1.05 }}
               onClick={() => setSelectedImage(item)}
               className="group cursor-pointer relative overflow-hidden rounded-lg border-2 border-cyan-500/30 hover:border-pink-500 transition-all duration-300"
             >

@@ -137,7 +137,7 @@ const Contact = () => {
                     placeholder=" "
                     className="w-full px-4 py-3 bg-black/50 border border-cyan-500/30 text-white focus:border-cyan-500 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 transition-all duration-300 input-tech"
                   />
-                  <label>Nombre Completo *</label>
+                  <label>Nombre Completo</label>
                 </div>
 
                 {/* Email */}
@@ -153,7 +153,7 @@ const Contact = () => {
                     placeholder=" "
                     className="w-full px-4 py-3 bg-black/50 border border-cyan-500/30 text-white focus:border-cyan-500 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 transition-all duration-300 input-tech"
                   />
-                  <label>Email *</label>
+                  <label>Email</label>
                 </div>
 
                 {/* Phone */}
@@ -190,7 +190,7 @@ const Contact = () => {
                     <option value="torres">Torres PC</option>
                     <option value="otro">Otro</option>
                   </select>
-                  <label>Tipo de Producto *</label>
+                  <label>Tipo de Producto</label>
                 </div>
 
                 {/* Message */}
@@ -206,7 +206,7 @@ const Contact = () => {
                     placeholder=" "
                     className="w-full px-4 py-3 bg-black/50 border border-cyan-500/30 text-white focus:border-cyan-500 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 transition-all duration-300 resize-none input-tech"
                   />
-                  <label>Describe tu Idea *</label>
+                  <label>Describe tu Idea</label>
                 </div>
 
                 {/* Submit Button */}
@@ -216,7 +216,7 @@ const Contact = () => {
                   className={`w-full py-4 border font-bold transition-all duration-300 flex items-center justify-center gap-3 btn-tech-alt ${
                     isFormValid 
                       ? 'border-pink-500 text-pink-400 hover:bg-pink-500/10 glow-border hover:scale-105' 
-                      : 'border-gray-600 text-gray-600 cursor-not-allowed'
+                      : 'border-gray-300 text-gray-300 cursor-not-allowed'
                   }`}
                 >
                   {submitted ? (

@@ -9,8 +9,8 @@ const Home = () => {
   return (
     <div className="">
       <Hero />
-      <Services />
       <Gallery />
+      <Services />
       
       {/* Call to Action Section */}
       <section className="py-20 px-4 bg-black relative overflow-hidden">

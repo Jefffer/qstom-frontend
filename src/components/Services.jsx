@@ -69,7 +69,7 @@ const Services = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 font-['Orbitron']">
-            <span className="glow-text">Nuestros Servicios</span>
+            <span className="glow-text">NUESTROS SERVICIOS</span>
           </h2>
           <p className="text-xl text-gray-400 max-w-2xl mx-auto">
             Personalizamos cualquier accesorio gamer con técnicas profesionales
