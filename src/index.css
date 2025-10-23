@@ -147,4 +147,64 @@ h1, h2, h3, h4, h5, h6 {
   );
 }
 
+/* Floating Label Input Container */
+.floating-input {
+  position: relative;
+}
+
+.floating-input input,
+.floating-input textarea,
+.floating-input select {
+  padding-top: 1.5rem;
+}
+
+.floating-input label {
+  position: absolute;
+  left: 1rem;
+  top: 0.75rem;
+  color: #6b7280;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  pointer-events: none;
+  background: transparent;
+  padding: 0 0.25rem;
+}
+
+.floating-input input:focus ~ label,
+.floating-input input:not(:placeholder-shown) ~ label,
+.floating-input textarea:focus ~ label,
+.floating-input textarea:not(:placeholder-shown) ~ label,
+.floating-input select:focus ~ label,
+.floating-input select:not([value=""]) ~ label {
+  top: -0.5rem;
+  left: 0.75rem;
+  font-size: 0.75rem;
+  color: #00ffff;
+  background: #0a0a0f;
+  padding: 0 0.5rem;
+}
+
+/* Placeholder styling */
+.floating-input input::placeholder,
+.floating-input textarea::placeholder {
+  color: transparent;
+}
+
+.floating-input input:focus::placeholder,
+.floating-input textarea:focus::placeholder {
+  color: transparent;
+}
+
+/* Button disabled state */
+button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  filter: grayscale(70%);
+}
+
+button:disabled:hover {
+  transform: none !important;
+  scale: 1 !important;
+  background: inherit;
+}
 

@@ -12,6 +12,7 @@ const Contact = () => {
   });
 
   const [submitted, setSubmitted] = useState(false);
+  const [focusedField, setFocusedField] = useState('');
 
   const handleChange = (e) => {
     setFormData({
@@ -26,6 +27,12 @@ const Contact = () => {
     setSubmitted(true);
     setTimeout(() => setSubmitted(false), 3000);
   };
+
+  // Validar si todos los campos requeridos están llenos
+  const isFormValid = formData.name.trim() !== '' && 
+                      formData.email.trim() !== '' && 
+                      formData.category !== '' && 
+                      formData.message.trim() !== '';
 
   const contactInfo = [
     {
@@ -118,65 +125,64 @@ const Contact = () => {
 
               <form onSubmit={handleSubmit} className="space-y-6">
                 {/* Name */}
-                <div>
-                  <label className="block text-gray-300 mb-2 font-medium">
-                    Nombre Completo *
-                  </label>
+                <div className="floating-input">
                   <input
                     type="text"
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
+                    onFocus={() => setFocusedField('name')}
+                    onBlur={() => setFocusedField('')}
                     required
+                    placeholder=" "
                     className="w-full px-4 py-3 bg-black/50 border border-cyan-500/30 text-white focus:border-cyan-500 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 transition-all duration-300 input-tech"
-                    placeholder="Tu nombre"
                   />
+                  <label>Nombre Completo *</label>
                 </div>
 
                 {/* Email */}
-                <div>
-                  <label className="block text-gray-300 mb-2 font-medium">
-                    Email *
-                  </label>
+                <div className="floating-input">
                   <input
                     type="email"
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
+                    onFocus={() => setFocusedField('email')}
+                    onBlur={() => setFocusedField('')}
                     required
+                    placeholder=" "
                     className="w-full px-4 py-3 bg-black/50 border border-cyan-500/30 text-white focus:border-cyan-500 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 transition-all duration-300 input-tech"
-                    placeholder="tu@email.com"
                   />
+                  <label>Email *</label>
                 </div>
 
                 {/* Phone */}
-                <div>
-                  <label className="block text-gray-300 mb-2 font-medium">
-                    Teléfono
-                  </label>
+                <div className="floating-input">
                   <input
                     type="tel"
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
+                    onFocus={() => setFocusedField('phone')}
+                    onBlur={() => setFocusedField('')}
+                    placeholder=" "
                     className="w-full px-4 py-3 bg-black/50 border border-cyan-500/30 text-white focus:border-cyan-500 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 transition-all duration-300 input-tech"
-                    placeholder="+1 (555) 123-4567"
                   />
+                  <label>Teléfono (Opcional)</label>
                 </div>
 
                 {/* Category */}
-                <div>
-                  <label className="block text-gray-300 mb-2 font-medium">
-                    Tipo de Producto *
-                  </label>
+                <div className="floating-input">
                   <select
                     name="category"
                     value={formData.category}
                     onChange={handleChange}
+                    onFocus={() => setFocusedField('category')}
+                    onBlur={() => setFocusedField('')}
                     required
                     className="w-full px-4 py-3 bg-black/50 border border-cyan-500/30 text-white focus:border-cyan-500 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 transition-all duration-300 select-tech"
                   >
-                    <option value="">Selecciona una categoría</option>
+                    <option value="">Selecciona</option>
                     <option value="consolas">Consolas</option>
                     <option value="controles">Controles</option>
                     <option value="teclados">Teclados</option>
@@ -184,28 +190,34 @@ const Contact = () => {
                     <option value="torres">Torres PC</option>
                     <option value="otro">Otro</option>
                   </select>
+                  <label>Tipo de Producto *</label>
                 </div>
 
                 {/* Message */}
-                <div>
-                  <label className="block text-gray-300 mb-2 font-medium">
-                    Describe tu Idea *
-                  </label>
+                <div className="floating-input">
                   <textarea
                     name="message"
                     value={formData.message}
                     onChange={handleChange}
+                    onFocus={() => setFocusedField('message')}
+                    onBlur={() => setFocusedField('')}
                     required
                     rows="5"
+                    placeholder=" "
                     className="w-full px-4 py-3 bg-black/50 border border-cyan-500/30 text-white focus:border-cyan-500 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 transition-all duration-300 resize-none input-tech"
-                    placeholder="Cuéntanos qué diseño tienes en mente..."
                   />
+                  <label>Describe tu Idea *</label>
                 </div>
 
                 {/* Submit Button */}
                 <button
                   type="submit"
-                  className="w-full py-4 border border-pink-500 text-pink-400 font-bold hover:bg-pink-500/10 transition-all duration-300 flex items-center justify-center gap-3 glow-border btn-tech-alt"
+                  disabled={!isFormValid}
+                  className={`w-full py-4 border font-bold transition-all duration-300 flex items-center justify-center gap-3 btn-tech-alt ${
+                    isFormValid 
+                      ? 'border-pink-500 text-pink-400 hover:bg-pink-500/10 glow-border hover:scale-105' 
+                      : 'border-gray-600 text-gray-600 cursor-not-allowed'
+                  }`}
                 >
                   {submitted ? (
                     <>
@@ -213,8 +225,8 @@ const Contact = () => {
                     </>
                   ) : (
                     <>
-                      {/* <FaPaperPlane /> */}
-                      <span>ENVIAR</span>
+                      <FaPaperPlane />
+                      <span>ENVIAR COTIZACIÓN</span>
                     </>
                   )}
                 </button>
