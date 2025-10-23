@@ -11,7 +11,8 @@ const TopBanner = () => {
   // Para personalizar los mensajes del banner:
   // 1. Mantén el formato: '> TIPO: mensaje'
   // 2. Tipos sugeridos: NUEVO, PROMO, INFO, ALERT, UPDATE
-  // 3. Cada mensaje se mostrará durante 5 segundos
+  // 3. Cada mensaje se mostrará durante 10 segundos + 2 segundos de pausa
+  // 4. Los mensajes se alternan: izquierda→derecha, derecha→izquierda
   // =====================================================
   const messages = [
     '> NUEVO: Personalización de controles PS5 con efectos holográficos disponible',
@@ -36,13 +37,18 @@ const TopBanner = () => {
     { icon: FaTwitter, url: 'https://twitter.com', label: 'Twitter', color: 'hover:text-cyan-300' },
   ];
 
-  // Cambiar mensaje cada 5 segundos
+  // Cambiar mensaje cada 12 segundos
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentMessageIndex((prev) => (prev + 1) % messages.length);
-    }, 5000);
+    }, 10000); // 10 segundos de animación + 2 segundos de pausa
     return () => clearInterval(interval);
   }, [messages.length]);
+
+  // Determinar dirección basada en el índice (izq→der, der→izq alternados)
+  const getDirection = (index) => {
+    return index % 2 === 0 ? 'ltr' : 'rtl';
+  };
 
   return (
     <div className="fixed top-0 left-0 right-0 z-50 bg-linear-to-r from-gray-900 via-black to-gray-900 border-b border-green-500/30 overflow-hidden">
@@ -68,8 +74,8 @@ const TopBanner = () => {
       />
 
       <div className="relative z-10 flex items-center justify-between h-10 px-4">
-        {/* Terminal Prompt Indicator */}
-        <div className="hidden sm:flex items-center gap-2 text-green-400 text-xs font-mono">
+        {/* Terminal Prompt Indicator - Solo Desktop */}
+        <div className="hidden md:flex items-center gap-2 text-green-400 text-xs font-mono">
           <div className="flex gap-1">
             <div className="w-2 h-2 rounded-full bg-red-500" />
             <div className="w-2 h-2 rounded-full bg-yellow-500"/>
@@ -79,49 +85,59 @@ const TopBanner = () => {
         </div>
 
         {/* Scrolling Messages Container */}
-        <div className="flex-1 mx-4 overflow-hidden relative h-full flex items-center">
+        <div className="flex-1 md:mx-4 overflow-hidden relative h-full flex items-center">
           {/* Gradient Fade on Edges */}
           <div className="absolute left-0 top-0 bottom-0 w-12 bg-linear-to-r from-black to-transparent z-10 pointer-events-none" />
           <div className="absolute right-0 top-0 bottom-0 w-12 bg-linear-to-l from-black to-transparent z-10 pointer-events-none" />
           
           {/* Animated Messages */}
           <div className="relative w-full h-full flex items-center">
-            {messages.map((message, index) => (
-              <motion.div
-                key={index}
-                initial={{ x: '100%', opacity: 0 }}
-                animate={{
-                  x: currentMessageIndex === index ? ['100%', '-100%'] : '100%',
-                  opacity: currentMessageIndex === index ? [0, 1, 1, 0] : 0,
-                }}
-                transition={{
-                  duration: 5,
-                  ease: 'linear',
-                  times: [0, 0.05, 0.95, 1],
-                }}
-                className="absolute whitespace-nowrap text-xs sm:text-sm font-mono text-green-400 tracking-wide"
-                style={{
-                  textShadow: '0 0 10px rgba(34, 197, 94, 0.5), 0 0 20px rgba(34, 197, 94, 0.3)',
-                }}
-              >
-                {message}
-                <motion.span
-                  animate={{ opacity: [1, 0, 1] }}
-                  transition={{ duration: 0.8, repeat: Infinity }}
-                  className="inline-block ml-1 w-2 h-4 bg-green-400"
+            {messages.map((message, index) => {
+              const direction = getDirection(index);
+              const isActive = currentMessageIndex === index;
+              
+              return (
+                <motion.div
+                  key={index}
+                  initial={{ 
+                    x: direction === 'ltr' ? '-100%' : '100%',
+                    opacity: 0 
+                  }}
+                  animate={{
+                    x: isActive 
+                      ? (direction === 'ltr' ? ['-100%', '100%'] : ['100%', '-100%'])
+                      : (direction === 'ltr' ? '-100%' : '100%'),
+                    opacity: isActive ? [0, 1, 1, 1, 0] : 0,
+                  }}
+                  transition={{
+                    duration: 10,
+                    ease: 'linear',
+                    times: [0, 0.05, 0.45, 0.95, 1],
+                  }}
+                  className="absolute whitespace-nowrap text-xs sm:text-sm font-mono text-green-400 tracking-wide"
                   style={{
-                    boxShadow: '0 0 5px rgba(34, 197, 94, 0.8)',
+                    textShadow: '0 0 10px rgba(34, 197, 94, 0.5), 0 0 20px rgba(34, 197, 94, 0.3)',
                   }}
                 >
-                  ▊
-                </motion.span>
-              </motion.div>
-            ))}
+                  {message}
+                  <motion.span
+                    animate={{ opacity: [1, 0, 1] }}
+                    transition={{ duration: 0.8, repeat: Infinity }}
+                    className="inline-block ml-1 w-2 h-4 bg-green-400"
+                    style={{
+                      boxShadow: '0 0 5px rgba(34, 197, 94, 0.8)',
+                    }}
+                  >
+                    ▊
+                  </motion.span>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
 
-        {/* Social Media Icons */}
-        <div className="flex items-center gap-3">
+        {/* Social Media Icons - Solo Desktop */}
+        <div className="hidden md:flex items-center gap-3">
           {socialLinks.map((social, index) => (
             <motion.a
               key={index}
