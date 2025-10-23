@@ -130,7 +130,7 @@ const Gallery = () => {
             viewport={{ once: true }}
             className="text-center"
           >
-            <h2 className="text-4xl md:text-6xl font-bold text-white mb-4 font-['Orbitron']">
+            <h2 className="text-2xl md:text-4xl font-bold text-white mb-4 font-['Orbitron']">
               <span className="glow-pink">GALERÍA</span>
             </h2>
             <div className="w-32 h-1 bg-linear-to-r from-transparent via-cyan-500 to-transparent mx-auto mb-4" />

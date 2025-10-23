@@ -6,12 +6,12 @@ const TopBanner = () => {
   const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
   
   // =====================================================
-  // CONFIGURACIÓN DE MENSAJES - EDITAR AQUÍ
+  // CONFIGURACIÓN DE MENSAJES
   // =====================================================
   // Para personalizar los mensajes del banner:
   // 1. Mantén el formato: '> TIPO: mensaje'
   // 2. Tipos sugeridos: NUEVO, PROMO, INFO, ALERT, UPDATE
-  // 3. Cada mensaje se mostrará durante 10 segundos + 2 segundos de pausa
+  // 3. Cada mensaje se mostrará durante 10 segundos
   // 4. Los mensajes se alternan: izquierda→derecha, derecha→izquierda
   // =====================================================
   const messages = [
@@ -23,12 +23,7 @@ const TopBanner = () => {
   ];
 
   // =====================================================
-  // CONFIGURACIÓN DE REDES SOCIALES - EDITAR AQUÍ
-  // =====================================================
-  // Para personalizar las redes sociales:
-  // 1. Cambia las URLs por las de tu negocio
-  // 2. Puedes agregar más redes importando iconos de 'react-icons/fa'
-  // 3. Colores personalizables en la propiedad 'color'
+  // CONFIGURACIÓN DE REDES SOCIALES
   // =====================================================
   const socialLinks = [
     { icon: FaInstagram, url: 'https://instagram.com', label: 'Instagram', color: 'hover:text-pink-500' },
@@ -41,7 +36,7 @@ const TopBanner = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentMessageIndex((prev) => (prev + 1) % messages.length);
-    }, 10000); // 10 segundos de animación + 2 segundos de pausa
+    }, 10000); // 10 segundos de animación
     return () => clearInterval(interval);
   }, [messages.length]);
 
@@ -66,12 +61,7 @@ const TopBanner = () => {
         />
       </div>
 
-      {/* Scanline Effect */}
-      <motion.div
-        animate={{ y: ['-100%', '200%'] }}
-        transition={{ duration: 3, repeat: Infinity, ease: 'linear' }}
-        className="absolute inset-0 bg-linear-to-b from-transparent via-green-500/5 to-transparent h-8 pointer-events-none"
-      />
+      
 
       <div className="relative z-10 flex items-center justify-between h-10 px-4">
         {/* Terminal Prompt Indicator - Solo Desktop */}
@@ -92,6 +82,14 @@ const TopBanner = () => {
           
           {/* Animated Messages */}
           <div className="relative w-full h-full flex items-center">
+
+            {/* Scanline Effect */}
+            <motion.div
+                animate={{ y: ['-100%', '200%'] }}
+                transition={{ duration: 3, repeat: Infinity, ease: 'linear' }}
+                className="absolute inset-0 bg-linear-to-b from-transparent via-green-500/10 to-transparent h-8 pointer-events-none"
+            />
+
             {messages.map((message, index) => {
               const direction = getDirection(index);
               const isActive = currentMessageIndex === index;
@@ -185,19 +183,8 @@ const TopBanner = () => {
         </div>
       </div>
 
-      {/* Bottom Border Glow */}
-      <motion.div
-        animate={{
-          opacity: [0.3, 0.6, 0.3],
-          boxShadow: [
-            '0 0 5px rgba(34, 197, 94, 0.3)',
-            '0 0 15px rgba(34, 197, 94, 0.6)',
-            '0 0 5px rgba(34, 197, 94, 0.3)',
-          ],
-        }}
-        transition={{ duration: 2, repeat: Infinity }}
-        className="absolute bottom-0 left-0 right-0 h-px bg-green-500"
-      />
+      {/* Bottom Border */}
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-green-500/50" />
     </div>
   );
 };
