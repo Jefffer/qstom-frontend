@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const Hero = () => {
   return (
-    <div className="relative min-h-screen flex items-center justify-center overflow-hidden bg-linear-to-br from-black via-purple-900/20 to-black">
+    <div className="relative min-h-screen flex items-center justify-center overflow-hidden bg-linear-to-br from-black via-purple-900/20 to-black pt-26">
       {/* Animated Background Grid */}
       <div className="absolute inset-0 opacity-20">
         <div className="absolute inset-0" style={{

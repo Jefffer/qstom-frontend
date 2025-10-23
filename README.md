@@ -5,6 +5,7 @@ Sitio web para **QSTOM**, empresa especializada en personalización de accesorio
 ## 🚀 Características
 
 - **Estética Cyberpunk**: Diseño futurista con colores neón (cyan y magenta), efectos de brillo y animaciones fluidas
+- **Terminal Banner**: Banner superior estilo terminal Linux con mensajes deslizantes y redes sociales
 - **Responsive**: Totalmente adaptable a dispositivos móviles, tablets y desktop
 - **Animaciones**: Implementadas con Framer Motion para transiciones suaves
 - **Componentes Modulares**: Arquitectura basada en componentes reutilizables
@@ -67,11 +68,13 @@ qstom-frontend/
 ├── src/
 │   ├── assets/
 │   ├── components/
+│   │   ├── TopBanner.jsx      # Banner superior tipo terminal
 │   │   ├── Navbar.jsx
 │   │   ├── Hero.jsx
 │   │   ├── Services.jsx
 │   │   ├── Gallery.jsx
-│   │   └── Footer.jsx
+│   │   ├── Footer.jsx
+│   │   └── WhatsAppButton.jsx
 │   ├── pages/
 │   │   ├── Home.jsx
 │   │   ├── Catalog.jsx
@@ -85,6 +88,41 @@ qstom-frontend/
 ├── package.json
 ├── vite.config.js
 └── README.md
+```
+
+## ⚙️ Configuración del Banner Superior
+
+El componente `TopBanner.jsx` permite personalizar mensajes y redes sociales:
+
+### Editar Mensajes
+
+Abre `src/components/TopBanner.jsx` y localiza el array `messages`:
+
+```jsx
+const messages = [
+  '> NUEVO: Personalización de controles PS5 con efectos holográficos disponible',
+  '> PROMO: 15% de descuento en teclados RGB custom este mes',
+  // Agrega más mensajes aquí
+];
+```
+
+**Formato recomendado**: `> TIPO: tu mensaje aquí`
+
+**Tipos sugeridos**: NUEVO, PROMO, INFO, ALERT, UPDATE
+
+### Editar Redes Sociales
+
+Localiza el array `socialLinks` y actualiza las URLs:
+
+```jsx
+const socialLinks = [
+  { icon: FaInstagram, url: 'https://instagram.com/tu_usuario', label: 'Instagram', color: 'hover:text-pink-500' },
+  { icon: FaFacebookF, url: 'https://facebook.com/tu_pagina', label: 'Facebook', color: 'hover:text-blue-500' },
+  // Personaliza las URLs con tus redes sociales
+];
+```
+
+## 🎨 Paleta de Colores Cyberpunk
 ```
 
 ## 🎯 Servicios
