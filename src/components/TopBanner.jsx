@@ -20,6 +20,7 @@ const TopBanner = () => {
     '> INFO: Envíos gratis en pedidos superiores a $100.000',
     '> ALERT: Diseños exclusivos para Xbox Series X',
     '> UPDATE: Nueva técnica de aerografía 3D implementada',
+    '> UPDATE: Amaya es gay',
   ];
 
   // =====================================================

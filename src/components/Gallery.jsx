@@ -144,6 +144,109 @@ const Gallery = () => {
         <div className="relative mb-16">
           <div className="max-w-7xl mx-auto px-4">
             <div className="relative h-[500px] md:h-[600px]">
+              {/* Cyberpunk Frame Container */}
+              <div className="absolute inset-0 pointer-events-none z-20">
+                {/* Top Frame */}
+                <div className="absolute top-0 left-0 right-0 h-3 bg-linear-to-r from-cyan-500 via-purple-500 to-pink-500" 
+                  style={{
+                    clipPath: 'polygon(0 0, 2% 100%, 98% 100%, 100% 0)',
+                    boxShadow: '0 0 20px rgba(0, 255, 255, 0.6), 0 0 40px rgba(255, 0, 255, 0.4)'
+                  }}
+                />
+                
+                {/* Bottom Frame */}
+                <div className="absolute bottom-0 left-0 right-0 h-3 bg-linear-to-r from-pink-500 via-purple-500 to-cyan-500" 
+                  style={{
+                    clipPath: 'polygon(0 100%, 2% 0, 98% 0, 100% 100%)',
+                    boxShadow: '0 0 20px rgba(255, 0, 255, 0.6), 0 0 40px rgba(0, 255, 255, 0.4)'
+                  }}
+                />
+                
+                {/* Left Frame */}
+                <div className="absolute top-0 bottom-0 left-0 w-3 bg-linear-to-b from-cyan-500 via-purple-500 to-pink-500" 
+                  style={{
+                    clipPath: 'polygon(0 0, 100% 2%, 100% 98%, 0 100%)',
+                    boxShadow: '0 0 20px rgba(0, 255, 255, 0.6), 0 0 40px rgba(255, 0, 255, 0.4)'
+                  }}
+                />
+                
+                {/* Right Frame */}
+                <div className="absolute top-0 bottom-0 right-0 w-3 bg-linear-to-b from-pink-500 via-purple-500 to-cyan-500" 
+                  style={{
+                    clipPath: 'polygon(100% 0, 0 2%, 0 98%, 100% 100%)',
+                    boxShadow: '0 0 20px rgba(255, 0, 255, 0.6), 0 0 40px rgba(0, 255, 255, 0.4)'
+                  }}
+                />
+
+                {/* Corner Tech Details */}
+                <div className="absolute top-0 left-0 w-16 h-16">
+                  <div className="absolute top-3 left-3 w-10 h-10 border-t-2 border-l-2 border-cyan-400" 
+                    style={{ clipPath: 'polygon(0 0, 100% 0, 100% 30%, 30% 30%, 30% 100%, 0 100%)' }}
+                  />
+                  <div 
+                    className="absolute top-6 left-6 w-2 h-2 bg-cyan-400 rounded-full"
+                    style={{ boxShadow: '0 0 10px rgba(0, 255, 255, 0.8)' }}
+                  />
+                </div>
+                
+                <div className="absolute top-0 right-0 w-16 h-16">
+                  <div className="absolute top-3 right-3 w-10 h-10 border-t-2 border-r-2 border-pink-400" 
+                    style={{ clipPath: 'polygon(0 0, 100% 0, 100% 100%, 70% 100%, 70% 30%, 0 30%)' }}
+                  />
+                  <div 
+                    className="absolute top-6 right-6 w-2 h-2 bg-pink-400 rounded-full"
+                    style={{ boxShadow: '0 0 10px rgba(255, 0, 255, 0.8)' }}
+                  />
+                </div>
+                
+                <div className="absolute bottom-0 left-0 w-16 h-16">
+                  <div className="absolute bottom-3 left-3 w-10 h-10 border-b-2 border-l-2 border-cyan-400" 
+                    style={{ clipPath: 'polygon(0 0, 30% 0, 30% 70%, 100% 70%, 100% 100%, 0 100%)' }}
+                  />
+                  <div 
+                    className="absolute bottom-6 left-6 w-2 h-2 bg-cyan-400 rounded-full"
+                    style={{ boxShadow: '0 0 10px rgba(0, 255, 255, 0.8)' }}
+                  />
+                </div>
+                
+                <div className="absolute bottom-0 right-0 w-16 h-16">
+                  <div className="absolute bottom-3 right-3 w-10 h-10 border-b-2 border-r-2 border-pink-400" 
+                    style={{ clipPath: 'polygon(0 70%, 70% 70%, 70% 0, 100% 0, 100% 100%, 0 100%)' }}
+                  />
+                  <div 
+                    className="absolute bottom-6 right-6 w-2 h-2 bg-pink-400 rounded-full"
+                    style={{ boxShadow: '0 0 10px rgba(255, 0, 255, 0.8)' }}
+                  />
+                </div>
+
+                {/* Decorative Lines */}
+                {[...Array(4)].map((_, i) => (
+                  <div
+                    key={i}
+                    className="absolute h-px bg-cyan-400"
+                    style={{
+                      top: `${25 * (i + 1)}%`,
+                      left: '3px',
+                      width: '30px',
+                      boxShadow: '0 0 5px rgba(0, 255, 255, 0.6)'
+                    }}
+                  />
+                ))}
+                
+                {[...Array(4)].map((_, i) => (
+                  <div
+                    key={i}
+                    className="absolute h-px bg-pink-400"
+                    style={{
+                      top: `${25 * (i + 1)}%`,
+                      right: '3px',
+                      width: '30px',
+                      boxShadow: '0 0 5px rgba(255, 0, 255, 0.6)'
+                    }}
+                  />
+                ))}
+              </div>
+
               <AnimatePresence mode="wait">
                 <motion.div
                   key={currentSlide}
@@ -152,6 +255,7 @@ const Gallery = () => {
                   exit={{ opacity: 0, x: -100 }}
                   transition={{ duration: 0.5 }}
                   className="absolute inset-0"
+                  style={{ padding: '3px' }}
                 >
                   <div 
                     className="relative h-full group cursor-pointer" 
@@ -159,14 +263,12 @@ const Gallery = () => {
                     onMouseEnter={() => setIsPaused(true)}
                     onMouseLeave={() => setIsPaused(false)}
                   >
-                    {/* Main Image with Irregular Shape */}
+                    {/* Main Image */}
                     <div className="relative h-full overflow-hidden">
-                      <motion.img
+                      <img
                         src={galleryItems[currentSlide].image}
                         alt={galleryItems[currentSlide].title}
                         className="w-full h-full object-cover"
-                        whileHover={{ scale: 1.05 }}
-                        transition={{ duration: 0.4 }}
                       />
                       
                       {/* Gradient Overlay */}
@@ -203,13 +305,34 @@ const Gallery = () => {
                         </p>
                       </motion.div>
                     </div>
-
-                    {/* Corner Accents */}
-                    <div className="absolute top-0 left-0 w-20 h-20 border-t-4 border-l-4 border-cyan-500 opacity-50 group-hover:opacity-100 transition-opacity" />
-                    <div className="absolute bottom-0 right-0 w-20 h-20 border-b-4 border-r-4 border-pink-500 opacity-50 group-hover:opacity-100 transition-opacity" />
                   </div>
                 </motion.div>
               </AnimatePresence>
+
+              {/* Navigation Buttons */}
+              <button
+                onClick={(e) => { e.stopPropagation(); prevSlide(); }}
+                className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-30 bg-black/70 hover:bg-cyan-500/80 text-white p-3 md:p-4 backdrop-blur-sm transition-all duration-300 group border-2 border-cyan-500/50 hover:border-cyan-500"
+                style={{
+                  clipPath: 'polygon(20% 0, 100% 0, 100% 100%, 20% 100%, 0 50%)',
+                  boxShadow: '0 0 20px rgba(0, 255, 255, 0.3)'
+                }}
+                aria-label="Previous"
+              >
+                <FaChevronLeft className="text-xl md:text-2xl group-hover:scale-110 transition-transform" />
+              </button>
+              
+              <button
+                onClick={(e) => { e.stopPropagation(); nextSlide(); }}
+                className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-30 bg-black/70 hover:bg-pink-500/80 text-white p-3 md:p-4 backdrop-blur-sm transition-all duration-300 group border-2 border-pink-500/50 hover:border-pink-500"
+                style={{
+                  clipPath: 'polygon(0 0, 80% 0, 100% 50%, 80% 100%, 0 100%)',
+                  boxShadow: '0 0 20px rgba(255, 0, 255, 0.3)'
+                }}
+                aria-label="Next"
+              >
+                <FaChevronRight className="text-xl md:text-2xl group-hover:scale-110 transition-transform" />
+              </button>
             </div>
           </div>
 
