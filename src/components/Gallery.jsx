@@ -5,6 +5,7 @@ import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 const Gallery = () => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
 
   const galleryItems = [
     {
@@ -59,11 +60,13 @@ const Gallery = () => {
 
   // Auto-advance carousel
   useEffect(() => {
+    if (isPaused) return;
+    
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % galleryItems.length);
-    }, 5000);
+    }, 6000); // 10 segundos por imagen
     return () => clearInterval(timer);
-  }, [galleryItems.length]);
+  }, [galleryItems.length, isPaused]);
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % galleryItems.length);
@@ -150,11 +153,14 @@ const Gallery = () => {
                   transition={{ duration: 0.5 }}
                   className="absolute inset-0"
                 >
-                  <div className="relative h-full group cursor-pointer" onClick={() => setSelectedImage(galleryItems[currentSlide])}>
+                  <div 
+                    className="relative h-full group cursor-pointer" 
+                    onClick={() => setSelectedImage(galleryItems[currentSlide])}
+                    onMouseEnter={() => setIsPaused(true)}
+                    onMouseLeave={() => setIsPaused(false)}
+                  >
                     {/* Main Image with Irregular Shape */}
-                    <div className="relative h-full overflow-hidden" style={{
-                      clipPath: 'polygon(0 5%, 5% 0, 95% 0, 100% 5%, 100% 95%, 95% 100%, 5% 100%, 0 95%)'
-                    }}>
+                    <div className="relative h-full overflow-hidden">
                       <motion.img
                         src={galleryItems[currentSlide].image}
                         alt={galleryItems[currentSlide].title}
@@ -206,7 +212,7 @@ const Gallery = () => {
               </AnimatePresence>
 
               {/* Navigation Arrows */}
-              <button
+              {/* <button
                 onClick={prevSlide}
                 className="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-black/50 hover:bg-cyan-500/50 text-white p-4 backdrop-blur-sm transition-all duration-300 btn-tech group"
                 aria-label="Previous"
@@ -219,7 +225,7 @@ const Gallery = () => {
                 aria-label="Next"
               >
                 <FaChevronRight className="text-2xl group-hover:scale-110 transition-transform" />
-              </button>
+              </button> */}
             </div>
           </div>
 
@@ -255,7 +261,7 @@ const Gallery = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                whileHover={{ scale: 1.05, y: -5 }}
+                // whileHover={{ scale: 1.05, y: -5 }}
                 onClick={() => {
                   setCurrentSlide(index);
                   setSelectedImage(item);
