@@ -37,12 +37,12 @@ const Footer = () => {
             <div className="flex items-center gap-2 mb-4">
               <FaGamepad className="text-3xl text-cyan-400" />
               <span className="text-2xl font-bold text-white glow-text font-['Orbitron']">
-                QSTOM
+                Qstom
               </span>
             </div>
-            <p className="text-gray-400 mb-4">
+            {/* <p className="text-gray-400 mb-4">
               Personalización extrema de accesorios gamer. Hacemos realidad tus diseños más creativos.
-            </p>
+            </p> */}
             <div className="flex gap-4">
               {socialLinks.map((social, index) => (
                 <motion.a
@@ -130,11 +130,11 @@ const Footer = () => {
               </li>
               <li className="flex items-start gap-3">
                 <FaPhone className="text-cyan-400 mt-1 shrink-0" />
-                <span>+1 (555) 123-4567</span>
+                <span>+57 312 354 6561</span>
               </li>
               <li className="flex items-start gap-3">
                 <FaMapMarkerAlt className="text-cyan-400 mt-1 shrink-0" />
-                <span>Ciudad Tech, Cyber District</span>
+                <span>Bogotá, Colombia</span>
               </li>
             </ul>
           </motion.div>

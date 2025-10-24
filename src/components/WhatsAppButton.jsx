@@ -2,11 +2,11 @@ import { motion } from 'framer-motion';
 import { FaWhatsapp } from 'react-icons/fa';
 
 const WhatsAppButton = () => {
-  const phoneNumber = '573001234567';
+  const phoneNumber = '573123546561';
   
   // Mensaje predefinido
   const message = encodeURIComponent(
-    '¡Hola Qstom! 🎮 Me interesa personalizar mis accesorios gaming. ¿Me pueden ayudar?'
+    '¡Hola Qstom! 🎮 Me interesa personalizar mis accesorios gaming. ¿Amaya es gay?'
   );
   
   // URL de WhatsApp
@@ -49,7 +49,7 @@ const WhatsAppButton = () => {
       
       {/* Tooltip - Hidden on mobile */}
       <span className="hidden md:block absolute right-full mr-3 top-1/2 -translate-y-1/2 bg-gray-900 text-white text-sm font-medium px-3 py-2 rounded-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-        ¿Necesitas ayuda? ¡Escríbenos!
+        ¿Necesitas ayuda bro? Escríbenos!!
       </span>
     </motion.a>
   );

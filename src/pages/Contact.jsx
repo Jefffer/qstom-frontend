@@ -44,14 +44,14 @@ const Contact = () => {
     {
       icon: <FaPhone />,
       title: 'Teléfono',
-      content: '+1 (555) 123-4567',
-      link: 'tel:+15551234567',
+      content: '+57 312 354 6561',
+      link: 'tel:+573123546561',
     },
     {
       icon: <FaWhatsapp />,
       title: 'WhatsApp',
-      content: '+1 (555) 123-4567',
-      link: 'https://wa.me/15551234567',
+      content: '+57 312 354 6561',
+      link: 'https://wa.me/573123546561',
     },
     {
       icon: <FaDiscord />,
@@ -62,7 +62,7 @@ const Contact = () => {
     {
       icon: <FaMapMarkerAlt />,
       title: 'Ubicación',
-      content: 'Ciudad Tech, Cyber District',
+      content: 'Bogotá, Colombia',
       link: '#',
     },
   ];
