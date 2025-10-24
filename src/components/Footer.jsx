@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { FaFacebook, FaInstagram, FaTwitter, FaTiktok, FaGamepad, FaEnvelope, FaPhone, FaMapMarkerAlt } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import FooterBackground from './FooterBackground';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -21,13 +22,8 @@ const Footer = () => {
 
   return (
     <footer className="bg-black border-t border-cyan-500/30 relative overflow-hidden">
-      {/* Animated Background */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `radial-gradient(circle, rgba(0, 255, 255, 0.1) 1px, transparent 1px)`,
-          backgroundSize: '50px 50px',
-        }} />
-      </div>
+      {/* Background Component with 3D Grid and City */}
+      <FooterBackground />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -161,30 +157,6 @@ const Footer = () => {
           </div>
         </div>
       </div>
-
-      {/* Decorative Elements */}
-      <motion.div
-        animate={{
-          opacity: [0.3, 0.6, 0.3],
-        }}
-        transition={{
-          duration: 3,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-        className="absolute bottom-0 left-0 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl"
-      />
-      <motion.div
-        animate={{
-          opacity: [0.3, 0.6, 0.3],
-        }}
-        transition={{
-          duration: 4,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-        className="absolute top-0 right-0 w-64 h-64 bg-pink-500/10 rounded-full blur-3xl"
-      />
     </footer>
   );
 };
