@@ -250,9 +250,9 @@ const Gallery = () => {
               <AnimatePresence mode="wait">
                 <motion.div
                   key={currentSlide}
-                  initial={{ opacity: 0, x: 100 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -100 }}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
                   transition={{ duration: 0.5 }}
                   className="absolute inset-0"
                   style={{ padding: '3px' }}
@@ -273,13 +273,6 @@ const Gallery = () => {
                       
                       {/* Gradient Overlay */}
                       <div className="absolute inset-0 bg-linear-to-t from-black via-transparent to-black/50" />
-                      
-                      {/* Scan Line Effect */}
-                      <motion.div
-                        animate={{ y: ['0%', '100%'] }}
-                        transition={{ duration: 3, repeat: Infinity, ease: 'linear' }}
-                        className="absolute inset-0 bg-linear-to-b from-transparent via-cyan-500/10 to-transparent h-32 opacity-50"
-                      />
                     </div>
 
                     {/* Content */}
@@ -368,7 +361,6 @@ const Gallery = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                // whileHover={{ scale: 1.05, y: -5 }}
                 onClick={() => {
                   setCurrentSlide(index);
                   setSelectedImage(item);
@@ -380,7 +372,10 @@ const Gallery = () => {
                   clipPath: 'polygon(10% 0, 90% 0, 100% 10%, 100% 90%, 90% 100%, 10% 100%, 0 90%, 0 10%)'
                 }}
               >
-                <div className="relative aspect-square">
+                {/* Responsive fixed height on small devices to save vertical space */}
+                <div className={`relative overflow-hidden transition-all duration-300 ${
+                  currentSlide === index ? '' : 'filter grayscale group-hover:grayscale-0'
+                } h-24 sm:h-28 md:h-36 lg:h-40`}> 
                   <img
                     src={item.image}
                     alt={item.title}
@@ -390,7 +385,7 @@ const Gallery = () => {
                     currentSlide === index ? 'opacity-50' : 'opacity-80 group-hover:opacity-50'
                   }`} />
                   <div className="absolute bottom-0 left-0 right-0 p-3">
-                    <p className="text-white text-xs font-bold font-['Orbitron'] truncate">
+                    <p className="text-white text-xs md:text-sm font-bold font-['Orbitron'] truncate">
                       {item.title}
                     </p>
                   </div>
