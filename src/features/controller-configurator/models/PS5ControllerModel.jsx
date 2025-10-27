@@ -1,5 +1,4 @@
-import { useRef, Suspense, useEffect } from 'react';
-import { useFrame } from '@react-three/fiber';
+import { Suspense, useEffect } from 'react';
 import { useGLTF } from '@react-three/drei';
 import * as THREE from 'three';
 
@@ -47,7 +46,7 @@ const FallbackPS5Model = ({ colors }) => {
 // Componente que carga el modelo GLTF
 const PS5GLTFModel = ({ colors }) => {
   // Ruta al modelo (debes descargar un modelo GLTF/GLB y colocarlo en public/models/)
-  const modelPath = '/models/ps5-controller.glb';
+  const modelPath = '/models/ps5-controller3.glb';
   
   let scene;
   try {
@@ -96,17 +95,9 @@ const PS5GLTFModel = ({ colors }) => {
   return <primitive object={scene} scale={1.5} />;
 };
 
-const PS5ControllerModel = ({ colors, rotation = [0, 0, 0] }) => {
-  const groupRef = useRef();
-
-  useFrame((state, delta) => {
-    if (groupRef.current && !rotation.some(r => r !== 0)) {
-      groupRef.current.rotation.y += delta * 0.3;
-    }
-  });
-
+const PS5ControllerModel = ({ colors, rotation = [0.1, 0, 0] }) => {
   return (
-    <group ref={groupRef} rotation={rotation}>
+    <group rotation={rotation} position={[0, 0, 0]}>
       <Suspense fallback={<FallbackPS5Model colors={colors} />}>
         <PS5GLTFModel colors={colors} />
       </Suspense>
@@ -115,6 +106,6 @@ const PS5ControllerModel = ({ colors, rotation = [0, 0, 0] }) => {
 };
 
 // Precargar modelo
-useGLTF.preload('/models/ps5-controller.glb');
+useGLTF.preload('/models/ps5-controller3.glb');
 
 export default PS5ControllerModel;

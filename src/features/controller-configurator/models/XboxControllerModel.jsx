@@ -1,5 +1,4 @@
-import { useRef, Suspense, useEffect } from 'react';
-import { useFrame } from '@react-three/fiber';
+import { Suspense, useEffect } from 'react';
 import { useGLTF } from '@react-three/drei';
 import * as THREE from 'three';
 
@@ -116,17 +115,9 @@ const XboxGLTFModel = ({ colors }) => {
   return <primitive object={scene} scale={1.5} />;
 };
 
-const XboxControllerModel = ({ colors, rotation = [0, 0, 0] }) => {
-  const groupRef = useRef();
-
-  useFrame((state, delta) => {
-    if (groupRef.current && !rotation.some(r => r !== 0)) {
-      groupRef.current.rotation.y += delta * 0.3;
-    }
-  });
-
+const XboxControllerModel = ({ colors, rotation = [0.1, 0, 0] }) => {
   return (
-    <group ref={groupRef} rotation={rotation}>
+    <group rotation={rotation} position={[0, 0, 0]}>
       <Suspense fallback={<FallbackXboxModel colors={colors} />}>
         <XboxGLTFModel colors={colors} />
       </Suspense>

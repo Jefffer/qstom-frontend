@@ -130,7 +130,7 @@ const ControllerConfigurator = () => {
             style={{ height: '600px' }}
           >
             <Canvas
-              camera={{ position: [0, 2, 5], fov: 50 }}
+              camera={{ position: [0, 0, 8], fov: 45 }}
               shadows
             >
               <Suspense fallback={null}>
