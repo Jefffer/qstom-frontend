@@ -124,7 +124,7 @@ const XboxGLTFModel = ({ colors }) => {
     }
   }, [scene, colors]);
 
-  return <primitive object={scene} scale={5.5} />;
+  return <primitive object={scene} scale={6} />;
 };
 
 const XboxControllerModel = ({ colors, rotation = [0.1, 0, 0] }) => {

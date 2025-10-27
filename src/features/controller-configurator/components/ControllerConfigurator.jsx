@@ -159,7 +159,7 @@ const ControllerConfigurator = () => {
                   enableZoom={true}
                   enableRotate={true}
                   minDistance={3}
-                  maxDistance={10}
+                  maxDistance={25}
                 />
 
                 {/* Sombras */}
