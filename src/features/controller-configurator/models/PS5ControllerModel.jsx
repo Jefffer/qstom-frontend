@@ -92,7 +92,7 @@ const PS5GLTFModel = ({ colors }) => {
     }
   }, [scene, colors]);
 
-  return <primitive object={scene} scale={1.5} />;
+  return <primitive object={scene} scale={1} />;
 };
 
 const PS5ControllerModel = ({ colors, rotation = [0.1, 0, 0] }) => {

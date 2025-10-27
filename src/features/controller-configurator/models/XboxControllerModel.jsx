@@ -60,11 +60,23 @@ const XboxGLTFModel = ({ colors }) => {
   let scene;
   try {
     const gltf = useGLTF(modelPath);
-    scene = gltf.scene;
+    scene = gltf.scene.clone();
   } catch (error) {
     console.warn('Modelo GLTF Xbox no encontrado, usando fallback');
     return <FallbackXboxModel colors={colors} />;
   }
+
+  // Centrar el modelo en su origen
+  useEffect(() => {
+    if (scene) {
+      // Calcular el centro del modelo
+      const box = new THREE.Box3().setFromObject(scene);
+      const center = box.getCenter(new THREE.Vector3());
+      
+      // Mover el modelo para que su centro esté en (0, 0, 0)
+      scene.position.sub(center);
+    }
+  }, [scene]);
 
   // Aplicar colores personalizados
   useEffect(() => {
@@ -112,7 +124,7 @@ const XboxGLTFModel = ({ colors }) => {
     }
   }, [scene, colors]);
 
-  return <primitive object={scene} scale={1.5} />;
+  return <primitive object={scene} scale={5.5} />;
 };
 
 const XboxControllerModel = ({ colors, rotation = [0.1, 0, 0] }) => {
