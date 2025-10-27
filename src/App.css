@@ -16,6 +16,59 @@ html {
   background: radial-gradient(circle, var(--tw-gradient-stops));
 }
 
+/* Glow Text Effect */
+.glow-text {
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.8),
+               0 0 20px rgba(0, 255, 255, 0.6),
+               0 0 30px rgba(0, 255, 255, 0.4);
+}
+
+/* Glow Border Effect */
+.glow-border {
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.5),
+              0 0 20px rgba(0, 255, 255, 0.3),
+              inset 0 0 10px rgba(0, 255, 255, 0.2);
+}
+
+/* Button Tech Style */
+.btn-tech {
+  position: relative;
+  clip-path: polygon(
+    0 0,
+    calc(100% - 10px) 0,
+    100% 10px,
+    100% 100%,
+    10px 100%,
+    0 calc(100% - 10px)
+  );
+}
+
+.btn-tech::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(45deg, transparent, rgba(0, 255, 255, 0.1), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.btn-tech:hover::before {
+  opacity: 1;
+}
+
+/* Button Tech Alt Style */
+.btn-tech-alt {
+  position: relative;
+  clip-path: polygon(
+    0 0,
+    calc(100% - 10px) 0,
+    100% 10px,
+    100% 100%,
+    10px 100%,
+    0 calc(100% - 10px)
+  );
+}
+
 /* Animation Keyframes */
 @keyframes pulse-glow {
   0%, 100% {
@@ -53,4 +106,5 @@ html {
   background-color: rgba(0, 255, 255, 0.3);
   color: white;
 }
+
 
