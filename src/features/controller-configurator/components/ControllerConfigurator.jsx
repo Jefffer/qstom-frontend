@@ -9,7 +9,6 @@ const ControllerConfigurator = () => {
   const [controllerType, setControllerType] = useState('ps5');
   const [selectedPart, setSelectedPart] = useState('body');
   const [uploadedImage, setUploadedImage] = useState(null);
-  const [sidebarOpen, setSidebarOpen] = useState(true);
   const fileInputRef = useRef(null);
 
   // Colores predeterminados
@@ -106,13 +105,14 @@ const ControllerConfigurator = () => {
   };
 
   return (
-    <div className="w-full bg-black text-white overflow-hidden" style={{ height: 'calc(100vh - 104px)', paddingTop: '104px'}}>
+    <div className="w-full bg-black text-white overflow-hidden pt-104" style={{ height: 'calc(100vh - 104px)'}}>
       {/* Canvas 3D - Pantalla Completa */}
-      <div className="absolute inset-0" style={{ 
-        top: '104px',
-        right: sidebarOpen ? '384px' : '0',
-        transition: 'right 0.3s ease-in-out'
-      }}>
+      <div 
+        className="absolute left-0 right-0 md:right-96 bottom-[40vh] md:bottom-0"
+        style={{ 
+          top: '104px'
+        }}
+      >
         <Canvas
           camera={{ position: [0, 0, 8], fov: 45 }}
           shadows
@@ -160,12 +160,11 @@ const ControllerConfigurator = () => {
           </Suspense>
         </Canvas>
 
-        {/* Logo/Título superior izquierdo */}
+        {/* Logo/Título inferior derecha */}
         <motion.div
-          initial={{ opacity: 0, x: -20 }}
+          initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
-          className="absolute left-4 z-10"
-          style={{ top: '108px' }}
+          className="absolute bottom-4 right-4 z-10 hidden md:block"
         >
           <h1 className="text-2xl md:text-3xl font-bold glow-text font-['Orbitron']">
             QSTOM LAB
@@ -184,33 +183,18 @@ const ControllerConfigurator = () => {
         </motion.div>
       </div>
 
-      {/* Sidebar Derecha - Desktop */}
-      <AnimatePresence>
-        {sidebarOpen && (
-          <motion.div
-            initial={{ x: '100%' }}
-            animate={{ x: 0 }}
-            exit={{ x: '100%' }}
-            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-            className="hidden md:block absolute right-0 w-96 bg-black/95 backdrop-blur-md border-l-2 border-cyan-500/50 shadow-2xl shadow-cyan-500/20 overflow-y-auto z-20"
-            style={{ top: '104px', height: 'calc(100vh - 104px)' }}
-          >
-            <div className="p-6 space-y-6">
-              {/* Header con botón de cerrar */}
-              <div className="flex items-center justify-between mb-6 pb-4 border-b-2 border-cyan-500/30">
-                <h2 className="text-2xl font-bold glow-text font-['Orbitron']">
-                  CONTROLES
-                </h2>
-                <button
-                  onClick={() => setSidebarOpen(false)}
-                  className="p-2 hover:bg-cyan-500/20 rounded-lg transition-all border border-cyan-500/30 hover:border-cyan-500"
-                  aria-label="Cerrar panel"
-                >
-                  <svg className="w-6 h-6 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                </button>
-              </div>
+      {/* Sidebar Derecha - Desktop - Siempre visible */}
+      <div
+        className="hidden md:block fixed right-0 w-96 bg-black/95 backdrop-blur-md border-l-2 border-cyan-500/50 shadow-2xl shadow-cyan-500/20 overflow-y-auto z-20 custom-scrollbar"
+        style={{ top: '104px', height: 'calc(100vh - 104px)' }}
+      >
+        <div className="p-6 space-y-6">
+          {/* Header */}
+          <div className="mb-6 pb-4 border-b-2 border-cyan-500/30">
+            <h2 className="text-2xl font-bold glow-text font-['Orbitron']">
+              CONTROLES
+            </h2>
+          </div>
 
               {/* Selector de Tipo de Control */}
               <div className="space-y-3">
@@ -350,37 +334,18 @@ const ControllerConfigurator = () => {
                 </button>
               </div>
             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Botón toggle sidebar - solo visible cuando está cerrada */}
-      {!sidebarOpen && (
-        <motion.button
-          initial={{ x: 20, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          onClick={() => setSidebarOpen(true)}
-          className="hidden md:block absolute right-4 bg-linear-to-r from-cyan-500 to-blue-600 text-white p-3 transition-all hover:brightness-110 glow-border btn-tech z-20"
-          style={{ top: '108px' }}
-          aria-label="Abrir panel de controles"
-        >
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-          </svg>
-        </motion.button>
-      )}
+          </div>
 
       {/* Panel inferior - Mobile */}
-      <div className="md:hidden absolute bottom-0 left-0 right-0 bg-black/95 backdrop-blur-md border-t-2 border-cyan-500/50 max-h-[60vh] overflow-y-auto z-20 custom-scrollbar">
-        <div className="p-4 space-y-4">
+      <div className="md:hidden absolute bottom-0 left-0 right-0 bg-black/95 backdrop-blur-md border-t-2 border-cyan-500/50 overflow-y-auto z-20 custom-scrollbar" style={{ height: '40vh' }}>
+        <div className="p-3 space-y-3">
           {/* Selector de Tipo de Control */}
           <div>
-            <h3 className="text-sm font-bold mb-2 text-cyan-400 font-['Orbitron']">Tipo de Control</h3>
+            <h3 className="text-xs font-bold mb-1.5 text-cyan-400 font-['Orbitron']">Tipo de Control</h3>
             <div className="grid grid-cols-2 gap-2">
               <button
                 onClick={() => setControllerType('ps5')}
-                className={`px-3 py-2 text-sm font-bold transition-all btn-tech ${
+                className={`px-2 py-1.5 text-xs font-bold transition-all btn-tech ${
                   controllerType === 'ps5'
                     ? 'bg-linear-to-r from-cyan-500 to-blue-600 text-white glow-border'
                     : 'bg-gray-900 border-2 border-cyan-500/30 text-cyan-400 hover:bg-cyan-500/20 hover:border-cyan-500'
@@ -390,7 +355,7 @@ const ControllerConfigurator = () => {
               </button>
               <button
                 onClick={() => setControllerType('xbox')}
-                className={`px-3 py-2 text-sm font-bold transition-all btn-tech ${
+                className={`px-2 py-1.5 text-xs font-bold transition-all btn-tech ${
                   controllerType === 'xbox'
                     ? 'bg-linear-to-r from-green-500 to-emerald-600 text-white glow-border'
                     : 'bg-gray-900 border-2 border-cyan-500/30 text-cyan-400 hover:bg-green-500/20 hover:border-green-500'
@@ -403,13 +368,13 @@ const ControllerConfigurator = () => {
 
           {/* Selector de Parte */}
           <div>
-            <h3 className="text-sm font-bold mb-2 text-cyan-400 font-['Orbitron']">Parte</h3>
-            <div className="grid grid-cols-3 gap-2">
+            <h3 className="text-xs font-bold mb-1.5 text-cyan-400 font-['Orbitron']">Parte</h3>
+            <div className="grid grid-cols-3 gap-1.5">
               {partsByType[controllerType].map((part) => (
                 <button
                   key={part.id}
                   onClick={() => setSelectedPart(part.id)}
-                  className={`px-2 py-2 text-xs font-semibold transition-all btn-tech ${
+                  className={`px-1.5 py-1.5 text-[10px] font-semibold transition-all btn-tech ${
                     selectedPart === part.id
                       ? 'bg-pink-500 text-white glow-border'
                       : 'bg-gray-900 border-2 border-cyan-500/30 text-gray-300 hover:bg-pink-500/20 hover:border-pink-500'
@@ -423,7 +388,7 @@ const ControllerConfigurator = () => {
 
           {/* Paleta de Colores Compacta */}
           <div>
-            <h3 className="text-sm font-bold mb-2 text-cyan-400 font-['Orbitron']">Colores</h3>
+            <h3 className="text-xs font-bold mb-1.5 text-cyan-400 font-['Orbitron']">Colores</h3>
             <div className="grid grid-cols-10 gap-1 mb-2">
               {[...colorPresets.basic, ...colorPresets.neon].map((color) => (
                 <button
@@ -438,7 +403,7 @@ const ControllerConfigurator = () => {
               type="color"
               value={colors[selectedPart]}
               onChange={(e) => handleColorChange(e.target.value)}
-              className="w-full h-10 rounded-lg cursor-pointer border-2 border-cyan-500/30"
+              className="w-full h-8 rounded-lg cursor-pointer border-2 border-cyan-500/30"
             />
           </div>
 
@@ -446,13 +411,13 @@ const ControllerConfigurator = () => {
           <div className="grid grid-cols-2 gap-2">
             <button
               onClick={resetColors}
-              className="border-2 border-red-500 text-red-400 text-sm font-bold py-2 px-3 hover:bg-red-500/20 hover:border-red-500 transition-all btn-tech-alt"
+              className="border-2 border-red-500 text-red-400 text-xs font-bold py-1.5 px-2 hover:bg-red-500/20 hover:border-red-500 transition-all btn-tech-alt"
             >
               🔄 Resetear
             </button>
             <button
               onClick={exportConfiguration}
-              className="bg-linear-to-r from-cyan-500 to-blue-600 text-white text-sm font-bold py-2 px-3 transition-all hover:brightness-110 glow-border btn-tech"
+              className="bg-linear-to-r from-cyan-500 to-blue-600 text-white text-xs font-bold py-1.5 px-2 transition-all hover:brightness-110 glow-border btn-tech"
             >
               💾 Exportar
             </button>
