@@ -105,18 +105,30 @@ const ControllerConfigurator = () => {
   };
 
   return (
-    <div className="w-full bg-black text-white overflow-hidden pt-104" style={{ height: 'calc(100vh - 104px)'}}>
+    <div className="w-full h-full bg-transparent text-white overflow-hidden pt-104" style={{ height: 'calc(100vh - 104px)'}}>
       {/* Canvas 3D - Pantalla Completa */}
       <div 
-        className="absolute left-0 right-0 md:right-96 bottom-[40vh] md:bottom-0"
+        className="absolute inset-0 left-0 right-0 md:right-96 bottom-[40vh] md:bottom-0"
         style={{ 
-          top: '104px'
+          top: '104px',
+          bottom: 0
         }}
       >
-        <Canvas
-          camera={{ position: [0, 0, 8], fov: 45 }}
-          shadows
-        >
+        {/* Fondo 3D cyberpunk - capa detrás */}
+        <div className="absolute inset-0 h-full grid-3d-background" style={{ zIndex: 0 }}>
+          <div className="ambient-light"></div>
+          <div className="vignette"></div>
+          <div className="scan-line"></div>
+        </div>
+
+        {/* Canvas encima del fondo con fondo transparente */}
+        <div className="absolute inset-0" style={{ zIndex: 1 }}>
+          <Canvas
+            camera={{ position: [0, 0, 8], fov: 45 }}
+            shadows
+            gl={{ alpha: true, antialias: true }}
+            style={{ background: 'transparent' }}
+          >
           <Suspense fallback={null}>
             {/* Iluminación */}
             <ambientLight intensity={0.5} />
@@ -159,6 +171,7 @@ const ControllerConfigurator = () => {
             <Environment preset="city" />
           </Suspense>
         </Canvas>
+        </div>
 
         {/* Logo/Título inferior derecha */}
         <motion.div

@@ -109,4 +109,142 @@ html {
   color: white;
 }
 
+/* 3D Cyberpunk Lab Background - Cubo con perspectiva */
+.grid-3d-background {
+  background-color: #000000;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Grid horizontal y vertical base */
+.grid-3d-background::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: 
+    /* Grid principal */
+    linear-gradient(to right, rgba(0, 255, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 255, 255, 0.1) 1px, transparent 1px),
+    /* Grid secundario más fino */
+    linear-gradient(to right, rgba(255, 0, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 0, 255, 0.05) 1px, transparent 1px);
+  background-size: 
+    80px 80px,
+    80px 80px,
+    20px 20px,
+    20px 20px;
+  animation: grid-shift 20s linear infinite;
+}
+
+/* Líneas de perspectiva que convergen al centro - efecto cubo */
+.grid-3d-background::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    /* Líneas diagonales desde esquinas - efecto 3D */
+    linear-gradient(135deg, transparent 49.5%, rgba(0, 255, 255, 0.15) 49.5%, rgba(0, 255, 255, 0.15) 50.5%, transparent 50.5%),
+    linear-gradient(45deg, transparent 49.5%, rgba(255, 0, 255, 0.15) 49.5%, rgba(255, 0, 255, 0.15) 50.5%, transparent 50.5%),
+    /* Círculos concéntricos desde el centro */
+    radial-gradient(circle at center, transparent 10%, rgba(0, 255, 255, 0.08) 10%, transparent 11%),
+    radial-gradient(circle at center, transparent 30%, rgba(255, 0, 255, 0.08) 30%, transparent 31%),
+    radial-gradient(circle at center, transparent 50%, rgba(0, 255, 255, 0.06) 50%, transparent 51%),
+    radial-gradient(circle at center, transparent 70%, rgba(255, 0, 255, 0.06) 70%, transparent 71%);
+  background-size: 
+    100% 100%,
+    100% 100%,
+    100% 100%,
+    100% 100%,
+    100% 100%,
+    100% 100%;
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+/* Gradiente de profundidad - más oscuro en los bordes */
+.grid-3d-background > div {
+  position: relative;
+  z-index: 1;
+}
+
+.grid-3d-background::before {
+  z-index: 0;
+}
+
+/* Efecto de escaneo vertical animado */
+@keyframes scan-line {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes grid-shift {
+  0% {
+    background-position: 0 0, 0 0, 0 0, 0 0;
+  }
+  100% {
+    background-position: 80px 80px, 80px 80px, 20px 20px, 20px 20px;
+  }
+}
+
+/* Luz ambiental pulsante */
+@keyframes ambient-pulse {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+/* Overlay de luz desde el centro */
+.grid-3d-background > .ambient-light {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 255, 255, 0.15) 0%,
+    transparent 40%
+  );
+  animation: ambient-pulse 4s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Vignette para profundidad */
+.grid-3d-background > .vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 0%,
+    transparent 30%,
+    rgba(0, 0, 0, 0.6) 100%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Línea de escaneo animada */
+.grid-3d-background > .scan-line {
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(0, 255, 255, 0.6),
+    transparent
+  );
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
+  animation: scan-line 8s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+
+
 
