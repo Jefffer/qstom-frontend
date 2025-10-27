@@ -202,11 +202,11 @@ const ControllerConfigurator = () => {
       >
         <div className="p-6 space-y-6">
           {/* Header */}
-          <div className="mb-6 pb-4 border-b border-cyan-500/30">
+          {/* <div className="mb-6 pb-4 border-b border-cyan-500/30">
             <h2 className="text-2xl font-bold glow-text font-['Orbitron']">
               CONTROLES
             </h2>
-          </div>
+          </div> */}
 
               {/* Selector de Tipo de Control */}
               <div className="space-y-3">

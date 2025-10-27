@@ -66,6 +66,37 @@ const Hero = () => {
            Estamos ubicados en Bogotá, próximamente en tu ciudad.
         </motion.p>
 
+        {/* Laboratorio Banner - Nuevo */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+          className="mb-6 max-w-2xl mx-auto"
+        >
+          <div className="bg-linear-to-r from-cyan-500/20 via-purple-500/20 to-pink-500/20 border border-cyan-400/50 rounded-lg p-4 backdrop-blur-sm">
+            <div className="flex items-center justify-center gap-2 text-sm md:text-base">
+              <motion.span
+                animate={{ scale: [1, 1.2, 1] }}
+                transition={{ duration: 1, repeat: Infinity }}
+              >
+                🎨
+              </motion.span>
+              <span className="text-cyan-300 font-semibold">
+                ¡NUEVA FUNCIONALIDAD!
+              </span>
+              <span className="text-gray-300">
+                Prueba nuestro <span className="text-pink-400 font-bold">Laboratorio 3D</span> para diseñar controles personalizados
+              </span>
+              <motion.span
+                animate={{ scale: [1, 1.2, 1] }}
+                transition={{ duration: 1, repeat: Infinity, delay: 0.5 }}
+              >
+                ✨
+              </motion.span>
+            </div>
+          </div>
+        </motion.div>
+
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -73,8 +104,17 @@ const Hero = () => {
           className="flex flex-col sm:flex-row gap-4 justify-center items-center"
         >
           <Link
+            to="/lab"
+            className="group relative px-8 py-4 bg-linear-to-r from-pink-500 to-purple-600 text-white font-bold uppercase overflow-hidden transition-all duration-300 hover:scale-105 glow-border btn-tech"
+          >
+            <span className="relative z-10 flex items-center gap-2">
+              🔬 LABORATORIO 3D
+            </span>
+          </Link>
+
+          <Link
             to="/catalog"
-            className="group relative px-8 py-4 bg-linear-to-r from-cyan-500 to-blue-600 text-white font-bold overflow-hidden transition-all duration-300 hover:scale-105 glow-border btn-tech"
+            className="group relative px-8 py-4 bg-linear-to-r from-cyan-500 to-blue-600 text-white font-bold uppercase overflow-hidden transition-all duration-300 hover:scale-105 glow-border btn-tech"
           >
             <span className="relative z-10 flex items-center gap-2">
               <FaRocket className="group-hover:rotate-12 transition-transform" />
@@ -84,7 +124,7 @@ const Hero = () => {
 
           <Link
             to="/contact"
-            className="px-8 py-4 border border-pink-500 text-pink-400 font-bold hover:bg-pink-500/10 transition-all duration-300 hover:scale-105 btn-tech-alt"
+            className="px-8 py-4 border border-pink-500 text-pink-400 font-bold uppercase hover:bg-pink-500/10 transition-all duration-300 hover:scale-105 btn-tech-alt"
           >
             COTIZA TU DISEÑO
           </Link>

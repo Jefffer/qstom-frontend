@@ -15,9 +15,10 @@ const TopBanner = () => {
   // 4. Los mensajes se alternan: izquierda→derecha, derecha→izquierda
   // =====================================================
   const messages = [
-    '> NUEVO: Personalización de controles PS5 con efectos holográficos disponible',
+    '> NUEVO: ¡Laboratorio 3D disponible! Personaliza controles PS5 y Xbox en tiempo real',
+    '> INFO: Diseña tu control con nuestro nuevo Laboratorio 3D interactivo',
     '> PROMO: 15% de descuento en personalización de teclados este mes',
-    '> UPDATE: Amaya es gay',
+    '> UPDATE: Nueva funcionalidad: Laboratorio de personalización 3D',
     '> INFO: Envíos gratis en pedidos superiores a $100.000',
     '> ALERT: Diseños exclusivos para Xbox Series X',
     '> UPDATE: Nueva técnica de aerografía 3D implementada',
