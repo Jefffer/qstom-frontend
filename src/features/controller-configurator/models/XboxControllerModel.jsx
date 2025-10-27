@@ -1,20 +1,12 @@
-import { useRef } from 'react';
+import { useRef, Suspense, useEffect } from 'react';
 import { useFrame } from '@react-three/fiber';
+import { useGLTF } from '@react-three/drei';
 import * as THREE from 'three';
 
-const XboxControllerModel = ({ colors, rotation = [0, 0, 0] }) => {
-  const groupRef = useRef();
-
-  // Rotar automáticamente el modelo
-  useFrame((state, delta) => {
-    if (groupRef.current && !rotation.some(r => r !== 0)) {
-      groupRef.current.rotation.y += delta * 0.3;
-    }
-  });
-
+// Fallback model con geometrías básicas
+const FallbackXboxModel = ({ colors }) => {
   return (
-    <group ref={groupRef} rotation={rotation}>
-      {/* Cuerpo principal del control Xbox */}
+    <group>
       <mesh position={[0, 0, 0]}>
         <boxGeometry args={[2.8, 1, 0.9]} />
         <meshStandardMaterial 
@@ -23,166 +15,126 @@ const XboxControllerModel = ({ colors, rotation = [0, 0, 0] }) => {
           metalness={0.1}
         />
       </mesh>
-
-      {/* Grips laterales (más redondeados que PS5) */}
       <mesh position={[-1.1, -0.7, 0]} rotation={[0, 0, -0.2]}>
         <cylinderGeometry args={[0.4, 0.5, 1.4, 16]} />
-        <meshStandardMaterial 
-          color={colors.grips || '#1a1a1a'} 
-          roughness={0.5}
-        />
+        <meshStandardMaterial color={colors.grips || '#1a1a1a'} roughness={0.5} />
       </mesh>
       <mesh position={[1.1, -0.7, 0]} rotation={[0, 0, 0.2]}>
         <cylinderGeometry args={[0.4, 0.5, 1.4, 16]} />
-        <meshStandardMaterial 
-          color={colors.grips || '#1a1a1a'} 
-          roughness={0.5}
-        />
+        <meshStandardMaterial color={colors.grips || '#1a1a1a'} roughness={0.5} />
       </mesh>
-
-      {/* Botones frontales (A, B, X, Y) */}
-      <mesh position={[0.9, 0.2, 0.5]}>
-        <cylinderGeometry args={[0.15, 0.15, 0.1, 16]} />
-        <meshStandardMaterial 
-          color={colors.buttons || '#00FF00'} 
-          roughness={0.2}
-          emissive={colors.buttons || '#00FF00'}
-          emissiveIntensity={0.3}
-        />
-      </mesh>
-      <mesh position={[1.2, 0.2, 0.5]}>
-        <cylinderGeometry args={[0.15, 0.15, 0.1, 16]} />
-        <meshStandardMaterial 
-          color={colors.buttons || '#FF0000'} 
-          roughness={0.2}
-          emissive={colors.buttons || '#FF0000'}
-          emissiveIntensity={0.3}
-        />
-      </mesh>
-      <mesh position={[1.05, 0.4, 0.5]}>
-        <cylinderGeometry args={[0.15, 0.15, 0.1, 16]} />
-        <meshStandardMaterial 
-          color={colors.buttons || '#FFFF00'} 
-          roughness={0.2}
-          emissive={colors.buttons || '#FFFF00'}
-          emissiveIntensity={0.3}
-        />
-      </mesh>
-      <mesh position={[1.05, 0, 0.5]}>
-        <cylinderGeometry args={[0.15, 0.15, 0.1, 16]} />
-        <meshStandardMaterial 
-          color={colors.buttons || '#0080FF'} 
-          roughness={0.2}
-          emissive={colors.buttons || '#0080FF'}
-          emissiveIntensity={0.3}
-        />
-      </mesh>
-
-      {/* D-Pad */}
-      <mesh position={[-0.9, 0.2, 0.5]} rotation={[Math.PI / 2, 0, 0]}>
-        <boxGeometry args={[0.5, 0.1, 0.5]} />
-        <meshStandardMaterial 
-          color={colors.dpad || '#2a2a2a'} 
-          roughness={0.4}
-        />
-      </mesh>
-
-      {/* Joysticks (Xbox asymmetric) */}
-      <group position={[-0.5, 0.1, 0.5]}>
-        <mesh>
-          <cylinderGeometry args={[0.25, 0.3, 0.3, 32]} />
+      {/* Botones A, B, X, Y */}
+      {[
+        { pos: [0.9, 0.2, 0.5], color: '#00FF00' },
+        { pos: [1.2, 0.2, 0.5], color: '#FF0000' },
+        { pos: [1.05, 0.4, 0.5], color: '#FFFF00' },
+        { pos: [1.05, 0, 0.5], color: '#0080FF' },
+      ].map((btn, idx) => (
+        <mesh key={idx} position={btn.pos}>
+          <cylinderGeometry args={[0.15, 0.15, 0.1, 16]} />
           <meshStandardMaterial 
-            color={colors.sticks || '#1a1a1a'} 
-            roughness={0.6}
+            color={colors.buttons || btn.color} 
+            roughness={0.2}
+            emissive={colors.buttons || btn.color}
+            emissiveIntensity={0.3}
           />
         </mesh>
-        <mesh position={[0, 0.2, 0]}>
-          <sphereGeometry args={[0.15, 16, 16]} />
-          <meshStandardMaterial 
-            color={colors.sticks || '#1a1a1a'} 
-            roughness={0.7}
-          />
-        </mesh>
-      </group>
-
-      <group position={[0.4, -0.4, 0.5]}>
-        <mesh>
-          <cylinderGeometry args={[0.25, 0.3, 0.3, 32]} />
-          <meshStandardMaterial 
-            color={colors.sticks || '#1a1a1a'} 
-            roughness={0.6}
-          />
-        </mesh>
-        <mesh position={[0, 0.2, 0]}>
-          <sphereGeometry args={[0.15, 16, 16]} />
-          <meshStandardMaterial 
-            color={colors.sticks || '#1a1a1a'} 
-            roughness={0.7}
-          />
-        </mesh>
-      </group>
-
-      {/* Bumpers superiores (LB, RB) */}
-      <mesh position={[-1.1, 0.6, -0.1]} rotation={[-0.3, 0, 0]}>
-        <boxGeometry args={[0.7, 0.15, 0.6]} />
-        <meshStandardMaterial 
-          color={colors.bumpers || '#333333'} 
-          roughness={0.5}
-        />
-      </mesh>
-      <mesh position={[1.1, 0.6, -0.1]} rotation={[-0.3, 0, 0]}>
-        <boxGeometry args={[0.7, 0.15, 0.6]} />
-        <meshStandardMaterial 
-          color={colors.bumpers || '#333333'} 
-          roughness={0.5}
-        />
-      </mesh>
-
-      {/* Triggers (LT, RT) */}
-      <mesh position={[-1.1, 0.8, -0.3]} rotation={[-0.6, 0, 0]}>
-        <boxGeometry args={[0.6, 0.15, 0.5]} />
-        <meshStandardMaterial 
-          color={colors.triggers || '#2a2a2a'} 
-          roughness={0.6}
-        />
-      </mesh>
-      <mesh position={[1.1, 0.8, -0.3]} rotation={[-0.6, 0, 0]}>
-        <boxGeometry args={[0.6, 0.15, 0.5]} />
-        <meshStandardMaterial 
-          color={colors.triggers || '#2a2a2a'} 
-          roughness={0.6}
-        />
-      </mesh>
-
-      {/* Botones centrales (View, Menu, Xbox) */}
-      <mesh position={[-0.2, 0.3, 0.5]}>
-        <cylinderGeometry args={[0.1, 0.1, 0.05, 16]} />
-        <meshStandardMaterial 
-          color="#ffffff" 
-          roughness={0.3}
-        />
-      </mesh>
-      <mesh position={[0.2, 0.3, 0.5]}>
-        <cylinderGeometry args={[0.1, 0.1, 0.05, 16]} />
-        <meshStandardMaterial 
-          color="#ffffff" 
-          roughness={0.3}
-        />
-      </mesh>
-
-      {/* Botón Xbox (logo iluminado) */}
+      ))}
+      {/* Botón Xbox central */}
       <mesh position={[0, 0.55, 0.5]}>
         <cylinderGeometry args={[0.18, 0.18, 0.08, 32]} />
         <meshStandardMaterial 
           color={colors.led || '#00FF00'} 
           emissive={colors.led || '#00FF00'}
           emissiveIntensity={0.8}
-          transparent
-          opacity={0.9}
         />
       </mesh>
     </group>
   );
 };
+
+// Componente que carga el modelo GLTF
+const XboxGLTFModel = ({ colors }) => {
+  // Ruta al modelo (debes descargar un modelo GLTF/GLB y colocarlo en public/models/)
+  const modelPath = '/models/xbox-controller.glb';
+  
+  let scene;
+  try {
+    const gltf = useGLTF(modelPath);
+    scene = gltf.scene;
+  } catch (error) {
+    console.warn('Modelo GLTF Xbox no encontrado, usando fallback');
+    return <FallbackXboxModel colors={colors} />;
+  }
+
+  // Aplicar colores personalizados
+  useEffect(() => {
+    if (scene) {
+      scene.traverse((child) => {
+        if (child.isMesh && child.material) {
+          const materialName = child.material.name?.toLowerCase() || '';
+          const meshName = child.name?.toLowerCase() || '';
+          
+          child.material = child.material.clone();
+          
+          // Mapeo inteligente de partes
+          if (meshName.includes('body') || materialName.includes('body') || materialName.includes('shell')) {
+            child.material.color = new THREE.Color(colors.body || '#ffffff');
+          } else if (meshName.includes('button') || materialName.includes('button')) {
+            // Mantener colores característicos de Xbox si no se personaliza
+            if (!colors.buttons) {
+              // Los modelos GLTF suelen tener nombres específicos para cada botón
+              if (meshName.includes('a')) child.material.color = new THREE.Color('#00C000');
+              else if (meshName.includes('b')) child.material.color = new THREE.Color('#E00000');
+              else if (meshName.includes('x')) child.material.color = new THREE.Color('#0080FF');
+              else if (meshName.includes('y')) child.material.color = new THREE.Color('#FFD000');
+            } else {
+              child.material.color = new THREE.Color(colors.buttons);
+            }
+            child.material.emissive = child.material.color.clone();
+            child.material.emissiveIntensity = 0.3;
+          } else if (meshName.includes('grip') || materialName.includes('grip')) {
+            child.material.color = new THREE.Color(colors.grips || '#1a1a1a');
+          } else if (meshName.includes('stick') || meshName.includes('analog') || meshName.includes('thumbstick')) {
+            child.material.color = new THREE.Color(colors.sticks || '#1a1a1a');
+          } else if (meshName.includes('trigger') || materialName.includes('trigger')) {
+            child.material.color = new THREE.Color(colors.triggers || '#2a2a2a');
+          } else if (meshName.includes('bumper') || materialName.includes('bumper')) {
+            child.material.color = new THREE.Color(colors.bumpers || '#333333');
+          } else if (meshName.includes('xbox') || meshName.includes('logo') || materialName.includes('logo')) {
+            child.material.color = new THREE.Color(colors.led || '#00FF00');
+            child.material.emissive = new THREE.Color(colors.led || '#00FF00');
+            child.material.emissiveIntensity = 0.9;
+          } else if (meshName.includes('dpad') || materialName.includes('dpad')) {
+            child.material.color = new THREE.Color(colors.dpad || '#2a2a2a');
+          }
+        }
+      });
+    }
+  }, [scene, colors]);
+
+  return <primitive object={scene} scale={1.5} />;
+};
+
+const XboxControllerModel = ({ colors, rotation = [0, 0, 0] }) => {
+  const groupRef = useRef();
+
+  useFrame((state, delta) => {
+    if (groupRef.current && !rotation.some(r => r !== 0)) {
+      groupRef.current.rotation.y += delta * 0.3;
+    }
+  });
+
+  return (
+    <group ref={groupRef} rotation={rotation}>
+      <Suspense fallback={<FallbackXboxModel colors={colors} />}>
+        <XboxGLTFModel colors={colors} />
+      </Suspense>
+    </group>
+  );
+};
+
+// Precargar modelo
+useGLTF.preload('/models/xbox-controller.glb');
 
 export default XboxControllerModel;

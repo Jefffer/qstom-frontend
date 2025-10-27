@@ -27,6 +27,43 @@ Sitio web para **QSTOM**, empresa especializada en personalización de accesorio
 - **Tailwind CSS 4** - Framework de estilos utility-first
 - **Framer Motion** - Librería de animaciones
 - **React Icons** - Iconos personalizables
+- **Three.js** - Motor 3D para visualización de modelos
+- **@react-three/fiber** - React renderer para Three.js
+- **@react-three/drei** - Helpers y componentes para R3F
+
+## 🎮 Laboratorio 3D
+
+El sitio incluye un **Laboratorio Interactivo 3D** donde los usuarios pueden:
+- Visualizar modelos 3D realistas de controles PS5 y Xbox
+- Personalizar colores en tiempo real
+- Rotar y explorar los modelos
+- Subir imágenes personalizadas
+- Exportar diseños
+
+### Configuración de Modelos 3D
+
+Los modelos 3D utilizan formato GLTF/GLB para máximo realismo. Para configurarlos:
+
+1. **Descarga modelos desde:**
+   - [Sketchfab](https://sketchfab.com/) - Busca "PS5 Controller" o "Xbox Controller"
+   - [Poly Pizza](https://poly.pizza/) - Modelos 3D gratuitos
+   - [CGTrader](https://www.cgtrader.com/) - Algunos modelos gratuitos
+
+2. **Coloca los archivos en:**
+   ```
+   public/models/ps5-controller.glb
+   public/models/xbox-controller.glb
+   ```
+
+3. **O ejecuta el script helper:**
+   ```powershell
+   .\download-models.ps1
+   ```
+
+4. **Consulta la guía completa:**
+   Lee `public/models/README.md` para instrucciones detalladas
+
+**Nota:** El sistema incluye modelos fallback si no se encuentran archivos GLTF.
 
 ## 📦 Instalación
 

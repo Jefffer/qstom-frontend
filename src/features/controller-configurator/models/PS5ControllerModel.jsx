@@ -1,20 +1,12 @@
-import { useRef } from 'react';
+import { useRef, Suspense, useEffect } from 'react';
 import { useFrame } from '@react-three/fiber';
+import { useGLTF } from '@react-three/drei';
 import * as THREE from 'three';
 
-const PS5ControllerModel = ({ colors, rotation = [0, 0, 0] }) => {
-  const groupRef = useRef();
-
-  // Rotar automáticamente el modelo
-  useFrame((state, delta) => {
-    if (groupRef.current && !rotation.some(r => r !== 0)) {
-      groupRef.current.rotation.y += delta * 0.3;
-    }
-  });
-
+// Fallback model con geometrías básicas
+const FallbackPS5Model = ({ colors }) => {
   return (
-    <group ref={groupRef} rotation={rotation}>
-      {/* Cuerpo principal del control (forma de DualSense) */}
+    <group>
       <mesh position={[0, 0, 0]}>
         <boxGeometry args={[2.5, 1.2, 0.8]} />
         <meshStandardMaterial 
@@ -23,144 +15,106 @@ const PS5ControllerModel = ({ colors, rotation = [0, 0, 0] }) => {
           metalness={0.1}
         />
       </mesh>
-
-      {/* Grips laterales */}
       <mesh position={[-1, -0.8, 0]} rotation={[0, 0, -0.3]}>
         <boxGeometry args={[0.7, 1.5, 0.7]} />
-        <meshStandardMaterial 
-          color={colors.grips || '#1a1a1a'} 
-          roughness={0.5}
-        />
+        <meshStandardMaterial color={colors.grips || '#1a1a1a'} roughness={0.5} />
       </mesh>
       <mesh position={[1, -0.8, 0]} rotation={[0, 0, 0.3]}>
         <boxGeometry args={[0.7, 1.5, 0.7]} />
-        <meshStandardMaterial 
-          color={colors.grips || '#1a1a1a'} 
-          roughness={0.5}
-        />
+        <meshStandardMaterial color={colors.grips || '#1a1a1a'} roughness={0.5} />
       </mesh>
-
-      {/* Botones frontales (X, O, Square, Triangle) */}
-      <mesh position={[0.8, 0.3, 0.45]}>
-        <cylinderGeometry args={[0.15, 0.15, 0.1, 16]} />
-        <meshStandardMaterial 
-          color={colors.buttons || '#00FFFF'} 
-          roughness={0.2}
-          emissive={colors.buttons || '#00FFFF'}
-          emissiveIntensity={0.3}
-        />
-      </mesh>
-      <mesh position={[1.1, 0.3, 0.45]}>
-        <cylinderGeometry args={[0.15, 0.15, 0.1, 16]} />
-        <meshStandardMaterial 
-          color={colors.buttons || '#00FFFF'} 
-          roughness={0.2}
-          emissive={colors.buttons || '#00FFFF'}
-          emissiveIntensity={0.3}
-        />
-      </mesh>
-      <mesh position={[0.95, 0.5, 0.45]}>
-        <cylinderGeometry args={[0.15, 0.15, 0.1, 16]} />
-        <meshStandardMaterial 
-          color={colors.buttons || '#00FFFF'} 
-          roughness={0.2}
-          emissive={colors.buttons || '#00FFFF'}
-          emissiveIntensity={0.3}
-        />
-      </mesh>
-      <mesh position={[0.95, 0.1, 0.45]}>
-        <cylinderGeometry args={[0.15, 0.15, 0.1, 16]} />
-        <meshStandardMaterial 
-          color={colors.buttons || '#00FFFF'} 
-          roughness={0.2}
-          emissive={colors.buttons || '#00FFFF'}
-          emissiveIntensity={0.3}
-        />
-      </mesh>
-
-      {/* D-Pad */}
-      <mesh position={[-0.8, 0.2, 0.45]} rotation={[Math.PI / 2, 0, 0]}>
-        <boxGeometry args={[0.5, 0.1, 0.5]} />
-        <meshStandardMaterial 
-          color={colors.dpad || '#2a2a2a'} 
-          roughness={0.4}
-        />
-      </mesh>
-
-      {/* Joysticks (Analog sticks) */}
-      <group position={[-0.5, -0.1, 0.5]}>
-        <mesh>
-          <cylinderGeometry args={[0.25, 0.3, 0.3, 32]} />
+      {/* Botones */}
+      {[
+        [0.8, 0.3, 0.45],
+        [1.1, 0.3, 0.45],
+        [0.95, 0.5, 0.45],
+        [0.95, 0.1, 0.45],
+      ].map((pos, idx) => (
+        <mesh key={idx} position={pos}>
+          <cylinderGeometry args={[0.15, 0.15, 0.1, 16]} />
           <meshStandardMaterial 
-            color={colors.sticks || '#1a1a1a'} 
-            roughness={0.6}
+            color={colors.buttons || '#00FFFF'} 
+            roughness={0.2}
+            emissive={colors.buttons || '#00FFFF'}
+            emissiveIntensity={0.3}
           />
         </mesh>
-        <mesh position={[0, 0.2, 0]}>
-          <sphereGeometry args={[0.15, 16, 16]} />
-          <meshStandardMaterial 
-            color={colors.sticks || '#1a1a1a'} 
-            roughness={0.7}
-          />
-        </mesh>
-      </group>
-
-      <group position={[0.5, -0.4, 0.5]}>
-        <mesh>
-          <cylinderGeometry args={[0.25, 0.3, 0.3, 32]} />
-          <meshStandardMaterial 
-            color={colors.sticks || '#1a1a1a'} 
-            roughness={0.6}
-          />
-        </mesh>
-        <mesh position={[0, 0.2, 0]}>
-          <sphereGeometry args={[0.15, 16, 16]} />
-          <meshStandardMaterial 
-            color={colors.sticks || '#1a1a1a'} 
-            roughness={0.7}
-          />
-        </mesh>
-      </group>
-
-      {/* Triggers superiores (L2, R2) */}
-      <mesh position={[-1, 0.7, -0.2]} rotation={[-0.5, 0, 0]}>
-        <boxGeometry args={[0.6, 0.2, 0.8]} />
-        <meshStandardMaterial 
-          color={colors.triggers || '#333333'} 
-          roughness={0.5}
-        />
-      </mesh>
-      <mesh position={[1, 0.7, -0.2]} rotation={[-0.5, 0, 0]}>
-        <boxGeometry args={[0.6, 0.2, 0.8]} />
-        <meshStandardMaterial 
-          color={colors.triggers || '#333333'} 
-          roughness={0.5}
-        />
-      </mesh>
-
-      {/* Touchpad central */}
-      <mesh position={[0, 0.4, 0.45]}>
-        <boxGeometry args={[1.2, 0.05, 0.5]} />
-        <meshStandardMaterial 
-          color={colors.touchpad || '#0a0a0a'} 
-          roughness={0.1}
-          metalness={0.3}
-        />
-      </mesh>
-
-      {/* LED Strip (luz característica) */}
-      <mesh position={[0, 0.65, 0.3]}>
-        <boxGeometry args={[1.8, 0.05, 0.1]} />
-        <meshStandardMaterial 
-          color={colors.led || '#00FFFF'} 
-          emissive={colors.led || '#00FFFF'}
-          emissiveIntensity={0.8}
-          transparent
-          opacity={0.8}
-        />
-      </mesh>
+      ))}
     </group>
   );
 };
+
+// Componente que carga el modelo GLTF
+const PS5GLTFModel = ({ colors }) => {
+  // Ruta al modelo (debes descargar un modelo GLTF/GLB y colocarlo en public/models/)
+  const modelPath = '/models/ps5-controller.glb';
+  
+  let scene;
+  try {
+    const gltf = useGLTF(modelPath);
+    scene = gltf.scene;
+  } catch (error) {
+    console.warn('Modelo GLTF PS5 no encontrado, usando fallback');
+    return <FallbackPS5Model colors={colors} />;
+  }
+
+  // Aplicar colores personalizados
+  useEffect(() => {
+    if (scene) {
+      scene.traverse((child) => {
+        if (child.isMesh && child.material) {
+          const materialName = child.material.name?.toLowerCase() || '';
+          const meshName = child.name?.toLowerCase() || '';
+          
+          child.material = child.material.clone();
+          
+          // Mapeo inteligente de partes
+          if (meshName.includes('body') || materialName.includes('body') || materialName.includes('shell')) {
+            child.material.color = new THREE.Color(colors.body || '#ffffff');
+          } else if (meshName.includes('button') || materialName.includes('button')) {
+            child.material.color = new THREE.Color(colors.buttons || '#00FFFF');
+            child.material.emissive = new THREE.Color(colors.buttons || '#00FFFF');
+            child.material.emissiveIntensity = 0.3;
+          } else if (meshName.includes('grip') || materialName.includes('grip')) {
+            child.material.color = new THREE.Color(colors.grips || '#1a1a1a');
+          } else if (meshName.includes('stick') || meshName.includes('analog')) {
+            child.material.color = new THREE.Color(colors.sticks || '#1a1a1a');
+          } else if (meshName.includes('trigger')) {
+            child.material.color = new THREE.Color(colors.triggers || '#333333');
+          } else if (meshName.includes('touchpad')) {
+            child.material.color = new THREE.Color(colors.touchpad || '#0a0a0a');
+          } else if (meshName.includes('led') || meshName.includes('light')) {
+            child.material.color = new THREE.Color(colors.led || '#00FFFF');
+            child.material.emissive = new THREE.Color(colors.led || '#00FFFF');
+            child.material.emissiveIntensity = 0.8;
+          }
+        }
+      });
+    }
+  }, [scene, colors]);
+
+  return <primitive object={scene} scale={1.5} />;
+};
+
+const PS5ControllerModel = ({ colors, rotation = [0, 0, 0] }) => {
+  const groupRef = useRef();
+
+  useFrame((state, delta) => {
+    if (groupRef.current && !rotation.some(r => r !== 0)) {
+      groupRef.current.rotation.y += delta * 0.3;
+    }
+  });
+
+  return (
+    <group ref={groupRef} rotation={rotation}>
+      <Suspense fallback={<FallbackPS5Model colors={colors} />}>
+        <PS5GLTFModel colors={colors} />
+      </Suspense>
+    </group>
+  );
+};
+
+// Precargar modelo
+useGLTF.preload('/models/ps5-controller.glb');
 
 export default PS5ControllerModel;
