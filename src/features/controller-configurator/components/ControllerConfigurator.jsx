@@ -2,6 +2,8 @@ import { useState, useRef, Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, Environment, ContactShadows } from '@react-three/drei';
 import { motion, AnimatePresence } from 'framer-motion';
+import { TbReload } from 'react-icons/tb';
+import { HiDownload } from 'react-icons/hi';
 import PS5ControllerModel from '../models/PS5ControllerModel';
 import XboxControllerModel from '../models/XboxControllerModel';
 
@@ -210,7 +212,7 @@ const ControllerConfigurator = () => {
 
               {/* Selector de Tipo de Control */}
               <div className="space-y-3">
-                <h3 className="text-lg font-bold text-cyan-400 font-['Orbitron']">Tipo de Control</h3>
+                <h3 className="text-2xl text-cyan-400 font-['Orbitron'] tracking-widest uppercase">Tipo de Control</h3>
                 <div className="grid grid-cols-2 gap-3">
                   <button
                     onClick={() => setControllerType('ps5')}
@@ -237,7 +239,7 @@ const ControllerConfigurator = () => {
 
               {/* Selector de Parte */}
               <div className="space-y-3">
-                <h3 className="text-lg font-bold text-cyan-400 font-['Orbitron']">Parte a Personalizar</h3>
+                <h3 className="text-2xl text-cyan-400 font-['Orbitron'] tracking-widest uppercase">Parte a Personalizar</h3>
                 <div className="grid grid-cols-2 gap-2 max-h-60 overflow-y-auto pr-2 custom-scrollbar">
                   {partsByType[controllerType].map((part) => (
                     <button
@@ -257,7 +259,7 @@ const ControllerConfigurator = () => {
 
               {/* Paleta de Colores */}
               <div className="space-y-3 border border-cyan-500/30 p-4 rounded-lg bg-gray-900/30">
-                <h3 className="text-lg font-bold text-cyan-400 font-['Orbitron']">Colores</h3>
+                <h3 className="text-xl text-cyan-400 font-['Orbitron'] tracking-widest uppercase">Colores</h3>
                 
                 {/* Colores Básicos */}
                 <div>
@@ -309,10 +311,10 @@ const ControllerConfigurator = () => {
 
               {/* Subir Imagen */}
               <div className="space-y-3 border border-purple-500/30 p-4 rounded-lg bg-gray-900/30">
-                <h3 className="text-lg font-bold text-purple-400 font-['Orbitron']">Imagen Personalizada</h3>
+                <h3 className="text-xl text-purple-400 font-['Orbitron'] tracking-widest uppercase">Imagen Personalizada</h3>
                 <button
                   onClick={() => fileInputRef.current?.click()}
-                  className="w-full bg-linear-to-r from-purple-500 to-pink-600 text-white font-bold py-3 px-4 border border-purple-400 transition-colors hover:brightness-110 glow-border btn-tech uppercase"
+                  className="w-full bg-linear-to-r from-purple-500 to-pink-600 text-white font-bold py-3 px-4 border border-purple-400 transition-colors hover:brightness-110 glow-border btn-tech uppercase tracking-wider"
                 >
                   {uploadedImage ? 'Cambiar Imagen' : 'Subir Imagen'}
                 </button>
@@ -334,15 +336,21 @@ const ControllerConfigurator = () => {
               <div className="space-y-3 sticky bottom-0 bg-black/95 pt-4 pb-2">
                 <button
                   onClick={resetColors}
-                  className="w-full border border-red-500 text-red-400 font-bold py-3 px-4 hover:bg-red-500/20 hover:border-red-400 transition-colors btn-tech-alt uppercase"
+                  className="w-full border border-red-500 text-red-400 font-bold py-3 px-4 hover:bg-red-500/20 hover:border-red-400 transition-colors btn-tech-alt uppercase tracking-wider group"
                 >
-                  🔄 Resetear Todo
+                  <span className="flex items-center justify-center gap-2">
+                    <TbReload className="text-xl group-hover:rotate-180 transition-transform duration-500" />
+                    Resetear Todo
+                  </span>
                 </button>
                 <button
                   onClick={exportConfiguration}
-                  className="w-full bg-linear-to-r from-cyan-500 to-blue-600 text-white font-bold py-3 px-4 border border-cyan-400 transition-colors hover:brightness-110 glow-border btn-tech uppercase"
+                  className="w-full bg-linear-to-r from-cyan-500 to-blue-600 text-white font-bold py-3 px-4 border border-cyan-400 transition-colors hover:brightness-110 glow-border btn-tech uppercase tracking-wider group"
                 >
-                  💾 Exportar Configuración
+                  <span className="flex items-center justify-center gap-2">
+                    <HiDownload className="text-xl group-hover:translate-y-1 transition-transform" />
+                    Exportar Configuración
+                  </span>
                 </button>
               </div>
             </div>
@@ -423,15 +431,21 @@ const ControllerConfigurator = () => {
           <div className="grid grid-cols-2 gap-2">
             <button
               onClick={resetColors}
-              className="border border-red-500 text-red-400 text-xs font-bold py-1.5 px-2 hover:bg-red-500/20 hover:border-red-400 transition-colors btn-tech-alt uppercase"
+              className="border border-red-500 text-red-400 text-xs font-bold py-1.5 px-2 hover:bg-red-500/20 hover:border-red-400 transition-colors btn-tech-alt uppercase group"
             >
-              🔄 Resetear
+              <span className="flex items-center justify-center gap-1">
+                <TbReload className="text-sm group-hover:rotate-180 transition-transform duration-500" />
+                Resetear
+              </span>
             </button>
             <button
               onClick={exportConfiguration}
-              className="bg-linear-to-r from-cyan-500 to-blue-600 text-white text-xs font-bold py-1.5 px-2 border border-cyan-400 transition-colors hover:brightness-110 glow-border btn-tech uppercase"
+              className="bg-linear-to-r from-cyan-500 to-blue-600 text-white text-xs font-bold py-1.5 px-2 border border-cyan-400 transition-colors hover:brightness-110 glow-border btn-tech uppercase group"
             >
-              💾 Exportar
+              <span className="flex items-center justify-center gap-1">
+                <HiDownload className="text-sm group-hover:translate-y-0.5 transition-transform" />
+                Exportar
+              </span>
             </button>
           </div>
         </div>
