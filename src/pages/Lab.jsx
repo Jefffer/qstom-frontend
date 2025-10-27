@@ -11,7 +11,7 @@ const Lab = () => {
   }, []);
 
   return (
-    <div className="fixed inset-0 w-full h-screen overflow-hidden bg-black">
+    <div className="w-full h-screen bg-black relative">
       <ControllerConfigurator />
     </div>
   );

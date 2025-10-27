@@ -16,8 +16,8 @@ function AppContent() {
 
   return (
     <div className="min-h-screen bg-black text-white">
-      {!isLabPage && <TopBanner />}
-      {!isLabPage && <Navbar />}
+      <TopBanner />
+      <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/catalogo" element={<Catalog />} />
