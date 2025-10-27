@@ -167,7 +167,7 @@ const ControllerConfigurator = () => {
           className="absolute bottom-4 right-4 z-10 hidden md:block"
         >
           <h1 className="text-2xl md:text-3xl font-bold glow-text font-['Orbitron']">
-            QSTOM LAB
+            Qstom LAB
           </h1>
         </motion.div>
 
@@ -185,12 +185,12 @@ const ControllerConfigurator = () => {
 
       {/* Sidebar Derecha - Desktop - Siempre visible */}
       <div
-        className="hidden md:block fixed right-0 w-96 bg-black/95 backdrop-blur-md border-l-2 border-cyan-500/50 shadow-2xl shadow-cyan-500/20 overflow-y-auto z-20 custom-scrollbar"
+        className="hidden md:block fixed right-0 w-96 bg-black/95 backdrop-blur-md border-l border-cyan-500/50 shadow-2xl shadow-cyan-500/20 overflow-y-auto z-20 custom-scrollbar"
         style={{ top: '104px', height: 'calc(100vh - 104px)' }}
       >
         <div className="p-6 space-y-6">
           {/* Header */}
-          <div className="mb-6 pb-4 border-b-2 border-cyan-500/30">
+          <div className="mb-6 pb-4 border-b border-cyan-500/30">
             <h2 className="text-2xl font-bold glow-text font-['Orbitron']">
               CONTROLES
             </h2>
@@ -202,20 +202,20 @@ const ControllerConfigurator = () => {
                 <div className="grid grid-cols-2 gap-3">
                   <button
                     onClick={() => setControllerType('ps5')}
-                    className={`px-4 py-3 font-bold transition-all relative overflow-hidden btn-tech ${
+                    className={`px-4 py-3 font-bold transition-colors border btn-tech uppercase ${
                       controllerType === 'ps5'
-                        ? 'bg-linear-to-r from-cyan-500 to-blue-600 text-white glow-border'
-                        : 'bg-gray-900 border-2 border-cyan-500/30 text-cyan-400 hover:bg-cyan-500/20 hover:border-cyan-500'
+                        ? 'bg-linear-to-r from-cyan-500 to-blue-600 text-white border-cyan-400 glow-border'
+                        : 'bg-gray-900 border-cyan-500/30 text-cyan-400 hover:bg-cyan-500/20 hover:border-cyan-500'
                     }`}
                   >
                     PS5
                   </button>
                   <button
                     onClick={() => setControllerType('xbox')}
-                    className={`px-4 py-3 font-bold transition-all relative overflow-hidden btn-tech ${
+                    className={`px-4 py-3 font-bold transition-colors border btn-tech uppercase ${
                       controllerType === 'xbox'
-                        ? 'bg-linear-to-r from-green-500 to-emerald-600 text-white glow-border'
-                        : 'bg-gray-900 border-2 border-cyan-500/30 text-cyan-400 hover:bg-green-500/20 hover:border-green-500'
+                        ? 'bg-linear-to-r from-green-500 to-emerald-600 text-white border-green-400 glow-border'
+                        : 'bg-gray-900 border-cyan-500/30 text-cyan-400 hover:bg-green-500/20 hover:border-green-500'
                     }`}
                   >
                     Xbox
@@ -231,10 +231,10 @@ const ControllerConfigurator = () => {
                     <button
                       key={part.id}
                       onClick={() => setSelectedPart(part.id)}
-                      className={`px-3 py-2 text-sm font-semibold transition-all btn-tech ${
+                      className={`px-3 py-2 text-sm font-semibold transition-colors border btn-tech uppercase ${
                         selectedPart === part.id
-                          ? 'bg-pink-500 text-white glow-border'
-                          : 'bg-gray-900 border-2 border-cyan-500/30 text-gray-300 hover:bg-pink-500/20 hover:border-pink-500'
+                          ? 'bg-pink-500 text-white border-pink-400 glow-border'
+                          : 'bg-gray-900 border-cyan-500/30 text-gray-300 hover:bg-pink-500/20 hover:border-pink-500'
                       }`}
                     >
                       {part.name}
@@ -244,7 +244,7 @@ const ControllerConfigurator = () => {
               </div>
 
               {/* Paleta de Colores */}
-              <div className="space-y-3 border-2 border-cyan-500/30 p-4 rounded-lg bg-gray-900/30">
+              <div className="space-y-3 border border-cyan-500/30 p-4 rounded-lg bg-gray-900/30">
                 <h3 className="text-lg font-bold text-cyan-400 font-['Orbitron']">Colores</h3>
                 
                 {/* Colores Básicos */}
@@ -255,7 +255,7 @@ const ControllerConfigurator = () => {
                       <button
                         key={color}
                         onClick={() => handleColorChange(color)}
-                        className="w-8 h-8 rounded border-2 border-gray-700 hover:border-cyan-400 transition-all"
+                        className="w-8 h-8 rounded border border-gray-700 hover:border-cyan-400 transition-colors"
                         style={{ backgroundColor: color }}
                         title={color}
                       />
@@ -271,7 +271,7 @@ const ControllerConfigurator = () => {
                       <button
                         key={color}
                         onClick={() => handleColorChange(color)}
-                        className="w-8 h-8 rounded border-2 border-gray-700 hover:border-cyan-400 transition-all"
+                        className="w-8 h-8 rounded border border-gray-700 hover:border-cyan-400 transition-colors"
                         style={{ 
                           backgroundColor: color,
                           boxShadow: `0 0 15px ${color}`
@@ -289,18 +289,18 @@ const ControllerConfigurator = () => {
                     type="color"
                     value={colors[selectedPart]}
                     onChange={(e) => handleColorChange(e.target.value)}
-                    className="w-full h-12 rounded-lg cursor-pointer border-2 border-cyan-500/30"
+                    className="w-full h-12 rounded-lg cursor-pointer border border-cyan-500/30"
                   />
                   <p className="text-xs text-cyan-400 mt-2 text-center font-mono">{colors[selectedPart]}</p>
                 </div>
               </div>
 
               {/* Subir Imagen */}
-              <div className="space-y-3 border-2 border-purple-500/30 p-4 rounded-lg bg-gray-900/30">
+              <div className="space-y-3 border border-purple-500/30 p-4 rounded-lg bg-gray-900/30">
                 <h3 className="text-lg font-bold text-purple-400 font-['Orbitron']">Imagen Personalizada</h3>
                 <button
                   onClick={() => fileInputRef.current?.click()}
-                  className="w-full bg-linear-to-r from-purple-500 to-pink-600 text-white font-bold py-3 px-4 transition-all hover:brightness-110 glow-border btn-tech"
+                  className="w-full bg-linear-to-r from-purple-500 to-pink-600 text-white font-bold py-3 px-4 border border-purple-400 transition-colors hover:brightness-110 glow-border btn-tech uppercase"
                 >
                   {uploadedImage ? 'Cambiar Imagen' : 'Subir Imagen'}
                 </button>
@@ -313,7 +313,7 @@ const ControllerConfigurator = () => {
                 />
                 {uploadedImage && (
                   <div className="mt-4">
-                    <img src={uploadedImage} alt="Preview" className="w-full rounded-lg border-2 border-purple-500/50" />
+                    <img src={uploadedImage} alt="Preview" className="w-full rounded-lg border border-purple-500/50" />
                   </div>
                 )}
               </div>
@@ -322,13 +322,13 @@ const ControllerConfigurator = () => {
               <div className="space-y-3 sticky bottom-0 bg-black/95 pt-4 pb-2">
                 <button
                   onClick={resetColors}
-                  className="w-full border-2 border-red-500 text-red-400 font-bold py-3 px-4 hover:bg-red-500/20 hover:border-red-500 transition-all btn-tech-alt"
+                  className="w-full border border-red-500 text-red-400 font-bold py-3 px-4 hover:bg-red-500/20 hover:border-red-400 transition-colors btn-tech-alt uppercase"
                 >
                   🔄 Resetear Todo
                 </button>
                 <button
                   onClick={exportConfiguration}
-                  className="w-full bg-linear-to-r from-cyan-500 to-blue-600 text-white font-bold py-3 px-4 transition-all hover:brightness-110 glow-border btn-tech"
+                  className="w-full bg-linear-to-r from-cyan-500 to-blue-600 text-white font-bold py-3 px-4 border border-cyan-400 transition-colors hover:brightness-110 glow-border btn-tech uppercase"
                 >
                   💾 Exportar Configuración
                 </button>
@@ -337,7 +337,7 @@ const ControllerConfigurator = () => {
           </div>
 
       {/* Panel inferior - Mobile */}
-      <div className="md:hidden absolute bottom-0 left-0 right-0 bg-black/95 backdrop-blur-md border-t-2 border-cyan-500/50 overflow-y-auto z-20 custom-scrollbar" style={{ height: '40vh' }}>
+      <div className="md:hidden absolute bottom-0 left-0 right-0 bg-black/95 backdrop-blur-md border-t border-cyan-500/50 overflow-y-auto z-20 custom-scrollbar" style={{ height: '40vh' }}>
         <div className="p-3 space-y-3">
           {/* Selector de Tipo de Control */}
           <div>
@@ -345,20 +345,20 @@ const ControllerConfigurator = () => {
             <div className="grid grid-cols-2 gap-2">
               <button
                 onClick={() => setControllerType('ps5')}
-                className={`px-2 py-1.5 text-xs font-bold transition-all btn-tech ${
+                className={`px-2 py-1.5 text-xs font-bold transition-colors border btn-tech uppercase ${
                   controllerType === 'ps5'
-                    ? 'bg-linear-to-r from-cyan-500 to-blue-600 text-white glow-border'
-                    : 'bg-gray-900 border-2 border-cyan-500/30 text-cyan-400 hover:bg-cyan-500/20 hover:border-cyan-500'
+                    ? 'bg-linear-to-r from-cyan-500 to-blue-600 text-white border-cyan-400 glow-border'
+                    : 'bg-gray-900 border-cyan-500/30 text-cyan-400 hover:bg-cyan-500/20 hover:border-cyan-500'
                 }`}
               >
                 PS5
               </button>
               <button
                 onClick={() => setControllerType('xbox')}
-                className={`px-2 py-1.5 text-xs font-bold transition-all btn-tech ${
+                className={`px-2 py-1.5 text-xs font-bold transition-colors border btn-tech uppercase ${
                   controllerType === 'xbox'
-                    ? 'bg-linear-to-r from-green-500 to-emerald-600 text-white glow-border'
-                    : 'bg-gray-900 border-2 border-cyan-500/30 text-cyan-400 hover:bg-green-500/20 hover:border-green-500'
+                    ? 'bg-linear-to-r from-green-500 to-emerald-600 text-white border-green-400 glow-border'
+                    : 'bg-gray-900 border-cyan-500/30 text-cyan-400 hover:bg-green-500/20 hover:border-green-500'
                 }`}
               >
                 Xbox
@@ -374,10 +374,10 @@ const ControllerConfigurator = () => {
                 <button
                   key={part.id}
                   onClick={() => setSelectedPart(part.id)}
-                  className={`px-1.5 py-1.5 text-[10px] font-semibold transition-all btn-tech ${
+                  className={`px-1.5 py-1.5 text-[10px] font-semibold transition-colors border btn-tech uppercase ${
                     selectedPart === part.id
-                      ? 'bg-pink-500 text-white glow-border'
-                      : 'bg-gray-900 border-2 border-cyan-500/30 text-gray-300 hover:bg-pink-500/20 hover:border-pink-500'
+                      ? 'bg-pink-500 text-white border-pink-400 glow-border'
+                      : 'bg-gray-900 border-cyan-500/30 text-gray-300 hover:bg-pink-500/20 hover:border-pink-500'
                   }`}
                 >
                   {part.name}
@@ -394,7 +394,7 @@ const ControllerConfigurator = () => {
                 <button
                   key={color}
                   onClick={() => handleColorChange(color)}
-                  className="w-full aspect-square rounded border-2 border-gray-700 hover:border-cyan-400 transition-all"
+                  className="w-full aspect-square rounded border border-gray-700 hover:border-cyan-400 transition-colors"
                   style={{ backgroundColor: color }}
                 />
               ))}
@@ -403,7 +403,7 @@ const ControllerConfigurator = () => {
               type="color"
               value={colors[selectedPart]}
               onChange={(e) => handleColorChange(e.target.value)}
-              className="w-full h-8 rounded-lg cursor-pointer border-2 border-cyan-500/30"
+              className="w-full h-8 rounded-lg cursor-pointer border border-cyan-500/30"
             />
           </div>
 
@@ -411,13 +411,13 @@ const ControllerConfigurator = () => {
           <div className="grid grid-cols-2 gap-2">
             <button
               onClick={resetColors}
-              className="border-2 border-red-500 text-red-400 text-xs font-bold py-1.5 px-2 hover:bg-red-500/20 hover:border-red-500 transition-all btn-tech-alt"
+              className="border border-red-500 text-red-400 text-xs font-bold py-1.5 px-2 hover:bg-red-500/20 hover:border-red-400 transition-colors btn-tech-alt uppercase"
             >
               🔄 Resetear
             </button>
             <button
               onClick={exportConfiguration}
-              className="bg-linear-to-r from-cyan-500 to-blue-600 text-white text-xs font-bold py-1.5 px-2 transition-all hover:brightness-110 glow-border btn-tech"
+              className="bg-linear-to-r from-cyan-500 to-blue-600 text-white text-xs font-bold py-1.5 px-2 border border-cyan-400 transition-colors hover:brightness-110 glow-border btn-tech uppercase"
             >
               💾 Exportar
             </button>
