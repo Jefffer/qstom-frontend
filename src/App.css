@@ -171,13 +171,21 @@ html {
   z-index: 0;
 }
 
-/* Efecto de escaneo vertical animado */
+/* Efecto de escaneo vertical animado - Mejorado */
 @keyframes scan-line {
   0% {
     transform: translateY(-100%);
+    opacity: 0;
+  }
+  5% {
+    opacity: 1;
+  }
+  95% {
+    opacity: 1;
   }
   100% {
-    transform: translateY(100%);
+    transform: translateY(100vh);
+    opacity: 0;
   }
 }
 
@@ -200,18 +208,19 @@ html {
   }
 }
 
-/* Overlay de luz desde el centro */
+/* Overlay de luz desde el centro - Mejorada y sin animación */
 .grid-3d-background > .ambient-light {
   position: absolute;
   inset: 0;
   background: radial-gradient(
     ellipse at center,
-    rgba(0, 255, 255, 0.15) 0%,
-    transparent 40%
+    rgba(0, 255, 255, 0.35) 0%,
+    rgba(0, 255, 255, 0.15) 20%,
+    transparent 50%
   );
-  animation: ambient-pulse 4s ease-in-out infinite;
   pointer-events: none;
   z-index: 0;
+  opacity: 1;
 }
 
 /* Vignette para profundidad */
@@ -228,21 +237,63 @@ html {
   z-index: 0;
 }
 
-/* Línea de escaneo animada */
+/* Línea de escaneo animada - Mejorada */
 .grid-3d-background > .scan-line {
   position: absolute;
   width: 100%;
+  height: 4px;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 255, 255, 0.1) 10%,
+    rgba(0, 255, 255, 0.8) 50%,
+    rgba(0, 255, 255, 0.1) 90%,
+    transparent 100%
+  );
+  box-shadow: 
+    0 0 30px rgba(0, 255, 255, 1),
+    0 0 60px rgba(0, 255, 255, 0.6),
+    0 0 90px rgba(0, 255, 255, 0.3);
+  animation: scan-line 6s linear infinite;
+  pointer-events: none;
+  z-index: 2;
+  filter: blur(0.5px);
+}
+
+/* Línea de escaneo secundaria */
+.grid-3d-background > .scan-line::before {
+  content: '';
+  position: absolute;
+  width: 100%;
   height: 2px;
+  top: -20px;
   background: linear-gradient(
     to bottom,
     transparent,
-    rgba(0, 255, 255, 0.6),
+    rgba(255, 0, 255, 0.4),
     transparent
   );
-  box-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
-  animation: scan-line 8s linear infinite;
-  pointer-events: none;
-  z-index: 0;
+  box-shadow: 
+    0 0 20px rgba(255, 0, 255, 0.8),
+    0 0 40px rgba(255, 0, 255, 0.4);
+  filter: blur(1px);
+}
+
+/* Línea de escaneo terciaria */
+.grid-3d-background > .scan-line::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  top: 15px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(0, 255, 200, 0.3),
+    transparent
+  );
+  box-shadow: 0 0 15px rgba(0, 255, 200, 0.6);
+  filter: blur(0.5px);
 }
 
 

@@ -118,7 +118,6 @@ const ControllerConfigurator = () => {
         <div className="absolute inset-0 h-full grid-3d-background" style={{ zIndex: 0 }}>
           <div className="ambient-light"></div>
           <div className="vignette"></div>
-          <div className="scan-line"></div>
         </div>
 
         {/* Canvas encima del fondo con fondo transparente */}
