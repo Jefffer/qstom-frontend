@@ -1,5 +1,8 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { HiBeaker } from 'react-icons/hi2';
+import { BsGrid3X3GapFill } from 'react-icons/bs';
+import { RiMessage3Fill } from 'react-icons/ri';
 
 const Hero = () => {
   return (
@@ -60,8 +63,8 @@ const Hero = () => {
         />
 
         {/* Líneas horizontales de acento */}
-        <div className="absolute top-1/4 left-0 right-0 h-px bg-linear-to-r from-transparent via-cyan-500/50 to-transparent" />
-        <div className="absolute bottom-1/4 left-0 right-0 h-px bg-linear-to-r from-transparent via-pink-500/50 to-transparent" />
+        <div className="absolute top-1/4 left-0 right-0 h-px bg-linear-to-r from-transparent via-pink-500/40 to-transparent" />
+        <div className="absolute bottom-1/4 left-0 right-0 h-px bg-linear-to-r from-transparent via-pink-500/40 to-transparent" />
       </div>
 
       {/* Contenido */}
@@ -120,10 +123,10 @@ const Hero = () => {
             to="/lab"
             className="group relative"
           >
-            <div className="relative px-8 py-4 bg-black border border-cyan-400 clip-corners overflow-hidden transition-all duration-300 hover:bg-cyan-400/10 hover:shadow-lg hover:shadow-cyan-400/50">
+            <div className="relative px-8 py-4 border border-cyan-400 clip-corners overflow-hidden transition-all duration-300 hover:bg-cyan-400/10 hover:shadow-lg hover:shadow-cyan-400/50">
               <div className="absolute inset-0 bg-linear-to-r from-cyan-500/0 via-cyan-500/10 to-cyan-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               <span className="relative z-10 text-cyan-400 font-bold uppercase text-sm tracking-wider font-['Orbitron'] flex items-center gap-2">
-                <span className="text-lg">🔬</span>
+                <HiBeaker className="text-xl group-hover:scale-110 transition-transform" />
                 Laboratorio 3D
               </span>
             </div>
@@ -137,10 +140,10 @@ const Hero = () => {
             to="/catalogo"
             className="group relative"
           >
-            <div className="relative px-8 py-4 bg-black border border-pink-400 clip-corners overflow-hidden transition-all duration-300 hover:bg-pink-400/10 hover:shadow-lg hover:shadow-pink-400/50">
+            <div className="relative px-8 py-4 border border-pink-400 clip-corners overflow-hidden transition-all duration-300 hover:bg-pink-400/10 hover:shadow-lg hover:shadow-pink-400/50">
               <div className="absolute inset-0 bg-linear-to-r from-pink-500/0 via-pink-500/10 to-pink-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               <span className="relative z-10 text-pink-400 font-bold uppercase text-sm tracking-wider font-['Orbitron'] flex items-center gap-2">
-                <span className="text-lg">📦</span>
+                <BsGrid3X3GapFill className="text-lg group-hover:scale-110 transition-transform" />
                 Catálogo
               </span>
             </div>
@@ -153,10 +156,10 @@ const Hero = () => {
             to="/contacto"
             className="group relative"
           >
-            <div className="relative px-8 py-4 bg-black border border-purple-400 clip-corners overflow-hidden transition-all duration-300 hover:bg-purple-400/10 hover:shadow-lg hover:shadow-purple-400/50">
+            <div className="relative px-8 py-4 border border-purple-400 clip-corners overflow-hidden transition-all duration-300 hover:bg-purple-400/10 hover:shadow-lg hover:shadow-purple-400/50">
               <div className="absolute inset-0 bg-linear-to-r from-purple-500/0 via-purple-500/10 to-purple-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               <span className="relative z-10 text-purple-400 font-bold uppercase text-sm tracking-wider font-['Orbitron'] flex items-center gap-2">
-                <span className="text-lg">💬</span>
+                <RiMessage3Fill className="text-lg group-hover:scale-110 transition-transform" />
                 Contacto
               </span>
             </div>
