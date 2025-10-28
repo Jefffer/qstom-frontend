@@ -13,17 +13,19 @@ const ControllerConfigurator = () => {
   const [uploadedImage, setUploadedImage] = useState(null);
   const fileInputRef = useRef(null);
 
-  // Colores predeterminados
+  // Colores predeterminados - PS5 estándar blanco y negro
   const [colors, setColors] = useState({
-    body: '#ffffff',
-    grips: '#1a1a1a',
-    buttons: '#00FFFF',
-    dpad: '#2a2a2a',
-    sticks: '#1a1a1a',
-    triggers: '#333333',
-    touchpad: '#0a0a0a',
-    bumpers: '#333333',
-    led: '#00FFFF'
+    body: '#f5f5f5',           // Blanco crema (cuerpo frontal superior)
+    frontLowerBody: '#f5f5f5', // Blanco crema (cuerpo frontal inferior)
+    backBody: '#f5f5f5',       // Blanco crema (cuerpo trasero)
+    grips: '#1a1a1a',          // Negro (grips laterales)
+    buttons: '#e8e8e8',        // Gris claro (botones)
+    dpad: '#1a1a1a',           // Negro (d-pad)
+    sticks: '#1a1a1a',         // Negro (joysticks)
+    triggers: '#e8e8e8',       // Gris claro (gatillos)
+    touchpad: '#0a0a0a',       // Negro oscuro (touchpad)
+    bumpers: '#333333',        // Gris oscuro (bumpers - Xbox)
+    led: '#0066ff'             // Azul PS5 (LED strip)
   });
 
   // Paleta de colores elegantes y patrones
@@ -67,7 +69,9 @@ const ControllerConfigurator = () => {
   // Partes configurables según el tipo de control
   const partsByType = {
     ps5: [
-      { id: 'body', name: 'Cuerpo Principal' },
+      { id: 'body', name: 'Frontal Superior' },
+      { id: 'frontLowerBody', name: 'Frontal Inferior' },
+      { id: 'backBody', name: 'Cuerpo Trasero' },
       { id: 'grips', name: 'Grips Laterales' },
       { id: 'buttons', name: 'Botones' },
       { id: 'dpad', name: 'D-Pad' },
@@ -113,15 +117,17 @@ const ControllerConfigurator = () => {
 
   const resetColors = () => {
     setColors({
-      body: '#ffffff',
-      grips: '#1a1a1a',
-      buttons: '#00FFFF',
-      dpad: '#2a2a2a',
-      sticks: '#1a1a1a',
-      triggers: '#333333',
-      touchpad: '#0a0a0a',
-      bumpers: '#333333',
-      led: '#00FFFF'
+      body: '#f5f5f5',           // Blanco crema (cuerpo frontal superior)
+      frontLowerBody: '#f5f5f5', // Blanco crema (cuerpo frontal inferior)
+      backBody: '#f5f5f5',       // Blanco crema (cuerpo trasero)
+      grips: '#1a1a1a',          // Negro (grips laterales)
+      buttons: '#e8e8e8',        // Gris claro (botones)
+      dpad: '#1a1a1a',           // Negro (d-pad)
+      sticks: '#1a1a1a',         // Negro (joysticks)
+      triggers: '#e8e8e8',       // Gris claro (gatillos)
+      touchpad: '#0a0a0a',       // Negro oscuro (touchpad)
+      bumpers: '#333333',        // Gris oscuro (bumpers - Xbox)
+      led: '#0066ff'             // Azul PS5 (LED strip)
     });
     setUploadedImage(null);
   };

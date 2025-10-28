@@ -62,30 +62,65 @@ const PS5GLTFModel = ({ colors }) => {
     if (scene) {
       scene.traverse((child) => {
         if (child.isMesh && child.material) {
-          const materialName = child.material.name?.toLowerCase() || '';
-          const meshName = child.name?.toLowerCase() || '';
+          const materialName = child.material.name || '';
+          const meshName = child.name || '';
           
+          // Clone material to avoid affecting other instances
           child.material = child.material.clone();
           
-          // Mapeo inteligente de partes
-          if (meshName.includes('body') || materialName.includes('body') || materialName.includes('shell')) {
-            child.material.color = new THREE.Color(colors.body || '#ffffff');
-          } else if (meshName.includes('button') || materialName.includes('button')) {
-            child.material.color = new THREE.Color(colors.buttons || '#00FFFF');
-            child.material.emissive = new THREE.Color(colors.buttons || '#00FFFF');
-            child.material.emissiveIntensity = 0.3;
-          } else if (meshName.includes('grip') || materialName.includes('grip')) {
+          // Mapeo basado en nombres de materiales del modelo GLTF
+          // BODY FRONTAL SUPERIOR: Object_10 (mesh name)
+          if (meshName === 'Object_42') {
+            child.material.color = new THREE.Color(colors.body || '#f5f5f5');
+          }
+          // BODY FRONTAL INFERIOR: front_body.001
+          else if (materialName === 'front_body.001') {
+            child.material.color = new THREE.Color(colors.frontLowerBody || colors.body || '#f5f5f5');
+          }
+          // BODY TRASERO: VRayMtl55
+          else if (materialName.includes('VRayMtl55')) {
+            child.material.color = new THREE.Color(colors.backBody || colors.body || '#f5f5f5');
+          }
+          // GRIPS: material_0
+          else if (materialName === 'material_0') {
             child.material.color = new THREE.Color(colors.grips || '#1a1a1a');
-          } else if (meshName.includes('stick') || meshName.includes('analog')) {
+          }
+          // BUTTONS (face buttons): Material.002
+          else if (materialName === 'Material.002') {
+            child.material.color = new THREE.Color(colors.buttons || '#e8e8e8');
+            child.material.emissive = new THREE.Color(colors.buttons || '#e8e8e8');
+            child.material.emissiveIntensity = 0.1;
+          }
+          // DPAD: Material.009
+          else if (materialName === 'Material.009') {
+            child.material.color = new THREE.Color(colors.dpad || '#1a1a1a');
+          }
+          // STICKS: VRayMtl33, Material.004
+          else if (materialName === 'VRayMtl33' ||
+                   materialName === 'Material.004') {
             child.material.color = new THREE.Color(colors.sticks || '#1a1a1a');
-          } else if (meshName.includes('trigger')) {
-            child.material.color = new THREE.Color(colors.triggers || '#333333');
-          } else if (meshName.includes('touchpad')) {
+          }
+          // TRIGGERS: VRayMtl37, 1001, 1001.002
+          else if (materialName === 'VRayMtl37' ||
+                   materialName.includes('1001')) {
+            child.material.color = new THREE.Color(colors.triggers || '#e8e8e8');
+          }
+          // TOUCHPAD: Material.006, Material.008, Material.010
+          else if (materialName === 'Material.006' || 
+                   materialName === 'Material.008' || 
+                   materialName === 'Material.010') {
             child.material.color = new THREE.Color(colors.touchpad || '#0a0a0a');
-          } else if (meshName.includes('led') || meshName.includes('light')) {
-            child.material.color = new THREE.Color(colors.led || '#00FFFF');
-            child.material.emissive = new THREE.Color(colors.led || '#00FFFF');
-            child.material.emissiveIntensity = 0.8;
+          }
+          // LED: Material.005, Material.007
+          else if (materialName === 'Material.005' || 
+                   materialName === 'Material.007') {
+            child.material.color = new THREE.Color(colors.led || '#0066ff');
+            child.material.emissive = new THREE.Color(colors.led || '#0066ff');
+            child.material.emissiveIntensity = 0.6;
+          }
+          // DEFAULT: Material
+          else if (materialName === 'Material') {
+            child.material.color = new THREE.Color(colors.body || '#f5f5f5');
           }
         }
       });

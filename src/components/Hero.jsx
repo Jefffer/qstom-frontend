@@ -19,7 +19,7 @@ const Hero = () => {
         <div 
           className="absolute inset-0"
           style={{
-            background: 'linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.5) 60%, rgba(0, 0, 0, 1) 100%)'
+            background: 'linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.2) 60%, rgba(0, 0, 0, 1) 100%)'
           }}
         />
       </div>
