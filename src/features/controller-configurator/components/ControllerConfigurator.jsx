@@ -26,10 +26,42 @@ const ControllerConfigurator = () => {
     led: '#00FFFF'
   });
 
-  // Paleta de colores básicos y neón
+  // Paleta de colores elegantes y patrones
   const colorPresets = {
-    basic: ['#ffffff', '#000000', '#808080', '#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff'],
-    neon: ['#00FFFF', '#FF00FF', '#00FF00', '#FF0080', '#FFFF00', '#8000FF', '#FF6600', '#00FFAA']
+    solid: [
+      '#ffffff', '#000000', '#1a1a1a', '#2d2d2d', 
+      '#c0c0c0', '#8b4513', '#2c3e50', '#34495e',
+      '#7f8c8d', '#95a5a6', '#bdc3c7', '#ecf0f1',
+      '#e74c3c', '#3498db', '#9b59b6', '#1abc9c'
+    ],
+    metallic: [
+      'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+      'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+      'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+      'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)',
+      'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
+      'linear-gradient(135deg, #30cfd0 0%, #330867 100%)',
+      'linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)',
+      'linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%)'
+    ],
+    patterns: [
+      // Animal Print - Leopardo
+      `url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23000' fill-opacity='0.4'%3E%3Cpath d='M10 10 Q 15 5 20 10 T 30 10' stroke='%23000' fill='%23d4a574'/%3E%3Cellipse cx='15' cy='15' rx='8' ry='6' transform='rotate(20 15 15)'/%3E%3Cellipse cx='35' cy='20' rx='7' ry='5' transform='rotate(-15 35 20)'/%3E%3Cellipse cx='25' cy='35' rx='6' ry='8' transform='rotate(30 25 35)'/%3E%3Cellipse cx='45' cy='40' rx='7' ry='6' transform='rotate(-20 45 40)'/%3E%3C/g%3E%3C/svg%3E") #d4a574`,
+      // Camuflaje Digital
+      `url("data:image/svg+xml,%3Csvg width='80' height='80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg%3E%3Crect x='0' y='0' width='20' height='20' fill='%233d5a3d'/%3E%3Crect x='20' y='0' width='20' height='20' fill='%235a7a5a'/%3E%3Crect x='40' y='0' width='20' height='20' fill='%232d3d2d'/%3E%3Crect x='0' y='20' width='20' height='20' fill='%235a7a5a'/%3E%3Crect x='20' y='20' width='20' height='20' fill='%232d3d2d'/%3E%3Crect x='40' y='20' width='20' height='20' fill='%233d5a3d'/%3E%3C/g%3E%3C/svg%3E") #3d5a3d`,
+      // Zebra
+      `url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg%3E%3Cpath d='M0 10 Q 30 5 60 10 L 60 20 Q 30 15 0 20 Z' fill='%23000'/%3E%3Cpath d='M0 30 Q 30 25 60 30 L 60 40 Q 30 35 0 40 Z' fill='%23000'/%3E%3Cpath d='M0 50 Q 30 45 60 50 L 60 60 Q 30 55 0 60 Z' fill='%23000'/%3E%3C/g%3E%3C/svg%3E") #ffffff`,
+      // Camuflaje Bosque
+      `url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg%3E%3Cpath d='M0 0 L 30 0 L 25 30 L 0 25 Z' fill='%2352684d'/%3E%3Cpath d='M30 0 L 60 5 L 55 35 L 25 30 Z' fill='%233d5a3d'/%3E%3Cpath d='M60 5 L 90 0 L 85 30 L 55 35 Z' fill='%232d3d2d'/%3E%3Cpath d='M0 25 L 25 30 L 20 60 L 0 55 Z' fill='%233d5a3d'/%3E%3C/g%3E%3C/svg%3E") #3d5a3d`,
+      // Carbon Fiber
+      `url("data:image/svg+xml,%3Csvg width='6' height='6' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23333'%3E%3Cpath d='M0 0h3v3H0zM3 3h3v3H3z'/%3E%3C/g%3E%3C/svg%3E") #1a1a1a`,
+      // Tiger Stripes
+      `url("data:image/svg+xml,%3Csvg width='80' height='80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg%3E%3Cpath d='M0 10 L 15 8 L 18 15 L 10 20 L 0 18 Z' fill='%23000'/%3E%3Cpath d='M25 5 L 40 3 L 43 12 L 30 18 L 25 12 Z' fill='%23000'/%3E%3Cpath d='M50 8 L 65 6 L 68 15 L 55 22 L 50 15 Z' fill='%23000'/%3E%3Cpath d='M0 35 L 12 33 L 15 42 L 8 48 L 0 45 Z' fill='%23000'/%3E%3C/g%3E%3C/svg%3E") #d4822f`,
+      // Hex Camo
+      `url("data:image/svg+xml,%3Csvg width='56' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%234a5f4a'%3E%3Cpath d='M28 66L0 50L0 16L28 0L56 16L56 50L28 66z'/%3E%3C/g%3E%3C/svg%3E") #2d3d2d`,
+      // Snake Skin
+      `url("data:image/svg+xml,%3Csvg width='40' height='40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg%3E%3Cellipse cx='10' cy='10' rx='8' ry='6' fill='%23000' opacity='0.3'/%3E%3Cellipse cx='30' cy='10' rx='7' ry='5' fill='%23000' opacity='0.3'/%3E%3Cellipse cx='10' cy='30' rx='7' ry='5' fill='%23000' opacity='0.3'/%3E%3Cellipse cx='30' cy='30' rx='8' ry='6' fill='%23000' opacity='0.3'/%3E%3C/g%3E%3C/svg%3E") #8b8680`
+    ]
   };
 
   // Partes configurables según el tipo de control
@@ -69,6 +101,11 @@ const ControllerConfigurator = () => {
       const reader = new FileReader();
       reader.onload = (event) => {
         setUploadedImage(event.target.result);
+        // Aplicar la imagen directamente al cuerpo principal
+        setColors(prev => ({
+          ...prev,
+          body: event.target.result
+        }));
       };
       reader.readAsDataURL(file);
     }
@@ -261,13 +298,13 @@ const ControllerConfigurator = () => {
               <div className="space-y-3 border border-cyan-500/30 p-4 rounded-lg bg-gray-900/30">
                 <h3 className="text-xl text-cyan-400 font-['Orbitron'] tracking-widest uppercase">Colores</h3>
                 
-                {/* Colores Básicos */}
+                {/* Colores Sólidos */}
                 <div>
-                  <p className="text-sm text-gray-400 mb-2">Básicos</p>
+                  <p className="text-sm text-gray-400 mb-2">Sólidos Elegantes</p>
                   <div className="grid grid-cols-8 gap-2">
-                    {colorPresets.basic.map((color) => (
+                    {colorPresets.solid.map((color, index) => (
                       <button
-                        key={color}
+                        key={`solid-${index}`}
                         onClick={() => handleColorChange(color)}
                         className="w-8 h-8 rounded border border-gray-700 hover:border-cyan-400 transition-colors"
                         style={{ backgroundColor: color }}
@@ -277,20 +314,33 @@ const ControllerConfigurator = () => {
                   </div>
                 </div>
 
-                {/* Colores Neón */}
+                {/* Colores Metálicos/Gradientes */}
                 <div>
-                  <p className="text-sm text-gray-400 mb-2">Neón</p>
+                  <p className="text-sm text-gray-400 mb-2">Metálicos & Gradientes</p>
                   <div className="grid grid-cols-8 gap-2">
-                    {colorPresets.neon.map((color) => (
+                    {colorPresets.metallic.map((gradient, index) => (
                       <button
-                        key={color}
-                        onClick={() => handleColorChange(color)}
+                        key={`metallic-${index}`}
+                        onClick={() => handleColorChange(gradient)}
                         className="w-8 h-8 rounded border border-gray-700 hover:border-cyan-400 transition-colors"
-                        style={{ 
-                          backgroundColor: color,
-                          boxShadow: `0 0 15px ${color}`
-                        }}
-                        title={color}
+                        style={{ background: gradient }}
+                        title="Gradiente metálico"
+                      />
+                    ))}
+                  </div>
+                </div>
+
+                {/* Patrones Especiales */}
+                <div>
+                  <p className="text-sm text-gray-400 mb-2">Patrones Especiales</p>
+                  <div className="grid grid-cols-8 gap-2">
+                    {colorPresets.patterns.map((pattern, index) => (
+                      <button
+                        key={`pattern-${index}`}
+                        onClick={() => handleColorChange(pattern)}
+                        className="w-8 h-8 rounded border border-gray-700 hover:border-cyan-400 transition-colors"
+                        style={{ background: pattern, backgroundSize: 'cover' }}
+                        title={['Leopardo', 'Camo Digital', 'Zebra', 'Camo Bosque', 'Fibra Carbono', 'Tigre', 'Hex Camo', 'Serpiente'][index]}
                       />
                     ))}
                   </div>
@@ -301,17 +351,20 @@ const ControllerConfigurator = () => {
                   <p className="text-sm text-gray-400 mb-2">Color Personalizado</p>
                   <input
                     type="color"
-                    value={colors[selectedPart]}
+                    value={colors[selectedPart]?.startsWith('#') ? colors[selectedPart] : '#ffffff'}
                     onChange={(e) => handleColorChange(e.target.value)}
                     className="w-full h-12 rounded-lg cursor-pointer border border-cyan-500/30"
                   />
-                  <p className="text-xs text-cyan-400 mt-2 text-center font-mono">{colors[selectedPart]}</p>
+                  <p className="text-xs text-cyan-400 mt-2 text-center font-mono break-all">
+                    {colors[selectedPart]?.startsWith('#') ? colors[selectedPart] : 'Patrón/Imagen'}
+                  </p>
                 </div>
               </div>
 
               {/* Subir Imagen */}
               <div className="space-y-3 border border-purple-500/30 p-4 rounded-lg bg-gray-900/30">
                 <h3 className="text-xl text-purple-400 font-['Orbitron'] tracking-widest uppercase">Imagen Personalizada</h3>
+                <p className="text-xs text-gray-400 mb-2">La imagen se aplicará al cuerpo principal</p>
                 <button
                   onClick={() => fileInputRef.current?.click()}
                   className="w-full bg-linear-to-r from-purple-500 to-pink-600 text-white font-bold py-3 px-4 border border-purple-400 transition-colors hover:brightness-110 glow-border btn-tech uppercase tracking-wider"
@@ -408,20 +461,51 @@ const ControllerConfigurator = () => {
 
           {/* Paleta de Colores Compacta */}
           <div>
-            <h3 className="text-xs font-bold mb-1.5 text-cyan-400 font-['Orbitron']">Colores</h3>
-            <div className="grid grid-cols-10 gap-1 mb-2">
-              {[...colorPresets.basic, ...colorPresets.neon].map((color) => (
+            <h3 className="text-xs font-bold mb-1.5 text-cyan-400 font-['Orbitron']">Colores & Patrones</h3>
+            
+            {/* Sólidos */}
+            <p className="text-[10px] text-gray-500 mb-1">Sólidos</p>
+            <div className="grid grid-cols-8 gap-1 mb-2">
+              {colorPresets.solid.slice(0, 8).map((color, index) => (
                 <button
-                  key={color}
+                  key={`mobile-solid-${index}`}
                   onClick={() => handleColorChange(color)}
                   className="w-full aspect-square rounded border border-gray-700 hover:border-cyan-400 transition-colors"
                   style={{ backgroundColor: color }}
                 />
               ))}
             </div>
+
+            {/* Gradientes */}
+            <p className="text-[10px] text-gray-500 mb-1">Metálicos</p>
+            <div className="grid grid-cols-8 gap-1 mb-2">
+              {colorPresets.metallic.slice(0, 8).map((gradient, index) => (
+                <button
+                  key={`mobile-metallic-${index}`}
+                  onClick={() => handleColorChange(gradient)}
+                  className="w-full aspect-square rounded border border-gray-700 hover:border-cyan-400 transition-colors"
+                  style={{ background: gradient }}
+                />
+              ))}
+            </div>
+
+            {/* Patrones */}
+            <p className="text-[10px] text-gray-500 mb-1">Patrones</p>
+            <div className="grid grid-cols-8 gap-1 mb-2">
+              {colorPresets.patterns.map((pattern, index) => (
+                <button
+                  key={`mobile-pattern-${index}`}
+                  onClick={() => handleColorChange(pattern)}
+                  className="w-full aspect-square rounded border border-gray-700 hover:border-cyan-400 transition-colors"
+                  style={{ background: pattern, backgroundSize: 'cover' }}
+                />
+              ))}
+            </div>
+
+            {/* Selector de color */}
             <input
               type="color"
-              value={colors[selectedPart]}
+              value={colors[selectedPart]?.startsWith('#') ? colors[selectedPart] : '#ffffff'}
               onChange={(e) => handleColorChange(e.target.value)}
               className="w-full h-8 rounded-lg cursor-pointer border border-cyan-500/30"
             />
