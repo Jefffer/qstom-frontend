@@ -7,8 +7,42 @@ import { RiMessage3Fill } from 'react-icons/ri';
 const Hero = () => {
   return (
     <div className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black pt-26">
-      {/* Fondo Cyberpunk con Cuadrículas */}
-      <div className="absolute inset-0">
+      {/* Imagen Cyberpunk del Control - Desktop (izquierda, detrás del fondo) */}
+      <div className="hidden md:block absolute inset-y-0 left-0 w-1/2 z-0">
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: `url('https://images.unsplash.com/photo-1614294148960-9aa740632a87?q=80&w=1200&auto=format&fit=crop')`,
+          }}
+        />
+        {/* Gradiente de desvanecimiento sutil hacia la derecha */}
+        <div 
+          className="absolute inset-0"
+          style={{
+            background: 'linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.5) 60%, rgba(0, 0, 0, 1) 100%)'
+          }}
+        />
+      </div>
+
+      {/* Imagen Cyberpunk del Control - Mobile (superior) */}
+      <div className="md:hidden absolute top-0 left-0 right-0 h-1/2 z-0">
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-60"
+          style={{
+            backgroundImage: `url('https://images.unsplash.com/photo-1614294148960-9aa740632a87?q=80&w=1200&auto=format&fit=crop')`,
+          }}
+        />
+        {/* Gradiente de desvanecimiento hacia abajo */}
+        <div 
+          className="absolute inset-0"
+          style={{
+            background: 'linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.3) 50%, rgba(0, 0, 0, 1) 100%)'
+          }}
+        />
+      </div>
+
+      {/* Fondo Cyberpunk con Cuadrículas (sobre la imagen) */}
+      <div className="absolute inset-0 z-10">
         {/* Cuadrícula principal */}
         <div 
           className="absolute inset-0 opacity-20"
@@ -68,56 +102,58 @@ const Hero = () => {
       </div>
 
       {/* Contenido */}
-      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Título Principal */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-12"
-        >
+      <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Contenedor alineado a la derecha en desktop */}
+        <div className="md:ml-auto md:max-w-2xl lg:max-w-3xl">
+          {/* Título Principal - Alineado a la derecha en desktop */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, delay: 0.2 }}
-            className="inline-block mb-4"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-center md:text-right mb-12"
           >
-            <div className="relative">
-              <h1 className="text-6xl md:text-8xl font-bold text-white font-['Orbitron'] tracking-wider">
-                <span className="glow-text">Qstom</span>
-              </h1>
-              {/* Líneas decorativas */}
-              <div className="absolute -left-8 top-1/2 w-6 h-px bg-linear-to-r from-cyan-500 to-transparent" />
-              <div className="absolute -right-8 top-1/2 w-6 h-px bg-linear-to-l from-pink-500 to-transparent" />
-            </div>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1, delay: 0.2 }}
+              className="inline-block mb-4"
+            >
+              <div className="relative">
+                <h1 className="text-6xl md:text-8xl font-bold text-white font-['Orbitron'] tracking-wider drop-shadow-[0_0_30px_rgba(0,255,255,0.5)]">
+                  <span className="glow-text">Qstom</span>
+                </h1>
+                {/* Líneas decorativas */}
+                <div className="absolute -left-8 top-1/2 w-6 h-px bg-linear-to-r from-cyan-500 to-transparent" />
+                <div className="absolute -right-8 top-1/2 w-6 h-px bg-linear-to-l from-pink-500 to-transparent" />
+              </div>
+            </motion.div>
+
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="text-xl md:text-2xl text-cyan-400 font-['Orbitron'] tracking-widest uppercase mb-3 drop-shadow-[0_0_20px_rgba(0,255,255,0.5)]"
+            >
+              Personalización de Alto Nivel
+            </motion.p>
+
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+              className="text-base md:text-lg text-gray-300 max-w-2xl mx-auto md:ml-auto drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]"
+            >
+              Transforma tus accesorios gaming en piezas únicas con tecnología de personalización 3D
+            </motion.p>
           </motion.div>
 
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-xl md:text-2xl text-cyan-400 font-['Orbitron'] tracking-widest uppercase mb-3"
+          {/* Botones de Navegación */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
+            className="flex flex-wrap justify-center md:justify-end gap-4 md:gap-6 mb-16"
           >
-            Personalización de Alto Nivel
-          </motion.p>
-
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            className="text-base md:text-lg text-gray-400 max-w-2xl mx-auto"
-          >
-            Transforma tus accesorios gaming en piezas únicas con tecnología de personalización 3D
-          </motion.p>
-        </motion.div>
-
-        {/* Botones de Navegación */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.8 }}
-          className="flex flex-wrap justify-center gap-4 md:gap-6 mb-16"
-        >
           {/* Laboratorio 3D */}
           <Link
             to="/lab"
@@ -173,7 +209,7 @@ const Hero = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 1 }}
-          className="grid grid-cols-3 gap-8 max-w-3xl mx-auto"
+          className="grid grid-cols-3 gap-8 max-w-3xl mx-auto md:ml-auto"
         >
           {[
             { number: '50+', label: 'Proyectos', color: 'cyan' },
@@ -193,6 +229,7 @@ const Hero = () => {
             </div>
           ))}
         </motion.div>
+        </div>
       </div>
 
       {/* Scroll Indicator Minimalista */}

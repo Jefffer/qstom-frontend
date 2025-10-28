@@ -300,7 +300,7 @@ const ControllerConfigurator = () => {
                 
                 {/* Colores Sólidos */}
                 <div>
-                  <p className="text-sm text-gray-400 mb-2">Sólidos Elegantes</p>
+                  <p className="text-sm text-gray-400 mb-2">Sólidos</p>
                   <div className="grid grid-cols-8 gap-2">
                     {colorPresets.solid.map((color, index) => (
                       <button
