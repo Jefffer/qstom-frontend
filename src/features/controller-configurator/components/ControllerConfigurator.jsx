@@ -105,11 +105,8 @@ const ControllerConfigurator = () => {
       const reader = new FileReader();
       reader.onload = (event) => {
         setUploadedImage(event.target.result);
-        // Aplicar la imagen directamente al cuerpo principal
-        setColors(prev => ({
-          ...prev,
-          body: event.target.result
-        }));
+        // La imagen se aplicará automáticamente en el modelo 3D
+        // No modificamos el estado de colors
       };
       reader.readAsDataURL(file);
     }
@@ -188,7 +185,7 @@ const ControllerConfigurator = () => {
 
             {/* Modelo del Control */}
             {controllerType === 'ps5' ? (
-              <PS5ControllerModel colors={colors} />
+              <PS5ControllerModel colors={colors} uploadedImage={uploadedImage} />
             ) : (
               <XboxControllerModel colors={colors} />
             )}

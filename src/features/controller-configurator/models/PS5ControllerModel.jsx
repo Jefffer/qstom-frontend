@@ -44,7 +44,7 @@ const FallbackPS5Model = ({ colors }) => {
 };
 
 // Componente que carga el modelo GLTF
-const PS5GLTFModel = ({ colors }) => {
+const PS5GLTFModel = ({ colors, uploadedImage }) => {
   // Ruta al modelo (debes descargar un modelo GLTF/GLB y colocarlo en public/models/)
   const modelPath = '/models/ps5-controller3.glb';
   
@@ -60,6 +60,15 @@ const PS5GLTFModel = ({ colors }) => {
   // Aplicar colores personalizados
   useEffect(() => {
     if (scene) {
+      // Crear textura desde imagen si existe
+      let imageTexture = null;
+      if (uploadedImage) {
+        const textureLoader = new THREE.TextureLoader();
+        imageTexture = textureLoader.load(uploadedImage);
+        imageTexture.wrapS = THREE.RepeatWrapping;
+        imageTexture.wrapT = THREE.RepeatWrapping;
+      }
+
       scene.traverse((child) => {
         if (child.isMesh && child.material) {
           const materialName = child.material.name || '';
@@ -68,73 +77,113 @@ const PS5GLTFModel = ({ colors }) => {
           // Clone material to avoid affecting other instances
           child.material = child.material.clone();
           
+          // Helper function to extract color from gradient/pattern or use solid color
+          const getColorFromValue = (colorValue) => {
+            if (!colorValue) return '#ffffff';
+            
+            // Si es un data URI de SVG pattern, extraer color de fondo o usar blanco
+            if (colorValue.includes('data:image/svg')) {
+              const match = colorValue.match(/#([0-9a-fA-F]{6})/);
+              return match ? `#${match[1]}` : '#ffffff';
+            }
+            
+            // Si es un gradiente lineal, extraer el primer color
+            if (colorValue.includes('linear-gradient')) {
+              const match = colorValue.match(/#([0-9a-fA-F]{6})/);
+              return match ? `#${match[1]}` : '#ffffff';
+            }
+            
+            // Si es un color hex válido, usarlo directamente
+            if (colorValue.match(/^#[0-9a-fA-F]{6}$/)) {
+              return colorValue;
+            }
+            
+            return '#ffffff';
+          };
+          
           // Mapeo basado en nombres de materiales del modelo GLTF
           // BODY FRONTAL SUPERIOR: Object_10 (mesh name)
-          if (meshName === 'Object_42') {
-            child.material.color = new THREE.Color(colors.body || '#f5f5f5');
+          if (meshName === 'Object_10') {
+            if (imageTexture) {
+              child.material.map = imageTexture;
+              child.material.needsUpdate = true;
+            } else {
+              child.material.map = null;
+              child.material.color = new THREE.Color(getColorFromValue(colors.body));
+              child.material.needsUpdate = true;
+            }
           }
           // BODY FRONTAL INFERIOR: front_body.001
           else if (materialName === 'front_body.001') {
-            child.material.color = new THREE.Color(colors.frontLowerBody || colors.body || '#f5f5f5');
+            if (imageTexture) {
+              child.material.map = imageTexture;
+              child.material.needsUpdate = true;
+            } else {
+              child.material.map = null;
+              child.material.color = new THREE.Color(getColorFromValue(colors.frontLowerBody || colors.body));
+              child.material.needsUpdate = true;
+            }
           }
           // BODY TRASERO: VRayMtl55
           else if (materialName.includes('VRayMtl55')) {
-            child.material.color = new THREE.Color(colors.backBody || colors.body || '#f5f5f5');
+            child.material.color = new THREE.Color(getColorFromValue(colors.backBody || colors.body));
           }
           // GRIPS: material_0
           else if (materialName === 'material_0') {
-            child.material.color = new THREE.Color(colors.grips || '#1a1a1a');
+            child.material.color = new THREE.Color(getColorFromValue(colors.grips));
           }
           // BUTTONS (face buttons): Material.002
           else if (materialName === 'Material.002') {
-            child.material.color = new THREE.Color(colors.buttons || '#e8e8e8');
-            child.material.emissive = new THREE.Color(colors.buttons || '#e8e8e8');
+            const btnColor = getColorFromValue(colors.buttons);
+            child.material.color = new THREE.Color(btnColor);
+            child.material.emissive = new THREE.Color(btnColor);
             child.material.emissiveIntensity = 0.1;
           }
           // DPAD: Material.009
           else if (materialName === 'Material.009') {
-            child.material.color = new THREE.Color(colors.dpad || '#1a1a1a');
+            child.material.color = new THREE.Color(getColorFromValue(colors.dpad));
           }
           // STICKS: VRayMtl33, Material.004
           else if (materialName === 'VRayMtl33' ||
                    materialName === 'Material.004') {
-            child.material.color = new THREE.Color(colors.sticks || '#1a1a1a');
+            child.material.color = new THREE.Color(getColorFromValue(colors.sticks));
           }
           // TRIGGERS: VRayMtl37, 1001, 1001.002
           else if (materialName === 'VRayMtl37' ||
                    materialName.includes('1001')) {
-            child.material.color = new THREE.Color(colors.triggers || '#e8e8e8');
+            child.material.color = new THREE.Color(getColorFromValue(colors.triggers));
           }
           // TOUCHPAD: Material.006, Material.008, Material.010
           else if (materialName === 'Material.006' || 
                    materialName === 'Material.008' || 
                    materialName === 'Material.010') {
-            child.material.color = new THREE.Color(colors.touchpad || '#0a0a0a');
+            child.material.color = new THREE.Color(getColorFromValue(colors.touchpad));
           }
           // LED: Material.005, Material.007
           else if (materialName === 'Material.005' || 
                    materialName === 'Material.007') {
-            child.material.color = new THREE.Color(colors.led || '#0066ff');
-            child.material.emissive = new THREE.Color(colors.led || '#0066ff');
+            const ledColor = getColorFromValue(colors.led);
+            child.material.color = new THREE.Color(ledColor);
+            child.material.emissive = new THREE.Color(ledColor);
             child.material.emissiveIntensity = 0.6;
           }
           // DEFAULT: Material
           else if (materialName === 'Material') {
-            child.material.color = new THREE.Color(colors.body || '#f5f5f5');
+            child.material.color = new THREE.Color(getColorFromValue(colors.body));
           }
         }
       });
     }
-  }, [scene, colors]);
+  }, [scene, colors, uploadedImage]);
 
   return <primitive object={scene} scale={1} />;
 };
 
-const PS5ControllerModel = ({ colors, rotation = [0.1, 0, 0] }) => {
+const PS5ControllerModel = ({ colors, uploadedImage, rotation = [0.1, 0, 0] }) => {
   return (
     <group rotation={rotation} position={[0, 0, 0]}>
       <Suspense fallback={<FallbackPS5Model colors={colors} />}>
-        <PS5GLTFModel colors={colors} />
+        <PS5GLTFModel colors={colors} uploadedImage={uploadedImage} />
       </Suspense>
     </group>
   );
