@@ -187,7 +187,7 @@ const ControllerConfigurator = () => {
             {controllerType === 'ps5' ? (
               <PS5ControllerModel colors={colors} uploadedImage={uploadedImage} />
             ) : (
-              <XboxControllerModel colors={colors} />
+              <XboxControllerModel colors={colors} uploadedImage={uploadedImage} />
             )}
 
             {/* Controles de órbita */}
@@ -195,7 +195,7 @@ const ControllerConfigurator = () => {
               enablePan={true}
               enableZoom={true}
               enableRotate={true}
-              minDistance={1}
+              minDistance={3}
               maxDistance={25}
             />
 

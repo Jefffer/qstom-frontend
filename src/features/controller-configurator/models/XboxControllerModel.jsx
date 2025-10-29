@@ -53,9 +53,9 @@ const FallbackXboxModel = ({ colors }) => {
 };
 
 // Componente que carga el modelo GLTF
-const XboxGLTFModel = ({ colors }) => {
-  // Ruta al modelo (debes descargar un modelo GLTF/GLB y colocarlo en public/models/)
-  const modelPath = '/models/xbox-controller.glb';
+const XboxGLTFModel = ({ colors, uploadedImage }) => {
+  // Ruta al modelo
+  const modelPath = '/models/xbox-controller7.glb';
   
   let scene;
   try {
@@ -66,14 +66,35 @@ const XboxGLTFModel = ({ colors }) => {
     return <FallbackXboxModel colors={colors} />;
   }
 
+  // Función para extraer color de gradientes y patrones SVG
+  const getColorFromValue = (colorValue) => {
+    if (!colorValue) return '#ffffff';
+    
+    // Si es una imagen SVG pattern, extraer el color de fondo
+    if (colorValue.includes('data:image/svg')) {
+      const match = colorValue.match(/#([0-9a-fA-F]{6})/);
+      return match ? `#${match[1]}` : '#ffffff';
+    }
+    
+    // Si es un gradiente, extraer el primer color
+    if (colorValue.includes('linear-gradient')) {
+      const match = colorValue.match(/#([0-9a-fA-F]{6})/);
+      return match ? `#${match[1]}` : '#ffffff';
+    }
+    
+    // Si ya es un color hex válido
+    if (colorValue.match(/^#[0-9a-fA-F]{6}$/)) {
+      return colorValue;
+    }
+    
+    return '#ffffff';
+  };
+
   // Centrar el modelo en su origen
   useEffect(() => {
     if (scene) {
-      // Calcular el centro del modelo
       const box = new THREE.Box3().setFromObject(scene);
       const center = box.getCenter(new THREE.Vector3());
-      
-      // Mover el modelo para que su centro esté en (0, 0, 0)
       scene.position.sub(center);
     }
   }, [scene]);
@@ -81,63 +102,96 @@ const XboxGLTFModel = ({ colors }) => {
   // Aplicar colores personalizados
   useEffect(() => {
     if (scene) {
+      console.log('=== Xbox Controller Scene Analysis ===');
+      
+      // Cargar textura de imagen si existe
+      let imageTexture = null;
+      if (uploadedImage) {
+        const textureLoader = new THREE.TextureLoader();
+        imageTexture = textureLoader.load(uploadedImage);
+        imageTexture.wrapS = THREE.RepeatWrapping;
+        imageTexture.wrapT = THREE.RepeatWrapping;
+      }
+      
       scene.traverse((child) => {
         if (child.isMesh && child.material) {
-          const materialName = child.material.name?.toLowerCase() || '';
-          const meshName = child.name?.toLowerCase() || '';
+          const materialName = child.material.name || '';
+          const meshName = child.name || '';
           
+          console.log('Mesh:', child.name, '| Material:', child.material.name);
+          
+          // Clonar material para no afectar otras instancias
           child.material = child.material.clone();
           
-          // Mapeo inteligente de partes
-          if (meshName.includes('body') || materialName.includes('body') || materialName.includes('shell')) {
-            child.material.color = new THREE.Color(colors.body || '#ffffff');
-          } else if (meshName.includes('button') || materialName.includes('button')) {
-            // Mantener colores característicos de Xbox si no se personaliza
-            if (!colors.buttons) {
-              // Los modelos GLTF suelen tener nombres específicos para cada botón
-              if (meshName.includes('a')) child.material.color = new THREE.Color('#00C000');
-              else if (meshName.includes('b')) child.material.color = new THREE.Color('#E00000');
-              else if (meshName.includes('x')) child.material.color = new THREE.Color('#0080FF');
-              else if (meshName.includes('y')) child.material.color = new THREE.Color('#FFD000');
+          // Mapeo según los nombres exactos de la consola
+          // TT_checker_1024x1024_UV_GRID -> Cuerpo principal
+          if (materialName === 'TT_checker_1024x1024_UV_GRID' || materialName === 'TT_checker_1024x1024_UV_GRID.001') {
+            if (imageTexture && (meshName.includes('Cylinder') || meshName.includes('Cube002'))) {
+              // Aplicar imagen solo al cuerpo principal
+              child.material.map = imageTexture;
+              child.material.needsUpdate = true;
             } else {
-              child.material.color = new THREE.Color(colors.buttons);
+              child.material.color = new THREE.Color(getColorFromValue(colors.body || '#ffffff'));
             }
-            child.material.emissive = child.material.color.clone();
-            child.material.emissiveIntensity = 0.3;
-          } else if (meshName.includes('grip') || materialName.includes('grip')) {
-            child.material.color = new THREE.Color(colors.grips || '#1a1a1a');
-          } else if (meshName.includes('stick') || meshName.includes('analog') || meshName.includes('thumbstick')) {
-            child.material.color = new THREE.Color(colors.sticks || '#1a1a1a');
-          } else if (meshName.includes('trigger') || materialName.includes('trigger')) {
-            child.material.color = new THREE.Color(colors.triggers || '#2a2a2a');
-          } else if (meshName.includes('bumper') || materialName.includes('bumper')) {
-            child.material.color = new THREE.Color(colors.bumpers || '#333333');
-          } else if (meshName.includes('xbox') || meshName.includes('logo') || materialName.includes('logo')) {
-            child.material.color = new THREE.Color(colors.led || '#00FF00');
-            child.material.emissive = new THREE.Color(colors.led || '#00FF00');
-            child.material.emissiveIntensity = 0.9;
-          } else if (meshName.includes('dpad') || materialName.includes('dpad')) {
-            child.material.color = new THREE.Color(colors.dpad || '#2a2a2a');
+            child.material.roughness = 0.3;
+            child.material.metalness = 0.1;
+          }
+          // Material.001 -> Letras de botones (A, B, X, Y)
+          else if (materialName === 'Material.001') {
+            child.material.color = new THREE.Color(colors.buttons || '#ffffff');
+            child.material.emissive = new THREE.Color(colors.buttons || '#ffffff');
+            child.material.emissiveIntensity = 0.5;
+          }
+          // glass -> Botón Xbox central
+          else if (materialName === 'glass') {
+            child.material.color = new THREE.Color(getColorFromValue(colors.led || '#00FF00'));
+            child.material.emissive = new THREE.Color(getColorFromValue(colors.led || '#00FF00'));
+            child.material.emissiveIntensity = 0.8;
+            child.material.transparent = true;
+            child.material.opacity = 0.9;
+          }
+          // Grips (Circle003, Circle004, etc.)
+          else if (meshName.includes('Circle003') || meshName.includes('Circle004') || 
+                   meshName.includes('Circle006') || meshName.includes('Circle007')) {
+            child.material.color = new THREE.Color(getColorFromValue(colors.grips || '#1a1a1a'));
+            child.material.roughness = 0.5;
+          }
+          // Joysticks (Circle008, Circle009)
+          else if (meshName.includes('Circle008') || meshName.includes('Circle009')) {
+            child.material.color = new THREE.Color(getColorFromValue(colors.sticks || '#1a1a1a'));
+            child.material.roughness = 0.4;
+          }
+          // D-Pad (Circle010)
+          else if (meshName.includes('Circle010')) {
+            child.material.color = new THREE.Color(getColorFromValue(colors.dpad || '#1a1a1a'));
+          }
+          // Gatillos (Cube003, Plane001)
+          else if (meshName.includes('Cube003') || meshName.includes('Plane001')) {
+            child.material.color = new THREE.Color(getColorFromValue(colors.triggers || '#e8e8e8'));
+          }
+          // Bumpers (Cube005, Circle011)
+          else if (meshName.includes('Cube005') || meshName.includes('Circle011')) {
+            child.material.color = new THREE.Color(getColorFromValue(colors.bumpers || '#333333'));
           }
         }
       });
     }
-  }, [scene, colors]);
+  }, [scene, colors, uploadedImage]);
 
-  return <primitive object={scene} scale={6} />;
+  return <primitive object={scene} scale={0.3} />;
 };
 
-const XboxControllerModel = ({ colors, rotation = [0.1, 0, 0] }) => {
+const XboxControllerModel = ({ colors, uploadedImage, rotation = [0.1, 0, 0] }) => {
   return (
     <group rotation={rotation} position={[0, 0, 0]}>
       <Suspense fallback={<FallbackXboxModel colors={colors} />}>
-        <XboxGLTFModel colors={colors} />
+        <XboxGLTFModel colors={colors} uploadedImage={uploadedImage} />
       </Suspense>
     </group>
   );
 };
 
 // Precargar modelo
-useGLTF.preload('/models/xbox-controller.glb');
+useGLTF.preload('/models/xbox-controller7.glb');
 
 export default XboxControllerModel;
