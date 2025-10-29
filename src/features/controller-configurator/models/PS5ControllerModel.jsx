@@ -107,7 +107,7 @@ const PS5GLTFModel = ({ colors, uploadedImage }) => {
             if (imageTexture) {
               child.material.map = imageTexture;
               child.material.needsUpdate = true;
-            } else {
+            } else if (colors.body) {
               child.material.map = null;
               child.material.color = new THREE.Color(getColorFromValue(colors.body));
               child.material.needsUpdate = true;
@@ -118,7 +118,7 @@ const PS5GLTFModel = ({ colors, uploadedImage }) => {
             if (imageTexture) {
               child.material.map = imageTexture;
               child.material.needsUpdate = true;
-            } else {
+            } else if (colors.frontLowerBody || colors.body) {
               child.material.map = null;
               child.material.color = new THREE.Color(getColorFromValue(colors.frontLowerBody || colors.body));
               child.material.needsUpdate = true;
@@ -126,50 +126,68 @@ const PS5GLTFModel = ({ colors, uploadedImage }) => {
           }
           // BODY TRASERO: VRayMtl55
           else if (materialName.includes('VRayMtl55')) {
-            child.material.color = new THREE.Color(getColorFromValue(colors.backBody || colors.body));
+            if (colors.backBody || colors.body) {
+              child.material.color = new THREE.Color(getColorFromValue(colors.backBody || colors.body));
+            }
           }
           // GRIPS: material_0
           else if (materialName === 'material_0') {
-            child.material.color = new THREE.Color(getColorFromValue(colors.grips));
+            if (colors.grips) {
+              child.material.color = new THREE.Color(getColorFromValue(colors.grips));
+            }
           }
           // BUTTONS (face buttons): Material.002
           else if (materialName === 'Material.002') {
-            const btnColor = getColorFromValue(colors.buttons);
-            child.material.color = new THREE.Color(btnColor);
-            child.material.emissive = new THREE.Color(btnColor);
-            child.material.emissiveIntensity = 0.1;
+            if (colors.buttons) {
+              const btnColor = getColorFromValue(colors.buttons);
+              child.material.color = new THREE.Color(btnColor);
+              child.material.emissive = new THREE.Color(btnColor);
+              child.material.emissiveIntensity = 0.1;
+            }
           }
           // DPAD: Material.009
           else if (materialName === 'Material.009') {
-            child.material.color = new THREE.Color(getColorFromValue(colors.dpad));
+            if (colors.dpad) {
+              child.material.color = new THREE.Color(getColorFromValue(colors.dpad));
+            }
           }
           // STICKS: VRayMtl33, Material.004
           else if (materialName === 'VRayMtl33' ||
                    materialName === 'Material.004') {
-            child.material.color = new THREE.Color(getColorFromValue(colors.sticks));
+            if (colors.sticks) {
+              child.material.color = new THREE.Color(getColorFromValue(colors.sticks));
+            }
           }
           // TRIGGERS: VRayMtl37, 1001, 1001.002
           else if (materialName === 'VRayMtl37' ||
                    materialName.includes('1001')) {
-            child.material.color = new THREE.Color(getColorFromValue(colors.triggers));
+            if (colors.triggers) {
+              child.material.color = new THREE.Color(getColorFromValue(colors.triggers));
+            }
           }
           // TOUCHPAD: Material.006, Material.008, Material.010
           else if (materialName === 'Material.006' || 
                    materialName === 'Material.008' || 
                    materialName === 'Material.010') {
-            child.material.color = new THREE.Color(getColorFromValue(colors.touchpad));
+            if (colors.touchpad) {
+              child.material.color = new THREE.Color(getColorFromValue(colors.touchpad));
+            }
           }
           // LED: Material.005, Material.007
           else if (materialName === 'Material.005' || 
                    materialName === 'Material.007') {
-            const ledColor = getColorFromValue(colors.led);
-            child.material.color = new THREE.Color(ledColor);
-            child.material.emissive = new THREE.Color(ledColor);
-            child.material.emissiveIntensity = 0.6;
+            if (colors.led) {
+              const ledColor = getColorFromValue(colors.led);
+              child.material.color = new THREE.Color(ledColor);
+              child.material.emissive = new THREE.Color(ledColor);
+              child.material.emissiveIntensity = 0.6;
+            }
           }
           // DEFAULT: Material
           else if (materialName === 'Material') {
-            child.material.color = new THREE.Color(getColorFromValue(colors.body));
+            if (colors.body) {
+              child.material.color = new THREE.Color(getColorFromValue(colors.body));
+            }
           }
         }
       });

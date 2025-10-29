@@ -123,6 +123,7 @@ const XboxGLTFModel = ({ colors, uploadedImage }) => {
           // Clonar material para no afectar otras instancias
           child.material = child.material.clone();
           
+          // Solo aplicar colores si fueron personalizados por el usuario
           // Mapeo según los nombres exactos de la consola
           // TT_checker_1024x1024_UV_GRID -> Cuerpo principal
           if (materialName === 'TT_checker_1024x1024_UV_GRID' || materialName === 'TT_checker_1024x1024_UV_GRID.001') {
@@ -130,48 +131,62 @@ const XboxGLTFModel = ({ colors, uploadedImage }) => {
               // Aplicar imagen solo al cuerpo principal
               child.material.map = imageTexture;
               child.material.needsUpdate = true;
-            } else {
-              child.material.color = new THREE.Color(getColorFromValue(colors.body || '#ffffff'));
+            } else if (colors.body) {
+              child.material.color = new THREE.Color(getColorFromValue(colors.body));
             }
             child.material.roughness = 0.3;
             child.material.metalness = 0.1;
           }
           // Material.001 -> Letras de botones (A, B, X, Y)
           else if (materialName === 'Material.001') {
-            child.material.color = new THREE.Color(colors.buttons || '#ffffff');
-            child.material.emissive = new THREE.Color(colors.buttons || '#ffffff');
-            child.material.emissiveIntensity = 0.5;
+            if (colors.buttons) {
+              child.material.color = new THREE.Color(colors.buttons);
+              child.material.emissive = new THREE.Color(colors.buttons);
+              child.material.emissiveIntensity = 0.5;
+            }
           }
           // glass -> Botón Xbox central
           else if (materialName === 'glass') {
-            child.material.color = new THREE.Color(getColorFromValue(colors.led || '#00FF00'));
-            child.material.emissive = new THREE.Color(getColorFromValue(colors.led || '#00FF00'));
-            child.material.emissiveIntensity = 0.8;
+            if (colors.led) {
+              child.material.color = new THREE.Color(getColorFromValue(colors.led));
+              child.material.emissive = new THREE.Color(getColorFromValue(colors.led));
+              child.material.emissiveIntensity = 0.8;
+            }
             child.material.transparent = true;
             child.material.opacity = 0.9;
           }
           // Grips (Circle003, Circle004, etc.)
           else if (meshName.includes('Circle003') || meshName.includes('Circle004') || 
                    meshName.includes('Circle006') || meshName.includes('Circle007')) {
-            child.material.color = new THREE.Color(getColorFromValue(colors.grips || '#1a1a1a'));
-            child.material.roughness = 0.5;
+            if (colors.grips) {
+              child.material.color = new THREE.Color(getColorFromValue(colors.grips));
+              child.material.roughness = 0.5;
+            }
           }
           // Joysticks (Circle008, Circle009)
           else if (meshName.includes('Circle008') || meshName.includes('Circle009')) {
-            child.material.color = new THREE.Color(getColorFromValue(colors.sticks || '#1a1a1a'));
-            child.material.roughness = 0.4;
+            if (colors.sticks) {
+              child.material.color = new THREE.Color(getColorFromValue(colors.sticks));
+              child.material.roughness = 0.4;
+            }
           }
           // D-Pad (Circle010)
           else if (meshName.includes('Circle010')) {
-            child.material.color = new THREE.Color(getColorFromValue(colors.dpad || '#1a1a1a'));
+            if (colors.dpad) {
+              child.material.color = new THREE.Color(getColorFromValue(colors.dpad));
+            }
           }
           // Gatillos (Cube003, Plane001)
           else if (meshName.includes('Cube003') || meshName.includes('Plane001')) {
-            child.material.color = new THREE.Color(getColorFromValue(colors.triggers || '#e8e8e8'));
+            if (colors.triggers) {
+              child.material.color = new THREE.Color(getColorFromValue(colors.triggers));
+            }
           }
           // Bumpers (Cube005, Circle011)
           else if (meshName.includes('Cube005') || meshName.includes('Circle011')) {
-            child.material.color = new THREE.Color(getColorFromValue(colors.bumpers || '#333333'));
+            if (colors.bumpers) {
+              child.material.color = new THREE.Color(getColorFromValue(colors.bumpers));
+            }
           }
         }
       });

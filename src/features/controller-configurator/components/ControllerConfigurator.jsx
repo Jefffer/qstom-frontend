@@ -13,19 +13,19 @@ const ControllerConfigurator = () => {
   const [uploadedImage, setUploadedImage] = useState(null);
   const fileInputRef = useRef(null);
 
-  // Colores predeterminados - PS5 estándar blanco y negro
+  // Colores predeterminados - null para usar colores originales del modelo
   const [colors, setColors] = useState({
-    body: '#f5f5f5',           // Blanco crema (cuerpo frontal superior)
-    frontLowerBody: '#f5f5f5', // Blanco crema (cuerpo frontal inferior)
-    backBody: '#f5f5f5',       // Blanco crema (cuerpo trasero)
-    grips: '#1a1a1a',          // Negro (grips laterales)
-    buttons: '#e8e8e8',        // Gris claro (botones)
-    dpad: '#1a1a1a',           // Negro (d-pad)
-    sticks: '#1a1a1a',         // Negro (joysticks)
-    triggers: '#e8e8e8',       // Gris claro (gatillos)
-    touchpad: '#0a0a0a',       // Negro oscuro (touchpad)
-    bumpers: '#333333',        // Gris oscuro (bumpers - Xbox)
-    led: '#0066ff'             // Azul PS5 (LED strip)
+    body: null,           
+    frontLowerBody: null, 
+    backBody: null,       
+    grips: null,          
+    buttons: null,        
+    dpad: null,           
+    sticks: null,         
+    triggers: null,       
+    touchpad: null,       
+    bumpers: null,        
+    led: null             
   });
 
   // Paleta de colores elegantes y patrones
@@ -114,17 +114,17 @@ const ControllerConfigurator = () => {
 
   const resetColors = () => {
     setColors({
-      body: '#f5f5f5',           // Blanco crema (cuerpo frontal superior)
-      frontLowerBody: '#f5f5f5', // Blanco crema (cuerpo frontal inferior)
-      backBody: '#f5f5f5',       // Blanco crema (cuerpo trasero)
-      grips: '#1a1a1a',          // Negro (grips laterales)
-      buttons: '#e8e8e8',        // Gris claro (botones)
-      dpad: '#1a1a1a',           // Negro (d-pad)
-      sticks: '#1a1a1a',         // Negro (joysticks)
-      triggers: '#e8e8e8',       // Gris claro (gatillos)
-      touchpad: '#0a0a0a',       // Negro oscuro (touchpad)
-      bumpers: '#333333',        // Gris oscuro (bumpers - Xbox)
-      led: '#0066ff'             // Azul PS5 (LED strip)
+      body: null,           
+      frontLowerBody: null, 
+      backBody: null,       
+      grips: null,          
+      buttons: null,        
+      dpad: null,           
+      sticks: null,         
+      triggers: null,       
+      touchpad: null,       
+      bumpers: null,        
+      led: null             
     });
     setUploadedImage(null);
   };
