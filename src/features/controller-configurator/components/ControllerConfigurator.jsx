@@ -5,12 +5,13 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { TbReload } from 'react-icons/tb';
 import { HiDownload } from 'react-icons/hi';
 import PS5ControllerModel from '../models/PS5ControllerModel';
-import XboxControllerModel from '../models/XboxControllerModel';
+import XboxControllerModel, { getXboxMeshNames } from '../models/XboxControllerModel';
 
 const ControllerConfigurator = () => {
   const [controllerType, setControllerType] = useState('ps5');
   const [selectedPart, setSelectedPart] = useState('body');
   const [uploadedImage, setUploadedImage] = useState(null);
+  const [testMeshName, setTestMeshName] = useState(null); // Para testing de meshes
   const fileInputRef = useRef(null);
 
   // Colores predeterminados - null para usar colores originales del modelo
@@ -187,7 +188,7 @@ const ControllerConfigurator = () => {
             {controllerType === 'ps5' ? (
               <PS5ControllerModel colors={colors} uploadedImage={uploadedImage} />
             ) : (
-              <XboxControllerModel colors={colors} uploadedImage={uploadedImage} />
+              <XboxControllerModel colors={colors} uploadedImage={uploadedImage} testMeshName={testMeshName} />
             )}
 
             {/* Controles de órbita */}
@@ -296,6 +297,35 @@ const ControllerConfigurator = () => {
                   ))}
                 </div>
               </div>
+
+              {/* MODO TEST - Solo para Xbox - Identificar Meshes */}
+              {controllerType === 'xbox' && (
+                <div className="space-y-3 border-2 border-yellow-500/50 p-4 rounded-lg bg-yellow-900/20">
+                  <h3 className="text-xl text-yellow-400 font-['Orbitron'] tracking-widest uppercase">🔍 Modo Test - Meshes</h3>
+                  <p className="text-xs text-yellow-300 mb-2">Click en un mesh para resaltarlo en ROJO en el modelo 3D</p>
+                  <div className="grid grid-cols-1 gap-1 max-h-80 overflow-y-auto pr-2 custom-scrollbar">
+                    {getXboxMeshNames().map((meshName) => (
+                      <button
+                        key={meshName}
+                        onClick={() => setTestMeshName(testMeshName === meshName ? null : meshName)}
+                        className={`px-2 py-1.5 text-xs font-mono transition-colors border btn-tech text-left ${
+                          testMeshName === meshName
+                            ? 'bg-red-500 text-white border-red-400 glow-border'
+                            : 'bg-gray-900 border-yellow-500/30 text-yellow-300 hover:bg-yellow-500/20 hover:border-yellow-500'
+                        }`}
+                      >
+                        {meshName}
+                      </button>
+                    ))}
+                  </div>
+                  <button
+                    onClick={() => setTestMeshName(null)}
+                    className="w-full border border-yellow-500 text-yellow-400 font-bold py-2 px-3 hover:bg-yellow-500/20 transition-colors btn-tech-alt uppercase text-sm"
+                  >
+                    Limpiar Selección
+                  </button>
+                </div>
+              )}
 
               {/* Paleta de Colores */}
               <div className="space-y-3 border border-cyan-500/30 p-4 rounded-lg bg-gray-900/30">
