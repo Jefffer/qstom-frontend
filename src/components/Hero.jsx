@@ -134,16 +134,16 @@ const Hero = () => {
               transition={{ duration: 0.8, delay: 0.4 }}
               className="text-xl md:text-2xl text-cyan-400 font-['Orbitron'] tracking-widest uppercase mb-3 drop-shadow-[0_0_20px_rgba(0,255,255,0.5)]"
             >
-              Personalización de Alto Nivel
+              Serigrafía, Aerografía y Personalización
             </motion.p>
 
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.6 }}
-              className="text-base md:text-lg text-gray-300 max-w-2xl mx-auto md:ml-auto drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]"
+              className="text-base md:text-lg text-gray-300 max-w-2xl mx-auto md:mx-0 md:ml-auto drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]"
             >
-              Transforma tus accesorios gaming en piezas únicas con tecnología de personalización 3D
+              Transforma tus accesorios gaming en piezas únicas con tecnología de personalización 3D <span className="hidden">en Bogotá, Colombia</span>
             </motion.p>
           </motion.div>
 

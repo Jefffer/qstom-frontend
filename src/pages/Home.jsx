@@ -1,6 +1,7 @@
 import Hero from '../components/Hero';
 import Services from '../components/Services';
 import Gallery from '../components/Gallery';
+import SEO from '../components/SEO';
 import { motion } from 'framer-motion';
 import { FaArrowRight } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
@@ -8,6 +9,12 @@ import { Link } from 'react-router-dom';
 const Home = () => {
   return (
     <div className="">
+      <SEO 
+        title="Qstom - Personalización de Accesorios Gamer en Bogotá | Serigrafía y Aerografía"
+        description="Personalización profesional de accesorios gamer en Bogotá, Colombia. Controles PS5, Xbox y periféricos gaming con tecnología 3D, serigrafía y aerografía. Diseños únicos 100% personalizados."
+        keywords="personalización gamer Bogotá, controles personalizados Colombia, serigrafía Bogotá, aerografía gaming, accesorios gamer personalizados, personalización 3D Bogotá, controles PS5 personalizados, controles Xbox personalizados, gaming Colombia, custom controllers Bogotá"
+        url="https://qstom.vercel.app/"
+      />
       <Hero />
       <Gallery />
       <Services />

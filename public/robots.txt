@@ -1,0 +1,17 @@
+# Qstom Colombia - Robots.txt
+User-agent: *
+Allow: /
+Allow: /lab
+Allow: /catalogo
+Allow: /contacto
+Allow: /sobre-nosotros
+
+# Sitemap
+Sitemap: https://qstom.co/sitemap.xml
+
+# Crawl-delay para bots
+Crawl-delay: 1
+
+# Block specific bots if needed
+# User-agent: BadBot
+# Disallow: /
